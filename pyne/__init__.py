@@ -2,8 +2,6 @@ import sys
 
 import pygame as pg
 
-from app import App
-
 __version__ = '0.1.0'
 
 print("\nWelcome to the Pyne")

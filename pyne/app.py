@@ -4,7 +4,7 @@ import pygame as pg
 class App:
     """Class App, it is a class which manages windows"""
 
-    def __init__(self, window_size=(500, 500), title="Pyne", bg_color=(255, 255, 255)):
+    def __init__(self, window_size=(500, 500), title="Pyne", bg_color=(100, 100, 100)):
         """
         :param window_size: list or tuple of two numbers: first width and last height
         :param title: title of the window
@@ -22,14 +22,19 @@ class App:
         self.bg = bg_color
         self.fps = 30
 
-    def quit(self):
-        self.running = False
-        pg.quit()
+    def _check_events(self):
+        for event in pg.event.get():
+            match event.type:
+                case pg.QUIT:
+                    self.quit()
 
     def run(self):
+        """method which start mainloop"""
         self.running = True
         while self.running:
             self.screen.fill(self.bg)
+
+            self._check_events()
 
             for business in self.time_table:
                 business()
@@ -37,3 +42,9 @@ class App:
             pg.display.flip()
 
             self.clock.tick()
+
+        pg.quit()
+
+    def quit(self):
+        """change running to False"""
+        self.running = False

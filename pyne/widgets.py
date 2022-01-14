@@ -32,3 +32,6 @@ class Button:
         self.text_image_rect = self.text_image.get_rect()
         self.text_image_rect.x = self.rect.x + 5
         self.text_image_rect.y = self.rect.y + 5
+
+    def draw(self, screen: pg.Surface):
+        screen.blit(self.text_image, self.text_image_rect)

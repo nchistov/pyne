@@ -4,7 +4,7 @@ import pygame as pg
 class App:
     """Class App, it is a class which manages windows"""
 
-    def __init__(self, window_size=(500, 500), title="Pyne", bg_color=(100, 100, 100)):
+    def __init__(self, window_size=(500, 500), title="Pyne", bg_color=(255, 255, 255)):
         """
         :param window_size: list or tuple of two numbers: first width and last height
         :param title: title of the window
@@ -21,6 +21,13 @@ class App:
         self.running = False
         self.bg = bg_color
         self.fps = 30
+
+    def add_to_time_table(self, func):
+        """
+        :param func: function which one need to append to time_table
+        :return: None
+        """
+        self.time_table.append(func)
 
     def _check_events(self):
         for event in pg.event.get():

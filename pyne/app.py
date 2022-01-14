@@ -18,6 +18,7 @@ class App:
         self.clock = pg.time.Clock()
 
         self.time_table = []
+        self.widgets = []
         self.running = False
         self.bg = bg_color
         self.fps = 30
@@ -28,6 +29,9 @@ class App:
         :return: None
         """
         self.time_table.append(func)
+
+    def add_widget(self, widget):
+        self.widgets.append(widget)
 
     def _check_events(self):
         for event in pg.event.get():
@@ -45,6 +49,10 @@ class App:
 
             for business in self.time_table:
                 business()
+
+            for widget in self.widgets:
+                widget.update()
+                widget.draw(self.screen)
 
             pg.display.flip()
 

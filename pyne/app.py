@@ -39,20 +39,22 @@ class App:
                 case pg.QUIT:
                     self.quit()
 
+            for widget in self.widgets:
+                widget.update(event)
+
     def run(self):
         """method which start mainloop"""
         self.running = True
         while self.running:
             self.screen.fill(self.bg)
 
-            self._check_events()
-
             for business in self.time_table:
                 business()
 
             for widget in self.widgets:
-                widget.update()
                 widget.draw(self.screen)
+
+            self._check_events()
 
             pg.display.flip()
 

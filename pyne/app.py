@@ -22,7 +22,7 @@ class App:
         self.bg = bg_color
         self.fps = 30
 
-    def add_to_time_table(self, func):
+    def add_to_time_table(self, func: callable):
         """
         :param func: function which one need to append to time_table
         :return: None

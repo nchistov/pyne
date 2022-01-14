@@ -7,8 +7,8 @@ import pygame as pg
 
 
 class Button:
-    def __init__(self, text: str, color=(100, 100, 100), active_color=(70, 200, 215),
-                 text_color=(0, 0, 0), command: callable = None):
+    def __init__(self, text: str, color=(150, 150, 150), active_color=(70, 200, 215),
+                 text_color=(0, 0, 0), font_size=40, command: callable = None):
         self.text = text
         self.color = color
         self.active_color = active_color
@@ -17,9 +17,11 @@ class Button:
 
         self.current_color = color
 
+        self.is_press = False
+
         pg.font.init()
 
-        self.rect = pg.Rect(0, 0, len(text) * 16, 35)
+        self.rect = pg.Rect(0, 0, len(text) * 17, 35)
 
         self.row = 0
         self.column = 0
@@ -27,7 +29,7 @@ class Button:
         self.max_rows = 0
         self.max_columns = 0
 
-        self.font = pg.font.SysFont('', 40)
+        self.font = pg.font.SysFont('', font_size)
 
         self.prep_msg(text)
 
@@ -42,11 +44,19 @@ class Button:
             mouse_x, mouse_y = pg.mouse.get_pos()
             if self.rect.collidepoint(mouse_x, mouse_y):
                 self.current_color = self.active_color
+                self.is_press = True
                 if self.command is not None:
                     self.command()
         elif event.type == pg.MOUSEBUTTONUP:
             self.current_color = self.color
+            self.is_press = False
 
     def draw(self, screen: pg.Surface):
         pg.draw.rect(screen, self.current_color, self.rect)
         screen.blit(self.text_image, self.text_image_rect)
+
+        if not self.is_press:
+            pg.draw.line(screen, (180, 180, 180), (self.rect.x + len(self.text) * 17, self.rect.y + 35),
+                         (self.rect.x + len(self.text) * 17, self.rect.y))
+            pg.draw.line(screen, (180, 180, 180), (self.rect.x + len(self.text) * 17, self.rect.y),
+                         (self.rect.x, self.rect.y))

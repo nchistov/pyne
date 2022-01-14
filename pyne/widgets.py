@@ -17,7 +17,9 @@ class Button:
 
         self.current_color = color
 
-        self.rect = pg.Rect(0, 0, len(text) * 7, 20)
+        pg.font.init()
+
+        self.rect = pg.Rect(0, 0, len(text) * 16, 35)
 
         self.row = 0
         self.column = 0
@@ -35,14 +37,15 @@ class Button:
         self.text_image_rect.x = self.rect.x + 5
         self.text_image_rect.y = self.rect.y + 5
 
-    def update(self):
-        for event in pg.event.get():
-            if event.type == pg.MOUSEBUTTONDOWN:
+    def update(self, event):
+        if event.type == pg.MOUSEBUTTONDOWN:
+            mouse_x, mouse_y = pg.mouse.get_pos()
+            if self.rect.collidepoint(mouse_x, mouse_y):
                 self.current_color = self.active_color
                 if self.command is not None:
                     self.command()
-            elif event.type == pg.MOUSEBUTTONUP:
-                self.current_color = self.color
+        elif event.type == pg.MOUSEBUTTONUP:
+            self.current_color = self.color
 
     def draw(self, screen: pg.Surface):
         pg.draw.rect(screen, self.current_color, self.rect)

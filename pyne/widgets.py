@@ -51,12 +51,14 @@ class Button:
             self.current_color = self.color
             self.is_press = False
 
+        self.text_image_rect.center = self.rect.center
+
     def draw(self, screen: pg.Surface):
         pg.draw.rect(screen, self.current_color, self.rect)
         screen.blit(self.text_image, self.text_image_rect)
 
         if not self.is_press:
-            pg.draw.line(screen, (180, 180, 180), (self.rect.x + len(self.text) * 17, self.rect.y + 35),
-                         (self.rect.x + len(self.text) * 17, self.rect.y))
-            pg.draw.line(screen, (180, 180, 180), (self.rect.x + len(self.text) * 17, self.rect.y),
+            pg.draw.line(screen, (180, 180, 180), (self.rect.x + self.rect.width, self.rect.y + self.rect.height),
+                         (self.rect.x + self.rect.width, self.rect.y))
+            pg.draw.line(screen, (180, 180, 180), (self.rect.x + self.rect.width, self.rect.y),
                          (self.rect.x, self.rect.y))

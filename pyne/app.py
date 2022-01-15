@@ -31,6 +31,18 @@ class App:
         self.time_table.append(func)
 
     def add_widget(self, widget):
+        try:
+            sell_height = self.screen.get_height() / widget.max_rows
+            sell_width = self.screen.get_width() / widget.max_columns
+
+            widget.rect.x = widget.column * sell_width
+            widget.rect.y = widget.row * sell_height
+
+            widget.rect.width = sell_width
+            widget.rect.height = sell_height
+        except ZeroDivisionError:
+            pass
+
         self.widgets.append(widget)
 
     def _check_events(self):

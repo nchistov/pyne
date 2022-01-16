@@ -1,7 +1,7 @@
 class Grid:
     def __init__(self, rows, columns):
-        self.rows = rows - 1
-        self.columns = columns - 1
+        self.rows = rows
+        self.columns = columns
 
     def add_widget(self, widget, row, column):
         try:

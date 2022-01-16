@@ -58,7 +58,7 @@ class Button:
         screen.blit(self.text_image, self.text_image_rect)
 
         if not self.is_press:
-            pg.draw.line(screen, (180, 180, 180), (self.rect.x + self.rect.width, self.rect.y + self.rect.height),
-                         (self.rect.x + self.rect.width, self.rect.y))
-            pg.draw.line(screen, (180, 180, 180), (self.rect.x + self.rect.width, self.rect.y),
-                         (self.rect.x, self.rect.y))
+            pg.draw.line(screen, (200, 200, 200), ((self.rect.x + self.rect.width) - 1, (self.rect.y + self.rect.height) - 1),
+                         ((self.rect.x + self.rect.width) - 1, self.rect.y - 1))
+            pg.draw.line(screen, (200, 200, 200), ((self.rect.x + self.rect.width) - 1, self.rect.y - 1),
+                         (self.rect.x - 1, self.rect.y - 1))

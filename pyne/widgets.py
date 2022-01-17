@@ -29,6 +29,9 @@ class Button:
         self.max_rows = 0
         self.max_columns = 0
 
+        self.width = 1
+        self.height = 1
+
         self.font = pg.font.SysFont('', font_size)
 
         self.prep_msg(text)

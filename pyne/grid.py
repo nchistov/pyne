@@ -6,7 +6,7 @@ class Grid:
         self.rows = rows
         self.columns = columns
 
-    def add_widget(self, widget, row, column):
+    def add_widget(self, widget, row, column, width=1, height=1):
         if row >= self.rows:
             raise NoSouchPositionError("Row must be less then max rows")
         if column >= self.columns:
@@ -16,8 +16,11 @@ class Grid:
             widget.max_rows = self.rows
             widget.max_columns = self.columns
 
+            widget.width = width
+            widget.height = height
+
             widget.row = row
             widget.column = column
 
         except AttributeError:
-            raise AttributeError("Widget must have got attributes max_rows, max_columns, row and column")
+            raise AttributeError("Widget must have got attributes max_rows, max_columns, row, column, width and height")

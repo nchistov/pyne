@@ -38,8 +38,8 @@ class App:
             widget.rect.x = widget.column * sell_width
             widget.rect.y = widget.row * sell_height
 
-            widget.rect.width = sell_width
-            widget.rect.height = sell_height
+            widget.rect.width = sell_width * widget.width
+            widget.rect.height = sell_height * widget.height
         except ZeroDivisionError:
             pass
 

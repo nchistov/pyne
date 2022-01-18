@@ -36,7 +36,7 @@ class Button(Widget):
 
         self.current_color = color
 
-        self.is_press = False
+        self.is_pressed = False
 
         pg.font.init()
 
@@ -44,25 +44,26 @@ class Button(Widget):
 
         self.font = pg.font.SysFont('', font_size)
 
-        self.prep_msg(text)
+        self.prep_text(text)
 
-    def prep_msg(self, text):
+    def prep_text(self, text):
         self.text_image = self.font.render(text, True, self.text_color)
+
         self.text_image_rect = self.text_image.get_rect()
         self.text_image_rect.x = self.rect.x + 5
         self.text_image_rect.y = self.rect.y + 5
 
     def update(self, event):
         if event.type == pg.MOUSEBUTTONDOWN:
-            mouse_x, mouse_y = event.pos
-            if self.rect.collidepoint(mouse_x, mouse_y):
-                self.current_color = self.active_color
-                self.is_press = True
+            mouse_x, mouse_y = event.pos  # Получаем координаты миши
+            if self.rect.collidepoint(mouse_x, mouse_y):  # Если кнопка нажата
+                self.current_color = self.active_color    # Изменяем цвет
+                self.is_pressed = True                    # И флаг is_pressed
                 if self.command is not None:
-                    self.command()
+                    self.command()                        # Если комманда зарегестрирована, вызываем ее
         elif event.type == pg.MOUSEBUTTONUP:
             self.current_color = self.color
-            self.is_press = False
+            self.is_pressed = False
 
         self.text_image_rect.center = self.rect.center
 
@@ -70,8 +71,56 @@ class Button(Widget):
         pg.draw.rect(screen, self.current_color, self.rect)
         screen.blit(self.text_image, self.text_image_rect)
 
-        if not self.is_press:
-            pg.draw.line(screen, (200, 200, 200), ((self.rect.x + self.rect.width) - 1, (self.rect.y + self.rect.height) - 1),
-                         ((self.rect.x + self.rect.width) - 1, self.rect.y - 1))
-            pg.draw.line(screen, (200, 200, 200), ((self.rect.x + self.rect.width) - 1, self.rect.y - 1),
-                         (self.rect.x - 1, self.rect.y - 1))
+        if not self.is_pressed:  # Если кнопка не нажата поррисовываем линии с краю
+            pg.draw.line(screen, (200, 200, 200), (self.rect.right - 1,
+                                                   self.rect.bottom),
+                         (self.rect.right - 1, self.rect.top))
+
+            pg.draw.line(screen, (200, 200, 200), (self.rect.right, self.rect.top),
+                         (self.rect.left, self.rect.top))
+
+
+class Label(Widget):
+    def __init__(self, text: str, bg_color=(255, 255, 255), outline_color=(255, 255, 255),
+                 text_color=(0, 0, 0), font_size=40, press='right'):
+        super().__init__()
+
+        self.text = text
+
+        self.bg_color = bg_color
+        self.outline_color = outline_color
+        self.text_color = text_color
+
+        self.press = press
+
+        self.rect = pg.Rect(0, 0, 100, 50)
+
+        self.font = pg.font.SysFont('', font_size)
+
+        self.set_text(text)
+
+    def set_text(self, text):
+        self.text_image = self.font.render(text, True, self.text_color)
+
+        self.text_image_rect = self.text_image.get_rect()
+
+        match self.press:  # Прижимаем текст к нужниму краю
+            case 'right':
+                self.text_image_rect.right = self.rect.right - 3
+            case 'left':
+                self.text_image_rect.left = self.rect.left + 3
+            case 'center':
+                self.text_image_rect.centerx = self.rect.centerx
+
+        self.text_image_rect.centery = self.rect.centery
+
+    def draw(self, screen):
+        pg.draw.rect(screen, self.bg_color, self.rect)
+        screen.blit(self.text_image, self.text_image_rect)
+
+        # Рисуем рамку
+        pg.draw.line(screen, self.outline_color, (self.rect.right, self.rect.bottom), (self.rect.right, self.rect.top))
+        pg.draw.line(screen, self.outline_color, (self.rect.right, self.rect.top), (self.rect.left, self.rect.top))
+        pg.draw.line(screen, self.outline_color, (self.rect.left, self.rect.top), (self.rect.left, self.rect.bottom))
+        pg.draw.line(screen, self.outline_color, (self.rect.left, self.rect.bottom),
+                     (self.rect.right, self.rect.bottom))

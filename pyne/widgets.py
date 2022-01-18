@@ -6,9 +6,28 @@ in package pyne
 import pygame as pg
 
 
-class Button:
+class Widget:
+    def __init__(self):
+        self.row = 0
+        self.column = 0
+
+        self.max_rows = 0
+        self.max_columns = 0
+
+        self.width = 1
+        self.height = 1
+
+    def update(self, event):
+        pass
+
+    def draw(self, screen: pg.Surface):
+        pass
+
+
+class Button(Widget):
     def __init__(self, text: str, color=(150, 150, 150), active_color=(70, 200, 215),
                  text_color=(0, 0, 0), font_size=40, command: callable = None):
+        super().__init__()
         self.text = text
         self.color = color
         self.active_color = active_color
@@ -23,15 +42,6 @@ class Button:
 
         self.rect = pg.Rect(0, 0, len(text) * 17, 35)
 
-        self.row = 0
-        self.column = 0
-
-        self.max_rows = 0
-        self.max_columns = 0
-
-        self.width = 1
-        self.height = 1
-
         self.font = pg.font.SysFont('', font_size)
 
         self.prep_msg(text)
@@ -44,7 +54,7 @@ class Button:
 
     def update(self, event):
         if event.type == pg.MOUSEBUTTONDOWN:
-            mouse_x, mouse_y = pg.mouse.get_pos()
+            mouse_x, mouse_y = event.pos
             if self.rect.collidepoint(mouse_x, mouse_y):
                 self.current_color = self.active_color
                 self.is_press = True
@@ -56,7 +66,7 @@ class Button:
 
         self.text_image_rect.center = self.rect.center
 
-    def draw(self, screen: pg.Surface):
+    def draw(self, screen):
         pg.draw.rect(screen, self.current_color, self.rect)
         screen.blit(self.text_image, self.text_image_rect)
 

@@ -17,7 +17,7 @@ class App:
 
         self.clock = pg.time.Clock()
 
-        self.time_table = []
+        self.schedule = []
         self.widgets = []
         self.running = False
         self.bg = bg_color
@@ -28,7 +28,7 @@ class App:
         :param func: function which one need to append to time_table
         :return: None
         """
-        self.time_table.append(func)
+        self.schedule.append(func)
 
     def add_widget(self, widget):
         try:
@@ -55,12 +55,12 @@ class App:
                 widget.update(event)
 
     def run(self):
-        """method which start mainloop"""
+        """starts mainloop"""
         self.running = True
         while self.running:
             self.screen.fill(self.bg)
 
-            for business in self.time_table:
+            for business in self.schedule:
                 business()
 
             for widget in self.widgets:

@@ -82,7 +82,7 @@ class Button(Widget):
 
 class Label(Widget):
     def __init__(self, text: str, bg_color=(255, 255, 255), outline_color=(255, 255, 255),
-                 text_color=(0, 0, 0), font_size=40, press='right'):
+                 text_color=(0, 0, 0), font_size=60, press='right'):
         super().__init__()
 
         self.text = text

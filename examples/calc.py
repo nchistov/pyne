@@ -4,9 +4,9 @@ from pyne.widgets import Button, Label
 
 calculation = ''
 
-grid = Grid(5, 4)
-
 app = App((500, 700))
+
+grid = Grid(app, 5, 4)
 
 
 def add_symbol(symbol: str):
@@ -53,7 +53,7 @@ divide_btn = Button('/', command=lambda: add_symbol('/'))
 
 enter = Button('=', command=equal)
 
-clear_btn = Button('C', command=clear)
+clear_btn = Button('AC', command=clear)
 
 label = Label(calculation, outline_color=(0, 0, 0))
 
@@ -78,27 +78,5 @@ grid.add_widget(enter, 4, 1)
 grid.add_widget(clear_btn, 1, 3)
 
 grid.add_widget(label, 0, 0, 4, 1)
-
-app.add_widget(btn0)
-app.add_widget(btn1)
-app.add_widget(btn2)
-app.add_widget(btn3)
-app.add_widget(btn4)
-app.add_widget(btn5)
-app.add_widget(btn6)
-app.add_widget(btn7)
-app.add_widget(btn8)
-app.add_widget(btn9)
-
-app.add_widget(plus_btn)
-app.add_widget(minus_btn)
-app.add_widget(multiply_btn)
-app.add_widget(divide_btn)
-
-app.add_widget(enter)
-
-app.add_widget(clear_btn)
-
-app.add_widget(label)
 
 app.run()

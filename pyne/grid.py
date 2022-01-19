@@ -2,7 +2,9 @@ class NoSouchPositionError(Exception): pass
 
 
 class Grid:
-    def __init__(self, rows, columns):
+    def __init__(self, app, rows, columns):
+        self.app = app
+
         self.rows = rows
         self.columns = columns
 
@@ -13,14 +15,16 @@ class Grid:
             raise NoSouchPositionError("Column must be less then max columns")
 
         try:
-            widget.max_rows = self.rows
-            widget.max_columns = self.columns
+            sell_height = self.app.screen.get_height() / self.rows
+            sell_width = self.app.screen.get_width() / self.columns
 
-            widget.width = width
-            widget.height = height
+            widget.rect.x = column * sell_width
+            widget.rect.y = row * sell_height
 
-            widget.row = row
-            widget.column = column
+            widget.rect.width = sell_width * width
+            widget.rect.height = sell_height * height
 
         except AttributeError:
-            raise AttributeError("Widget must have got attributes max_rows, max_columns, row, column, width and height")
+            raise AttributeError("Widget must has attribute rect")
+
+        self.app.add_widget(widget)

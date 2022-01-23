@@ -24,15 +24,21 @@ class App:
         self.bg = bg_color
         self.fps = 30
 
-    def add_to_time_table(self, func: callable):
+    def add_to_schedule(self, func: callable):
         """
         :param func: function which one need to append to time_table
         :return: None
         """
         self.schedule.append(func)
 
+    def remove_from_schedule(self, func):
+        self.schedule.remove(func)
+
     def add_widget(self, widget):
         self.widgets.append(widget)
+
+    def remove_widget(self, widget):
+        self.widgets.remove(widget)
 
     def _check_events(self):
         for event in pg.event.get():

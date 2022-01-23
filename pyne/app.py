@@ -11,6 +11,7 @@ class App:
         :param bg_color: color of background, in format RGB
         """
         pg.init()
+        pg.font.init()
 
         self.screen = pg.display.set_mode(window_size)
         pg.display.set_caption(title)

@@ -28,3 +28,24 @@ class Grid:
             raise AttributeError("Widget must has attribute rect")
 
         self.app.add_widget(widget)
+
+    def add_image(self, image, row, column, width=1, height=1):
+        if row >= self.rows:
+            raise NoSouchPositionError("Row must be less then max rows")
+        if column >= self.columns:
+            raise NoSouchPositionError("Column must be less then max columns")
+
+        try:
+            sell_height = self.app.screen.get_height() / self.rows
+            sell_width = self.app.screen.get_width() / self.columns
+
+            image.rect.x = column * sell_width
+            image.rect.y = row * sell_height
+
+            image.rect.width = sell_width * width
+            image.rect.height = sell_height * height
+
+        except AttributeError:
+            raise AttributeError("Widget must has attribute rect")
+
+        self.app.add_to_schedule(image.draw)

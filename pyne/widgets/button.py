@@ -1,27 +1,6 @@
-"""
-module in which one are located all widgets
-in package pyne
-"""
-
 import pygame as pg
 
-
-class Widget:
-    def __init__(self):
-        self.row = 0
-        self.column = 0
-
-        self.max_rows = 0
-        self.max_columns = 0
-
-        self.width = 1
-        self.height = 1
-
-    def update(self, event):
-        pass
-
-    def draw(self, screen: pg.Surface):
-        pass
+from .base_widget import Widget
 
 
 class Button(Widget):
@@ -76,49 +55,3 @@ class Button(Widget):
 
             pg.draw.line(screen, (200, 200, 200), (self.rect.right, self.rect.top),
                          (self.rect.left, self.rect.top))
-
-
-class Label(Widget):
-    def __init__(self, text: str, bg_color=(255, 255, 255), outline_color=(255, 255, 255),
-                 text_color=(0, 0, 0), font_size=60, press='right'):
-        super().__init__()
-
-        self.text = text
-
-        self.bg_color = bg_color
-        self.outline_color = outline_color
-        self.text_color = text_color
-
-        self.press = press
-
-        self.rect = pg.Rect(0, 0, 100, 50)
-
-        self.font = pg.font.SysFont('', font_size)
-
-        self.set_text(text)
-
-    def set_text(self, text):
-        self.text_image = self.font.render(text, True, self.text_color)
-
-        self.text_image_rect = self.text_image.get_rect()
-
-        match self.press:  # Press the text to the desired edge
-            case 'right':
-                self.text_image_rect.right = self.rect.right - 3
-            case 'left':
-                self.text_image_rect.left = self.rect.left + 3
-            case 'center':
-                self.text_image_rect.centerx = self.rect.centerx
-
-        self.text_image_rect.centery = self.rect.centery
-
-    def draw(self, screen):
-        pg.draw.rect(screen, self.bg_color, self.rect)
-        screen.blit(self.text_image, self.text_image_rect)
-
-        # Draw outline
-        pg.draw.line(screen, self.outline_color, (self.rect.right, self.rect.bottom), (self.rect.right, self.rect.top))
-        pg.draw.line(screen, self.outline_color, (self.rect.right, self.rect.top), (self.rect.left, self.rect.top))
-        pg.draw.line(screen, self.outline_color, (self.rect.left, self.rect.top), (self.rect.left, self.rect.bottom))
-        pg.draw.line(screen, self.outline_color, (self.rect.left, self.rect.bottom),
-                     (self.rect.right, self.rect.bottom))

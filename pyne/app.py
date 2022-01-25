@@ -14,6 +14,7 @@ class App:
         pg.font.init()
 
         self.screen = pg.display.set_mode(window_size)
+
         pg.display.set_caption(title)
 
         self.clock = pg.time.Clock()
@@ -25,10 +26,6 @@ class App:
         self.fps = 30
 
     def add_to_schedule(self, func: callable):
-        """
-        :param func: function which one need to append to time_table
-        :return: None
-        """
         self.schedule.append(func)
 
     def remove_from_schedule(self, func):

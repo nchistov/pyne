@@ -1,4 +1,4 @@
-from pyne.app import App
+from pyne import App
 
 app = App()
 

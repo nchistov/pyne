@@ -1,4 +1,4 @@
-from pyne.app import App
+from pyne import App
 from pyne.widgets import Button
 
 btn = Button('Hello', command=lambda: print('Hello!'))

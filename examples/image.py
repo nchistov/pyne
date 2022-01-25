@@ -1,4 +1,4 @@
-from pyne.app import App
+from pyne import App
 from pyne.grid import Grid
 
 from pyne.image import Image

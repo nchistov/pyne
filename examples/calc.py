@@ -4,7 +4,7 @@ from pyne.widgets import Button, Label
 
 calculation = ''
 
-app = App((500, 700))
+app = App((500, 700), title='Calc')
 
 grid = Grid(app, 5, 4)
 

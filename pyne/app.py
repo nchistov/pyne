@@ -1,3 +1,5 @@
+import os
+
 import pygame as pg
 
 
@@ -15,6 +17,8 @@ class App:
 
         self.screen = pg.display.set_mode(window_size)
 
+        icon = pg.image.load(os.path.join(os.path.dirname(__file__), 'icon.jpg'))
+        pg.display.set_icon(icon)
         pg.display.set_caption(title)
 
         self.clock = pg.time.Clock()

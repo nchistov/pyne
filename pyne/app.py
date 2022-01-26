@@ -12,6 +12,7 @@ class App:
         :param title: title of the window
         :param bg_color: color of background, in format RGB
         """
+
         pg.init()
         pg.font.init()
 
@@ -19,6 +20,7 @@ class App:
 
         icon = pg.image.load(os.path.join(os.path.dirname(__file__), 'icon.jpg'))
         pg.display.set_icon(icon)
+
         pg.display.set_caption(title)
 
         self.clock = pg.time.Clock()

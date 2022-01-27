@@ -1,3 +1,6 @@
+import pygame as pg
+
+
 class NoSouchPositionError(Exception): pass
 
 
@@ -29,7 +32,7 @@ class Grid:
 
         self.app.add_widget(widget)
 
-    def add_image(self, image, row, column, width=1, height=1):
+    def add_image(self, image, row, column, width=1, height=1, size_correction=False):
         if row >= self.rows:
             raise NoSouchPositionError("Row must be less then max rows")
         if column >= self.columns:
@@ -44,6 +47,9 @@ class Grid:
 
             image.rect.width = sell_width * width
             image.rect.height = sell_height * height
+
+            if size_correction:
+                image.image = pg.transform.smoothscale(image.image, (sell_width, sell_height))
 
         except AttributeError:
             raise AttributeError("Widget must has attribute rect")

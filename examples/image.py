@@ -8,6 +8,9 @@ app = App()
 grid = Grid(app, 3, 3)
 
 image = Image(app, 'image.png')
-grid.add_image(image, 1, 1)
+image2 = Image(app, 'image.png')
+
+grid.add_image(image, 0, 0)
+grid.add_image(image2, 1, 1, size_correction=True)
 
 app.run()

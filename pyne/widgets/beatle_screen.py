@@ -4,13 +4,10 @@ import pygame as pg
 
 
 class BeatleScreen(Widget):
-    def __init__(self, app, width, height, color=(255, 255, 255), outline_color=(150, 150, 150)):
+    def __init__(self, app,  color=(255, 255, 255), outline_color=(150, 150, 150)):
         super().__init__()
 
         self.app = app
-
-        self.width = width
-        self.height = height
 
         self.color = color
         self.outline_color = outline_color

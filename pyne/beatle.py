@@ -5,8 +5,8 @@ import pygame as pg
 
 
 class Beatle:
-    def __init__(self, app, beatle_screen):
-        self.app = app
+    def __init__(self,  beatle_screen):
+        self.app = beatle_screen.app
 
         self.screen = beatle_screen
 

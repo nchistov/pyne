@@ -58,11 +58,11 @@ class App:
         while self.running:
             self.screen.fill(self.bg)
 
-            for business in self.schedule:
-                business()
-
             for widget in self.widgets:
                 widget.draw(self.screen)
+
+            for business in self.schedule:
+                business()
 
             self._check_events()
 

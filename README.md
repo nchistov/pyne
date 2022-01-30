@@ -2,7 +2,7 @@
 ## Python application lib
 ## version 0.1.0 alpha
 
-Why we call it 'Pyne'? Because we create it on Pyton and I want to call it 'Pine' 🌳
+Why we call it 'Pyne'? Because we create it on Python and I want to call it 'Pine' 🌳
 
 ----
 

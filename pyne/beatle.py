@@ -24,8 +24,6 @@ class Beatle:
         self.angle = 0
         self.steps = 0
 
-        self.end_point = None
-
         self.moving = False
 
         t = Thread(target=self.update)
@@ -40,9 +38,11 @@ class Beatle:
 
         self.moving = True
 
+    def left(self, angle):
+        self.angle -= angle
+
     def setheading(self, angle):
         self.angle = angle
-
         self.image = pg.transform.rotate(self.image, self.angle)
 
     def update(self):
@@ -53,6 +53,9 @@ class Beatle:
                 for i in range(self.steps // self.speed):
                     self.rect.x += dx
                     self.rect.y -= dy
+
+                    self.x += dx
+                    self.y -= dy
 
                     sleep(0.02)
                 self.moving = False

@@ -52,7 +52,7 @@ class Beatle:
                 dy = self.speed * sin(radians(self.angle))
                 for i in range(self.steps // self.speed):
                     self.rect.x += dx
-                    self.rect.y += dy
+                    self.rect.y -= dy
 
                     sleep(0.02)
                 self.moving = False

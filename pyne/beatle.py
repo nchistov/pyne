@@ -63,7 +63,10 @@ class Beatle:
                 elif task[0] == 'seth':
                     self.angle = task[1]
 
-                    self.angle %= 360
+                    if self.angle != self.angle % 360:
+                        self.angle %= 360
+                    else:
+                        self.angle %= -360
 
                     self.image = pg.transform.rotate(self.base_image, self.angle)
 

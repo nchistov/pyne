@@ -15,7 +15,7 @@ grid.add_widget(beatle_screen, 0, 0)
 t = beatle.Beatle(beatle_screen)
 
 # Draw circle
-for i in range(0, 401, 10):
+for i in range(0, 361, 10):
     t.forward(10)
     t.setheading(i)
 

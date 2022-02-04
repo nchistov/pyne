@@ -14,17 +14,10 @@ grid.add_widget(beatle_screen, 0, 0)
 
 t = beatle.Beatle(beatle_screen)
 
-steps = 100
-
-
-def f():
-    global steps
-    if steps > 0:
-        t.forward(10)
-    steps -= 1
-
-
-app.add_to_schedule(f)
+# Draw circle
+for i in range(0, 401, 10):
+    t.forward(10)
+    t.setheading(i)
 
 app.run()
 t.stop()  # Stopping all process

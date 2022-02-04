@@ -26,8 +26,6 @@ class Beatle:
         self.angle = 0
         self.steps = 0
 
-        self.moving = False
-
         self.tasks = Queue(maxsize=10000)
 
         t = Thread(target=self.update)
@@ -63,14 +61,9 @@ class Beatle:
                 elif task[0] == 'seth':
                     self.angle = task[1]
 
-                    if self.angle != self.angle % 360:
-                        self.angle %= 360
-                    else:
-                        self.angle %= -360
+                    self.angle %= 360
 
                     self.image = pg.transform.rotate(self.base_image, self.angle)
-
-                self.moving = False
 
             sleep(0.02)
 

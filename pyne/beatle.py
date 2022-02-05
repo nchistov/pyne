@@ -8,7 +8,49 @@ import pygame as pg
 
 
 class Beatle:
+    """
+    class Beatle (analog of class turtle.Pen)
+
+    Attributes:
+    app: exemplar of class pyne.App
+    screen: exemplar of class pyne.widgets.BeatleScreen
+
+    x: turtle y
+    y: turtle x
+
+    is_down: if it is True beatle draw line else no
+
+    base_image: the image intended for rotation
+    image: image which one is drawing on screen
+
+    rect: rectangle of image
+
+    speed: int
+    angle: int
+    steps: int
+
+    tasks: exemplar of class queue.Queue
+
+    lines: list of coordinates for drawing lines
+
+    Methods:
+    forward: moving beatle forward by steps
+    forward: moving beatle backward by steps
+
+    setheading: rotate beatle by angle
+
+    down: set flag is_down to True
+    up: set flag is_down to False
+    stop: stopping process self.thread
+
+    update: updating pos and angle
+    draw: drawing beatle and lines on screen
+
+    """
     def __init__(self,  beatle_screen):
+        """
+        :param beatle_screen: exemplar of class pyne.widgets BeatleScreen
+        """
         self.app = beatle_screen.app
 
         self.screen = beatle_screen
@@ -55,6 +97,9 @@ class Beatle:
     def up(self):
         self.is_down = False
 
+    def stop(self):
+        self._running = False
+
     def update(self):
         while self._running:
             if not self.tasks.empty():
@@ -87,9 +132,6 @@ class Beatle:
                     self.image = pg.transform.rotate(self.base_image, self.angle)
 
             sleep(0.02)
-
-    def stop(self):
-        self._running = False
 
     def draw(self):
         self.app.screen.blit(self.image, self.rect)

@@ -43,6 +43,9 @@ class Beatle:
     def forward(self, steps):
         self.tasks.put(('fd', steps))
 
+    def backward(self, steps):
+        self.forward(-steps)
+
     def setheading(self, angle):
         self.tasks.put(('seth', angle))
 

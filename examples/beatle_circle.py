@@ -5,14 +5,14 @@ from pyne.widgets import beatle_screen
 
 from pyne import beatle
 
-app = App(window_size=(1100, 500))
+app = App(window_size=(1100, 500))  # Creating white window 1100x500
 
-grid = Grid(app, 1, 1)
+grid = Grid(app, 1, 1)  # Adding grid
 
-beatle_screen = beatle_screen.BeatleScreen(app)
+beatle_screen = beatle_screen.BeatleScreen(app)  # Adding screen for beatle
 grid.add_widget(beatle_screen, 0, 0)
 
-t = beatle.Beatle(beatle_screen)
+t = beatle.Beatle(beatle_screen)  # Creating Beatle
 
 # Draw circle
 for i in range(0, 361, 10):

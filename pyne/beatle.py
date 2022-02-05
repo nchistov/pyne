@@ -20,13 +20,16 @@ class Beatle:
         self.image = self.base_image
 
         self.rect = self.image.get_rect()
-        self.rect.center = beatle_screen.rect.center
+        self.rect.x = self.screen.rect.centerx + self.x
+        self.rect.y = self.screen.rect.centery + self.y
 
         self.speed = 5
         self.angle = 0
         self.steps = 0
 
         self.tasks = Queue(maxsize=10000)
+
+        self.lines = []
 
         t = Thread(target=self.update)
         self._running = True
@@ -47,16 +50,21 @@ class Beatle:
                 task = self.tasks.get()
 
                 if task[0] == 'fd':
-                    dx = self.speed * cos(radians(self.angle))
-                    dy = self.speed * sin(radians(self.angle))
-                    for i in range(task[1] // self.speed):
-                        self.rect.x += dx
-                        self.rect.y -= dy
-
+                    dx = cos(radians(self.angle))
+                    dy = sin(radians(self.angle))
+                    self.lines.append(((self.rect.centerx, self.rect.centery),
+                                       (self.rect.centerx + dx, self.rect.centery - dy)))
+                    for i in range(task[1]):
+                        (start_x, start_y), _ = self.lines[-1]
+                        self.lines[-1] = ((start_x, start_y),
+                                          (self.rect.centerx + dx, self.rect.centery - dy))
                         self.x += dx
                         self.y -= dy
 
-                        sleep(0.02)
+                        self.rect.x = self.screen.rect.centerx + self.x
+                        self.rect.y = self.screen.rect.centery + self.y
+
+                        sleep(0.05 / self.speed)
 
                 elif task[0] == 'seth':
                     self.angle = task[1]
@@ -72,3 +80,6 @@ class Beatle:
 
     def draw(self):
         self.app.screen.blit(self.image, self.rect)
+
+        for line in self.lines:
+            pg.draw.line(self.app.screen, (0, 0, 0), line[0], line[1])

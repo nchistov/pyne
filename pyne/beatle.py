@@ -16,6 +16,8 @@ class Beatle:
         self.x = 0
         self.y = 0
 
+        self.is_down = True
+
         self.base_image = pg.image.load(os.path.join(os.path.dirname(__file__), 'beatle.png'))
         self.image = self.base_image
 
@@ -44,6 +46,12 @@ class Beatle:
     def setheading(self, angle):
         self.tasks.put(('seth', angle))
 
+    def down(self):
+        self.is_down = True
+
+    def up(self):
+        self.is_down = False
+
     def update(self):
         while self._running:
             if not self.tasks.empty():
@@ -52,12 +60,14 @@ class Beatle:
                 if task[0] == 'fd':
                     dx = cos(radians(self.angle))
                     dy = sin(radians(self.angle))
-                    self.lines.append(((self.rect.centerx, self.rect.centery),
-                                       (self.rect.centerx + dx, self.rect.centery - dy)))
+                    if self.is_down:
+                        self.lines.append(((self.rect.centerx, self.rect.centery),
+                                           (self.rect.centerx + dx, self.rect.centery - dy)))
                     for i in range(task[1]):
-                        (start_x, start_y), _ = self.lines[-1]
-                        self.lines[-1] = ((start_x, start_y),
-                                          (self.rect.centerx + dx, self.rect.centery - dy))
+                        if self.is_down:
+                            (start_x, start_y), _ = self.lines[-1]
+                            self.lines[-1] = ((start_x, start_y),
+                                              (self.rect.centerx + dx, self.rect.centery - dy))
                         self.x += dx
                         self.y -= dy
 

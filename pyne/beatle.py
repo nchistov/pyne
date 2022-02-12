@@ -92,10 +92,10 @@ class Beatle:
         self.tasks.put(('seth', angle))
 
     def down(self):
-        self.is_down = True
+        self.tasks.put('down')
 
     def up(self):
-        self.is_down = False
+        self.tasks.put('up')
 
     def stop(self):
         self._running = False
@@ -130,6 +130,10 @@ class Beatle:
                     self.angle %= 360
 
                     self.image = pg.transform.rotate(self.base_image, self.angle)
+                elif task == 'up':
+                    self.is_down = False
+                elif task == 'down':
+                    self.is_down = True
 
             sleep(0.02)
 

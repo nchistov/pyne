@@ -20,6 +20,13 @@ app = pyne.App()
 
 app.run()
 ```
+Other examples you can find [here](https://github.com/nchistov/Pyne/examples)
+
+---
+## Help
+Documentation you can find [here](https://github.com/nchistov/Pyne/DOC.md)
+
+---
 
 by Nickolay Chistov\
 2022

@@ -14,9 +14,9 @@ and I wanted to create pyne for _EPL IDE_(now it's on _Tkinter_, and I don't lik
 #### simple example
 This code create white window 500x500
 ```python
-from pyne.app import App
+import pyne
 
-app = App()
+app = pyne.App()
 
 app.run()
 ```

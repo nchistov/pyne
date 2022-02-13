@@ -1,5 +1,5 @@
-from pyne import App
+import pyne
 
-app = App()
+app = pyne.App()
 
 app.run()

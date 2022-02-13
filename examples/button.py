@@ -1,9 +1,8 @@
-from pyne import App
-from pyne.widgets import Button
+import pyne
 
-btn = Button('Hello', command=lambda: print('Hello!'))
+app = pyne.App(bg_color=(0, 0, 0))
 
-app = App(bg_color=(0, 0, 0))
+btn = pyne.widgets.Button('Hello', command=lambda: print('Hello!'))
 
 app.add_widget(btn)
 

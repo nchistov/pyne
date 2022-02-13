@@ -1,13 +1,11 @@
-from pyne import App
-from pyne.widgets import Button
-from pyne.grid import Grid
+import pyne
 
-btn1 = Button('1', command=lambda: print('Hello from btn1!'))
-btn2 = Button('2', command=lambda: print('Hello from btn2!'))
+app = pyne.App()
 
-app = App()
+btn1 = pyne.widgets.Button('1', command=lambda: print('Hello from btn1!'))
+btn2 = pyne.widgets.Button('2', command=lambda: print('Hello from btn2!'))
 
-grid = Grid(app, 5, 5)
+grid = pyne.Grid(app, 5, 5)
 
 grid.add_widget(btn1, 1, 0)
 grid.add_widget(btn2, 1, 1)

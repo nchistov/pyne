@@ -1,20 +1,15 @@
-from pyne import App
-from pyne.grid import Grid
+import pyne
 
-from pyne.widgets import beatle_screen, button
+app = pyne.App(window_size=(1100, 500))
 
-from pyne import beatle
+grid = pyne.Grid(app, 10, 7)
 
-app = App(window_size=(1100, 500))
-
-grid = Grid(app, 10, 7)
-
-beatle_screen = beatle_screen.BeatleScreen(app)
+beatle_screen = pyne.widgets.BeatleScreen(app)
 grid.add_widget(beatle_screen, 0, 0, 2.5, 9)
 
-t = beatle.Beatle(beatle_screen)
+t = pyne.beatle.Beatle(beatle_screen)
 
-run_button = button.Button('Запустить', color=(230, 230, 230), active_color=(150, 150, 150), font_size=30)
+run_button = pyne.widgets.Button('Запустить', color=(230, 230, 230), active_color=(150, 150, 150), font_size=30)
 
 grid.add_widget(run_button, 9, 0.5)
 

@@ -27,6 +27,8 @@ class App:
 
         self.schedule = []
         self.widgets = []
+        self.handlers = {}
+
         self.running = False
         self.bg = bg_color
         self.fps = 30
@@ -42,6 +44,9 @@ class App:
 
     def remove_widget(self, widget):
         self.widgets.remove(widget)
+
+    def add_handler(self, key: str, func: callable):
+        self.handlers[key] = func
 
     def _check_events(self):
         for event in pg.event.get():

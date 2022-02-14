@@ -15,8 +15,8 @@ class Beatle:
     app: exemplar of class pyne.App
     screen: exemplar of class pyne.widgets.BeatleScreen
 
-    x: turtle y
-    y: turtle x
+    x: turtle x
+    y: turtle y
 
     is_down: if it is True beatle draw line else no
 
@@ -27,7 +27,6 @@ class Beatle:
 
     speed: int
     angle: int
-    steps: int
 
     tasks: exemplar of class queue.Queue
 
@@ -69,7 +68,6 @@ class Beatle:
 
         self.speed = 5
         self.angle = 0
-        self.steps = 0
 
         self.tasks = Queue(maxsize=10000)
 

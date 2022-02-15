@@ -1,3 +1,4 @@
+import json
 import os
 
 import pygame as pg
@@ -29,6 +30,9 @@ class App:
         self.widgets = []
         self.handlers = {}
 
+        with open(os.path.join(os.path.dirname(__file__), 'events.json')) as f:
+            self.events = json.load(f)
+
         self.running = False
         self.bg = bg_color
         self.fps = 30
@@ -49,6 +53,15 @@ class App:
         self.handlers[key] = func
 
     def _check_events(self):
+        keys = pg.key.get_pressed()
+        for handler, func in self.handlers.items():
+            for key in handler.split('-'):
+                pass
+                # if not keys[self.events[key]]:
+                #     break
+            else:
+                func()
+
         for event in pg.event.get():
             match event.type:
                 case pg.QUIT:

@@ -41,19 +41,22 @@ class App:
         self.schedule.append(func)
 
     def remove_from_schedule(self, func):
-        self.schedule.remove(func)
+        if func in self.schedule:
+            self.schedule.remove(func)
 
     def add_widget(self, widget):
         self.widgets.append(widget)
 
     def remove_widget(self, widget):
-        self.widgets.remove(widget)
+        if widget in self.widgets:
+            self.widgets.remove(widget)
 
     def add_handler(self, key: str, func: callable):
         self.handlers[key] = func
 
     def remove_handler(self, key):
-        del self.handlers[key]
+        if key in self.handlers.keys():
+            del self.handlers[key]
 
     def _check_events(self):
         keys = pg.key.get_pressed()

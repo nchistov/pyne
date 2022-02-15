@@ -56,9 +56,8 @@ class App:
         keys = pg.key.get_pressed()
         for handler, func in self.handlers.items():
             for key in handler.split('-'):
-                pass
-                # if not keys[self.events[key]]:
-                #     break
+                if not keys[self.events[key]]:
+                    break
             else:
                 func()
 

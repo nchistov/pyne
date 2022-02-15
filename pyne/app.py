@@ -52,6 +52,9 @@ class App:
     def add_handler(self, key: str, func: callable):
         self.handlers[key] = func
 
+    def remove_handler(self, key):
+        del self.handlers[key]
+
     def _check_events(self):
         keys = pg.key.get_pressed()
         for handler, func in self.handlers.items():

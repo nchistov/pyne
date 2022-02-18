@@ -1,8 +1,7 @@
 # ToDo
 
 ### App:
- - [X] Method add_handler
- - [ ] File events.json
+ - [ ] Add checking press mouse button
 ### Widgets:
  - [ ] Panel
  - [ ] CheckBox

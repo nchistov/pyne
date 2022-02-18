@@ -60,6 +60,7 @@ class App:
 
     def _check_events(self):
         keys = pg.key.get_pressed()
+
         for handler, func in self.handlers.items():
             for key in handler.split('-'):
                 if not keys[self.events[key]]:

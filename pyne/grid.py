@@ -32,6 +32,10 @@ class Grid:
 
         self.app.add_widget(widget)
 
+    def change_pos_of_widget(self, widget, new_row, new_column, new_width=0, new_height=0):
+        self.app.remove_widget(widget)
+        self.add_widget(widget, new_row, new_column, new_width, new_height)
+
     def add_image(self, image, row, column, width=1, height=1, size_correction=False):
         if row >= self.rows:
             raise NoSouchPositionError("Row must be less then max rows")
@@ -55,3 +59,6 @@ class Grid:
             raise AttributeError("Widget must has attribute rect")
 
         self.app.add_to_schedule(image.draw)
+
+    def change_pos_of_image(self, image, row, column, width=1, height=1, size_correction=False):
+        self.add_image(image, row, column, width, height, size_correction)

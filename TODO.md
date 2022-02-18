@@ -3,7 +3,7 @@
 ### App:
  - [ ] Add checking press mouse button
 ### Widgets:
- - [ ] Panel
+ - [X] Panel
  - [ ] CheckBox
  - [ ] ComboBox
  - [ ] Canvas

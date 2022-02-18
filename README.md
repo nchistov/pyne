@@ -28,5 +28,7 @@ Documentation you can find [here](https://github.com/nchistov/Pyne/DOC.md)
 
 ---
 
-by Nickolay Chistov\
+We need your help to make pyne better than it's now! Pull requests are welcome
+
+By Nickolay Chistov\
 2022

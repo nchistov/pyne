@@ -1,7 +1,8 @@
 import pygame as pg
 
 
-class NoSouchPositionError(Exception): pass
+class NoSouchPositionError(Exception):
+    pass
 
 
 class Grid:

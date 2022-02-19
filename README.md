@@ -30,5 +30,13 @@ Documentation you can find [here](https://github.com/nchistov/Pyne/DOC.md)
 
 We need your help to make pyne better than it's now! Pull requests are welcome
 
+## Thanks
+
+I'd like to give thanks to this people:
+ + [Anatoliy Chistov](https://github.com/FrCln)
+ + [Vladimir Chistov](https://github.com/wchistow)
+
+---
+
 By Nickolay Chistov\
 2022

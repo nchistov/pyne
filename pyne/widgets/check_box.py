@@ -42,3 +42,13 @@ class CheckBox(Widget):
 
         self.choosing_rect.x = self.rect.x + 10
         self.choosing_rect.y = self.rect.y + 10
+
+    def draw(self, screen: pg.Surface):
+        screen.blit(self.text_image, self.rect)
+        pg.draw.rect(screen, (0, 0, 0), self.choosing_rect)
+
+        if self.is_choose:
+            pg.draw.line(screen, (0, 0, 0), (self.choosing_rect.x - 5, self.choosing_rect.y - 5),
+                         (self.choosing_rect.centerx, self.choosing_rect.bottom))
+            pg.draw.line(screen, (0, 0, 0), (self.choosing_rect.centerx, self.choosing_rect.bottom),
+                         (self.choosing_rect.right, self.choosing_rect.top))

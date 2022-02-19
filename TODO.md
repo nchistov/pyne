@@ -4,6 +4,6 @@
  - [ ] Add checking press mouse button
 ### Widgets:
  - [X] Panel
- - [ ] CheckBox
+ - [X] CheckBox
  - [ ] ComboBox
  - [ ] Canvas

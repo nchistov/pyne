@@ -4,7 +4,7 @@ from .base_widget import Widget
 
 
 class CheckBox(Widget):
-    def __init__(self, text, command=None, text_color=(0, 0, 0), font_size=20):
+    def __init__(self, text, command=None, text_color=(0, 0, 0), font_size=25):
         super().__init__()
 
         self.text = text
@@ -23,8 +23,6 @@ class CheckBox(Widget):
         self.text_image = self.font.render(text, True, self.text_color)
 
         self.text_image_rect = self.text_image.get_rect()
-        self.text_image_rect.x = self.rect.x + 5
-        self.text_image_rect.y = self.rect.y + 5
 
     def update(self, event):
         if event.type == pg.MOUSEBUTTONDOWN:
@@ -38,17 +36,17 @@ class CheckBox(Widget):
                     self.is_choose = False
 
         self.text_image_rect.left = self.rect.left + 30
-        self.text_image_rect.top = self.rect.top + 20
+        self.text_image_rect.top = self.rect.top + 8
 
         self.choosing_rect.x = self.rect.x + 10
         self.choosing_rect.y = self.rect.y + 10
 
     def draw(self, screen: pg.Surface):
-        screen.blit(self.text_image, self.rect)
+        screen.blit(self.text_image, self.text_image_rect)
         pg.draw.rect(screen, (0, 0, 0), self.choosing_rect)
 
         if self.is_choose:
             pg.draw.line(screen, (0, 0, 0), (self.choosing_rect.x - 5, self.choosing_rect.y - 5),
-                         (self.choosing_rect.centerx, self.choosing_rect.bottom))
+                         (self.choosing_rect.centerx, self.choosing_rect.bottom), width=2)
             pg.draw.line(screen, (0, 0, 0), (self.choosing_rect.centerx, self.choosing_rect.bottom),
-                         (self.choosing_rect.right, self.choosing_rect.top))
+                         (self.choosing_rect.right, self.choosing_rect.top), width=2)

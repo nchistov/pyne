@@ -13,6 +13,8 @@ class CheckBox(Widget):
 
         self.choosing_rect = pg.Rect(self.rect.x + 10, self.rect.y + 10, 10, 10)
 
+        self.bg_rect = pg.Rect(self.rect.x + 9, self.rect.y + 9, 12, 12)
+
         self.font = pg.font.SysFont('', font_size)
 
         self.is_choose = False
@@ -43,7 +45,8 @@ class CheckBox(Widget):
 
     def draw(self, screen: pg.Surface):
         screen.blit(self.text_image, self.text_image_rect)
-        pg.draw.rect(screen, (0, 0, 0), self.choosing_rect)
+        pg.draw.rect(screen, (0, 0, 0), self.bg_rect)
+        pg.draw.rect(screen, (255, 255, 255), self.choosing_rect)
 
         if self.is_choose:
             pg.draw.line(screen, (0, 0, 0), (self.choosing_rect.x - 5, self.choosing_rect.y - 5),

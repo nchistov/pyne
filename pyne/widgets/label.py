@@ -16,8 +16,6 @@ class Label(Widget):
 
         self.press = press
 
-        self.rect = pg.Rect(0, 0, 100, 50)
-
         self.font = pg.font.SysFont('', font_size)
 
         self.set_text(text)

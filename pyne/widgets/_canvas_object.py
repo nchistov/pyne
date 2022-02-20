@@ -33,3 +33,14 @@ class CanvasObject:
                 self.R = info[2]
 
                 self.color = info[3]
+
+    def draw(self, screen: pg.Surface):
+        match self.info[0]:
+            case 'point':
+                pg.draw.rect(screen, self.rect, self.color)
+            case 'line':
+                pg.draw.line(screen, self.color, self.start_pos, self.end_pos, self.line_width)
+            case 'rect':
+                pg.draw.rect(screen, self.color, self.rect)
+            case 'circle':
+                pg.draw.circle(screen, self.color, (self.x, self.y), self.R)

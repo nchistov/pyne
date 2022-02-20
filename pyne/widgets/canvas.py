@@ -9,7 +9,7 @@ class Canvas(Widget):
 
         self.bg_color = bg_color
 
-        self.objects  = []
+        self.objects = []
 
     def draw(self, screen: pg.Surface):
         for obj in self.objects:

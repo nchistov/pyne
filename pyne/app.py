@@ -69,9 +69,8 @@ class App:
                 func()
 
         for event in pg.event.get():
-            match event.type:
-                case pg.QUIT:
-                    self.quit()
+            if event.type == pg.QUIT:
+                self.quit()
 
             for widget in self.widgets:
                 widget.update(event)

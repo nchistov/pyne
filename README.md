@@ -2,6 +2,8 @@
 ## Python application lib
 ## version 0.1.0 alpha
 
+### Warning, python version must be 3.10 or high!
+
 ## History
 Why we call it 'Pyne'? Because we create it on Python and I want to call it 'Pine' 🌳
 The first idea of Pyne created when I saw the Kivy.

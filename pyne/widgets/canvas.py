@@ -19,4 +19,4 @@ class Canvas(Widget):
 
     def draw(self, screen: pg.Surface):
         for obj in self.objects:
-            obj.draw()
+            obj.draw(screen)

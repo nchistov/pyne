@@ -18,5 +18,7 @@ class Canvas(Widget):
         self.objects.append(new_obj)
 
     def draw(self, screen: pg.Surface):
+        pg.draw.rect(screen, self.bg_color, self.rect)
+
         for obj in self.objects:
             obj.draw(screen)

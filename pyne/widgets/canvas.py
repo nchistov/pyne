@@ -14,7 +14,7 @@ class Canvas(Widget):
         self.objects = []
 
     def point(self, x: int, y: int, color=(0, 0, 0)):
-        new_obj = CanvasObject(('point', (x, y), color))
+        new_obj = CanvasObject(('point', (self.rect.x + x, self.rect.y + y), color))
         self.objects.append(new_obj)
 
     def draw(self, screen: pg.Surface):

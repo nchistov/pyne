@@ -7,7 +7,6 @@ from .grid import Grid
 
 from . import widgets
 
-from . import image
 from . import beatle
 
 __version__ = '0.1.0 alpha'

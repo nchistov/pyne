@@ -30,6 +30,10 @@ class Canvas(Widget):
         new_obj = CanvasObject(('circle', (self.rect.x + x, self.rect.y + y), R, color))
         self.objects.append(new_obj)
 
+    def draw_image(self, file_name: str, x: int, y: int):
+        new_obj = CanvasObject(('image', file_name, (self.rect.x + x, self.rect.y + y)))
+        self.objects.append(new_obj)
+
     def draw(self, screen: pg.Surface):
         pg.draw.rect(screen, self.bg_color, self.rect)
 

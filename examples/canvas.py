@@ -21,10 +21,10 @@ moving = 'left'
 def f():
     global x, moving
 
-    if x < 300 and moving == 'left':
+    if x < 450 and moving == 'left':
         canvas.move(image, 1, 0)
         x += 1
-    elif x > 298:
+    elif x > 348:
         moving = 'right'
     if x > 0 and moving == 'right':
         canvas.move(image, -1, 0)

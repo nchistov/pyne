@@ -36,6 +36,15 @@ class CanvasObject:
                 self.R = info[2]
 
                 self.color = info[3]
+            case 'image':
+                self.image = pg.image.load(info[1])
+
+                self.x = info[2][0]
+                self.y = info[2][1]
+
+                self.rect = self.image.get_rect()
+                self.rect.x = info[2][0]
+                self.rect.y = info[2][1]
 
     def draw(self, screen: pg.Surface):
         match self.info[0]:
@@ -53,3 +62,8 @@ class CanvasObject:
                 pg.draw.rect(screen, self.color, self.rect)
             case 'circle':
                 pg.draw.circle(screen, self.color, (self.x, self.y), self.R)
+            case 'image':
+                self.rect.x = self.x
+                self.rect.y = self.y
+
+                screen.blit(self.image, self.rect)

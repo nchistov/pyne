@@ -8,9 +8,12 @@ class CanvasObject:
         match info[0]:
             case 'point':
                 self.rect = pg.Rect(info[1][0], info[1][1], 1, 1)
+
+                self.x = info[1][0]
+                self.y = info[1][1]
+
                 self.color = info[2]
             case 'line':
-                self.start_pos = info[1]
                 self.end_pos = info[2]
 
                 self.x = info[1][0]
@@ -37,10 +40,16 @@ class CanvasObject:
     def draw(self, screen: pg.Surface):
         match self.info[0]:
             case 'point':
+                self.rect.x = self.x
+                self.rect.y = self.y
+
                 pg.draw.rect(screen, self.color, self.rect)
             case 'line':
-                pg.draw.line(screen, self.color, self.start_pos, self.end_pos, self.line_width)
+                pg.draw.line(screen, self.color, (self.x, self.y), self.end_pos, self.line_width)
             case 'rect':
+                self.rect.x = self.x
+                self.rect.y = self.y
+
                 pg.draw.rect(screen, self.color, self.rect)
             case 'circle':
                 pg.draw.circle(screen, self.color, (self.x, self.y), self.R)

@@ -13,26 +13,36 @@ class Canvas(Widget):
 
         self.objects = []
 
-    def draw_point(self, x: int, y: int, color=(0, 0, 0)):
+    def draw_point(self, x: int, y: int, color=(0, 0, 0)) -> int:
         new_obj = CanvasObject(('point', (self.rect.x + x, self.rect.y + y), color))
         self.objects.append(new_obj)
 
-    def draw_line(self, x1: int, y1: int, x2: int, y2: int, color=(0, 0, 0), width=1):
+        return len(self.objects) - 1
+
+    def draw_line(self, x1: int, y1: int, x2: int, y2: int, color=(0, 0, 0), width=1) -> int:
         new_obj = CanvasObject(('line', (self.rect.x + x1, self.rect.y + y1), (self.rect.x + x2, self.rect.y + y2),
                                 color, width))
         self.objects.append(new_obj)
 
-    def draw_rect(self, x: int, y: int, width: int, height: int, color=(0, 0, 0)):
+        return len(self.objects) - 1
+
+    def draw_rect(self, x: int, y: int, width: int, height: int, color=(0, 0, 0)) -> int:
         new_obj = CanvasObject(('rect', (self.rect.x + x, self.rect.y + y), width, height, color))
         self.objects.append(new_obj)
 
-    def draw_circle(self, x: int, y: int, R: int, color=(0, 0, 0)):
+        return len(self.objects) - 1
+
+    def draw_circle(self, x: int, y: int, R: int, color=(0, 0, 0)) -> int:
         new_obj = CanvasObject(('circle', (self.rect.x + x, self.rect.y + y), R, color))
         self.objects.append(new_obj)
 
-    def draw_image(self, file_name: str, x: int, y: int):
+        return len(self.objects) - 1
+
+    def draw_image(self, file_name: str, x: int, y: int) -> int:
         new_obj = CanvasObject(('image', file_name, (self.rect.x + x, self.rect.y + y)))
         self.objects.append(new_obj)
+
+        return len(self.objects) - 1
 
     def draw(self, screen: pg.Surface):
         pg.draw.rect(screen, self.bg_color, self.rect)

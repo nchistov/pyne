@@ -44,6 +44,10 @@ class Canvas(Widget):
 
         return len(self.objects) - 1
 
+    def move(self, obj, x, y):
+        self.objects[obj].x += x
+        self.objects[obj].y += y
+
     def draw(self, screen: pg.Surface):
         pg.draw.rect(screen, self.bg_color, self.rect)
 

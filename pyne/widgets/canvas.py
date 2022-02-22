@@ -48,6 +48,10 @@ class Canvas(Widget):
         self.objects[obj].x += x
         self.objects[obj].y += y
 
+        if self.objects[obj].info[0] == 'line':
+            self.objects[obj].end_pos[0] += x
+            self.objects[obj].end_pos[1] += y
+
     def draw(self, screen: pg.Surface):
         pg.draw.rect(screen, self.bg_color, self.rect)
 

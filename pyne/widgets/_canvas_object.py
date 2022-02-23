@@ -46,9 +46,9 @@ class CanvasObject:
                 self.rect.x = info[2][0]
                 self.rect.y = info[2][1]
             case 'polygon':
-                self.coordinates = info[0]
+                self.coordinates = info[1]
 
-                self.color = info[1]
+                self.color = info[2]
 
     def draw(self, screen: pg.Surface):
         match self.info[0]:

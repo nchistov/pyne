@@ -43,7 +43,7 @@ class Grid(Widget):
 
         self.widgets.append(widget)
 
-    def change_pos_of_widget(self, widget, new_row, new_column, new_width=0, new_height=0):
+    def change_pos_of_widget(self, widget, new_row, new_column, new_width=1, new_height=1):
         self.widgets.remove(widget)
         self.add_widget(widget, new_row, new_column, new_width, new_height)
 

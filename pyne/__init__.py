@@ -3,7 +3,6 @@ import sys
 import pygame as pg
 
 from .app import App
-from .grid import Grid
 
 from . import widgets
 

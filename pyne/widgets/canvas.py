@@ -38,6 +38,12 @@ class Canvas(Widget):
 
         return len(self.objects) - 1
 
+    def draw_polygon(self, coordinates, color=(0, 0, 0)) -> int:
+        new_obj = CanvasObject(('polygon', coordinates, color))
+        self.objects.append(new_obj)
+
+        return len(self.objects) - 1
+
     def draw_image(self, file_name: str, x: int, y: int) -> int:
         new_obj = CanvasObject(('image', file_name, (self.rect.x + x, self.rect.y + y)))
         self.objects.append(new_obj)
@@ -45,11 +51,21 @@ class Canvas(Widget):
         return len(self.objects) - 1
 
     def move(self, obj, x, y):
+        new_coordinates = []
+
+        if self.objects[obj].info[0] == 'polygon':
+            for pos in self.objects[obj].coordinates:
+                new_coordinates.append((pos[0] + x, pos[1] + y))
+
+                self.objects[obj].coordinates = new_coordinates
+
+            return
+
         self.objects[obj].x += x
         self.objects[obj].y += y
 
-        if self.objects[obj].info[0] == 'line':
-            new_end_pos = self.objects[obj].end_pos[0] + x, self.objects[obj].end_pos[1] + y
+        if self.objects[obj].info[0] == 'line':  # If we need to move the line, we change not only start pos
+            new_end_pos = self.objects[obj].end_pos[0] + x, self.objects[obj].end_pos[1] + y  # end pos too
 
             self.objects[obj].end_pos = new_end_pos
 

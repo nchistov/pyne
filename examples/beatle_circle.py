@@ -2,7 +2,8 @@ import pyne
 
 app = pyne.App(window_size=(1100, 500))  # Creating white window 1100x500
 
-grid = pyne.Grid(app, 1, 1)  # Adding grid
+grid = pyne.widgets.Grid(app, 1, 1)  # Adding grid
+app.add_widget(grid)
 
 beatle_screen = pyne.widgets.BeatleScreen(app)  # Adding screen for beatle
 grid.add_widget(beatle_screen, 0, 0)

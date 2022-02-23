@@ -1,9 +1,11 @@
 import pyne
 
 app = pyne.App()
-grid = pyne.Grid(app, 3, 3)
+grid = pyne.widgets.Grid(app, 3, 3)
+app.add_widget(grid)
 
-sub_grid = pyne.Grid(app, 3, 3, 25, 25, 50, 50)
+sub_grid = pyne.widgets.Grid(app, 3, 3)
+grid.add_widget(sub_grid, 1, 1)
 
 btn = pyne.widgets.Button('OK', command=lambda: print('OK'))
 btn2 = pyne.widgets.Button('1', font_size=20, command=lambda: print('1'))

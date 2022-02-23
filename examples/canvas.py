@@ -1,7 +1,8 @@
 import pyne
 
 app = pyne.App()
-grid = pyne.Grid(app, 1, 1)
+grid = pyne.widgets.Grid(app, 1, 1)
+app.add_widget(grid)
 
 canvas = pyne.widgets.Canvas((0, 255, 150))
 grid.add_widget(canvas, 0, 0)

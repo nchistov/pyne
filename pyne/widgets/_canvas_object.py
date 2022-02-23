@@ -45,6 +45,10 @@ class CanvasObject:
                 self.rect = self.image.get_rect()
                 self.rect.x = info[2][0]
                 self.rect.y = info[2][1]
+            case 'polygon':
+                self.coordinates = info[0]
+
+                self.color = info[1]
 
     def draw(self, screen: pg.Surface):
         match self.info[0]:
@@ -67,3 +71,5 @@ class CanvasObject:
                 self.rect.y = self.y
 
                 screen.blit(self.image, self.rect)
+            case 'polygon':
+                pg.draw.polygon(screen, self.color, self.coordinates)

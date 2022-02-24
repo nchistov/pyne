@@ -37,15 +37,23 @@ class App:
         self.bg = bg_color
         self.fps = 30
 
-    def add_to_schedule(self, func: callable):
-        self.schedule.append(func)
+    def add_to_schedule(self, func: callable, priority=None):
+        if priority is None:
+            self.schedule.append(func)
+            return
+
+        self.schedule.insert(priority, func)
 
     def remove_from_schedule(self, func):
         if func in self.schedule:
             self.schedule.remove(func)
 
-    def add_widget(self, widget):
-        self.widgets.append(widget)
+    def add_widget(self, widget, priority=None):
+        if priority is None:
+            self.widgets.append(widget)
+            return
+
+        self.widgets.insert(priority, widget)
 
     def remove_widget(self, widget):
         if widget in self.widgets:

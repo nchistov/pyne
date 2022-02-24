@@ -20,7 +20,7 @@ class Grid(Widget):
 
         self.widgets = []
 
-    def add_widget(self, widget, row, column, width=1, height=1):
+    def add_widget(self, widget, row, column, width=1, height=1, priority=None):
         if row >= self.rows:
             raise NoSouchPositionError("Row must be less then max rows")
         if column >= self.columns:
@@ -41,11 +41,15 @@ class Grid(Widget):
         except ZeroDivisionError:
             pass
 
-        self.widgets.append(widget)
+        if priority is None:
+            self.widgets.append(widget)
+            return
 
-    def change_pos_of_widget(self, widget, new_row, new_column, new_width=1, new_height=1):
+        self.widgets.insert(priority, widget)
+
+    def change_pos_of_widget(self, widget, new_row, new_column, new_width=1, new_height=1, priority=None):
         self.widgets.remove(widget)
-        self.add_widget(widget, new_row, new_column, new_width, new_height)
+        self.add_widget(widget, new_row, new_column, new_width, new_height, priority)
 
     def update(self, event):
         for widget in self.widgets:

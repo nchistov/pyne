@@ -49,6 +49,17 @@ class CanvasObject:
                 self.coordinates = info[1]
 
                 self.color = info[2]
+            case 'text':
+                self.font = pg.font.SysFont('', info[3])
+
+                self.text_image = self.font.render(info[2], True, info[4])
+
+                self.text_image_rect = self.text_image.get_rect()
+
+                self.x, self.y = info[1][0], info[1][1]
+
+                self.text_image_rect.x = info[1][0]
+                self.text_image_rect.y = info[1][1]
 
     def draw(self, screen: pg.Surface):
         match self.info[0]:
@@ -73,3 +84,8 @@ class CanvasObject:
                 screen.blit(self.image, self.rect)
             case 'polygon':
                 pg.draw.polygon(screen, self.color, self.coordinates)
+            case 'text':
+                self.text_image_rect.x = self.x
+                self.text_image_rect.y = self.y
+
+                screen.blit(self.text_image, self.text_image_rect)

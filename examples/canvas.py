@@ -16,6 +16,10 @@ image = canvas.draw_image('image.png', 0, 350)
 canvas.draw_polygon(((400, 50), (450, 100), (400, 150)))
 canvas.draw_text('Test Canvas', 200, 150, 30)
 
+test_text = canvas.draw_text('Test Text', 200, 200, 30)
+
+canvas.delete(test_text)
+
 x = 0
 
 moving = 'left'

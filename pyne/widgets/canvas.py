@@ -56,10 +56,10 @@ class Canvas(Widget):
 
         return len(self.objects) - 1
 
-    def move(self, obj, x, y):
+    def move(self, obj: int, x, y):
         new_coordinates = []
 
-        if self.objects[obj].info[0] == 'polygon':
+        if self.objects[obj].info[0] == 'polygon':  # If we need to move polygon, we move all coordinates
             for pos in self.objects[obj].coordinates:
                 new_coordinates.append((pos[0] + x, pos[1] + y))
 
@@ -74,6 +74,12 @@ class Canvas(Widget):
             new_end_pos = self.objects[obj].end_pos[0] + x, self.objects[obj].end_pos[1] + y  # end pos too
 
             self.objects[obj].end_pos = new_end_pos
+
+    def delete(self, obj: int):
+        try:
+            del self.objects[obj]
+        except IndexError:
+            pass
 
     def draw(self, screen: pg.Surface):
         pg.draw.rect(screen, self.bg_color, self.rect)

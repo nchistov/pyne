@@ -16,6 +16,7 @@ class App:
 
         pg.init()
         pg.font.init()
+        pg.mixer.init()
 
         self.screen = pg.display.set_mode(window_size)
 

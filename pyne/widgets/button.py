@@ -5,7 +5,8 @@ from .base_widget import Widget
 
 class Button(Widget):
     def __init__(self, text: str, color=(150, 150, 150), active_color=(70, 200, 215),
-                 text_color=(0, 0, 0), font_size=40, command: callable = None, image=None, press='left'):
+                 text_color=(0, 0, 0), font_size=40, command: callable = None,
+                 image=None, press='left', sound=None):
         super().__init__()
         self.text = text
         self.color = color
@@ -16,6 +17,7 @@ class Button(Widget):
         self.press = press
 
         self.current_color = color
+        self.sound = sound
 
         self.is_pressed = False
 
@@ -26,6 +28,9 @@ class Button(Widget):
             self.image_rect = self.image.get_rect()
 
             self.has_image = True
+
+        if self.sound is not None:
+            self.sound = pg.mixer.Sound(self.sound)
 
         self.rect = pg.Rect(0, 0, len(text) * 17, 35)
 
@@ -48,6 +53,9 @@ class Button(Widget):
                 self.is_pressed = True                    # and flag is_pressed
                 if self.command is not None:
                     self.command()                        # If the command is registered, called it
+                if self.sound is not None:
+                    self.sound.play()
+
         elif event.type == pg.MOUSEBUTTONUP:
             self.current_color = self.color
             self.is_pressed = False

@@ -1,10 +1,13 @@
+from time import time
+
 import pygame as pg
 
 from .base_widget import Widget
 
 
 class Entry(Widget):
-    def __init__(self, prompt='', text_color=(0, 0, 0), bg_color=(225, 255, 255), outline_color=(0, 0, 0), font_size=30):
+    def __init__(self, prompt='', text_color=(0, 0, 0), bg_color=(225, 255, 255),
+                 outline_color=(0, 0, 0), font_size=30):
         super().__init__()
 
         self.text_color = text_color
@@ -15,6 +18,11 @@ class Entry(Widget):
         self.text = ''
 
         self.active = False
+
+        self.cursor_rect = pg.Rect(self.rect.x, self.rect.y, 2, 10)
+
+        self.time_cursor_state_changed = time()
+        self.cursor_state = 0
 
         self.font = pg.font.SysFont('', font_size)
 
@@ -33,6 +41,14 @@ class Entry(Widget):
             if self.rect.collidepoint(mouse_x, mouse_y):
                 self.active = True
 
+        # Change cursor state
+        if self.time_cursor_state_changed - time() >= 0.1:
+            if self.cursor_state == 0:
+                self.cursor_state = 1
+            elif self.cursor_state == 1:
+                self.cursor_state = 0
+            self.time_cursor_state_changed = time()
+
     def draw(self, screen: pg.Surface):
         pg.draw.rect(screen, self.bg_color, self.rect)
 
@@ -47,3 +63,6 @@ class Entry(Widget):
                          (self.rect.left, self.rect.bottom))
             pg.draw.line(screen, self.outline_color, (self.rect.left, self.rect.bottom),
                          (self.rect.right, self.rect.bottom))
+
+            # Draw cursor
+            pg.draw.rect(screen, (0, 0, 0), self.cursor_rect)

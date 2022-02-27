@@ -1,14 +1,14 @@
-from time import time
-
 import pygame as pg
 
 from .base_widget import Widget
 
 
 class Entry(Widget):
-    def __init__(self, prompt='', text_color=(0, 0, 0), bg_color=(225, 255, 255),
+    def __init__(self, prompt='', text_color=(0, 0, 0), bg_color=(255, 255, 255),
                  outline_color=(0, 0, 0), font_size=30):
         super().__init__()
+
+        self.prompt = prompt
 
         self.text_color = text_color
 
@@ -19,10 +19,9 @@ class Entry(Widget):
 
         self.active = False
 
-        self.cursor_rect = pg.Rect(self.rect.x, self.rect.y, 2, 10)
-
-        self.time_cursor_state_changed = time()
-        self.cursor_state = 0
+        self.cursor_rect = pg.Rect(self.rect.x, self.rect.y, 3, 20)
+        self.cursor_rect.left = self.rect.left
+        self.cursor_rect.top = self.rect.top
 
         self.font = pg.font.SysFont('', font_size)
 
@@ -34,20 +33,39 @@ class Entry(Widget):
         self.text_image_rect = self.text_image.get_rect()
 
         self.text_image_rect.left = self.rect.left
+        self.text_image_rect.top = self.rect.top
 
     def update(self, event):
+        self.cursor_rect.top = self.rect.top
+
         if event.type == pg.MOUSEBUTTONDOWN:
             mouse_x, mouse_y = event.pos
             if self.rect.collidepoint(mouse_x, mouse_y):
                 self.active = True
 
-        # Change cursor state
-        if self.time_cursor_state_changed - time() >= 0.1:
-            if self.cursor_state == 0:
-                self.cursor_state = 1
-            elif self.cursor_state == 1:
-                self.cursor_state = 0
-            self.time_cursor_state_changed = time()
+        if event.type == pg.KEYDOWN:
+            if event.key == pg.K_BACKSPACE:
+                self.text = self.text[:-1]
+
+                self.prep_text(self.text, self.text_color)
+
+                self.cursor_rect.left = self.text_image_rect.left
+                self.cursor_rect.top = self.text_image_rect.top
+            elif self.active:
+                if event.key not in (13, 1073742052, 1073742048, 1073742054, 1073742050):
+                    self.text += event.unicode
+
+                    self.prep_text(self.text, self.text_color)
+
+                    self.cursor_rect.left = self.text_image_rect.left
+                    self.cursor_rect.top = self.text_image_rect.top
+
+            self.cursor_rect.left = self.text_image_rect.right + 1
+
+        if not self.text:
+            self.prep_text(self.prompt, (150, 150, 150))
+
+            self.cursor_rect.left = self.rect.left
 
     def draw(self, screen: pg.Surface):
         pg.draw.rect(screen, self.bg_color, self.rect)

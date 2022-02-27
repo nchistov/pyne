@@ -33,32 +33,32 @@ class Entry(Widget):
         self.text_image_rect = self.text_image.get_rect()
 
         self.text_image_rect.left = self.rect.left
-        self.text_image_rect.top = self.rect.top
+        self.text_image_rect.centery = self.rect.centery
 
     def update(self, event):
-        self.cursor_rect.top = self.rect.top
+        self.cursor_rect.centery = self.rect.centery
 
         if event.type == pg.MOUSEBUTTONDOWN:
             mouse_x, mouse_y = event.pos
             if self.rect.collidepoint(mouse_x, mouse_y):
                 self.active = True
+            else:
+                self.active = False
 
         if event.type == pg.KEYDOWN:
-            if event.key == pg.K_BACKSPACE:
-                self.text = self.text[:-1]
+            if self.active:
+                if event.key == pg.K_BACKSPACE:
+                    self.text = self.text[:-1]
 
-                self.prep_text(self.text, self.text_color)
+                    self.prep_text(self.text, self.text_color)
 
-                self.cursor_rect.left = self.text_image_rect.left
-                self.cursor_rect.top = self.text_image_rect.top
-            elif self.active:
-                if event.key not in (13, 1073742052, 1073742048, 1073742054, 1073742050):
+                    self.cursor_rect.centery = self.text_image_rect.centery
+                elif event.key not in (13, 1073742052, 1073742048, 1073742054, 1073742050):
                     self.text += event.unicode
 
                     self.prep_text(self.text, self.text_color)
 
-                    self.cursor_rect.left = self.text_image_rect.left
-                    self.cursor_rect.top = self.text_image_rect.top
+                    self.cursor_rect.centery = self.text_image_rect.centery
 
             self.cursor_rect.left = self.text_image_rect.right + 1
 

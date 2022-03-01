@@ -15,6 +15,8 @@ class Entry(Widget):
         self.bg_color = bg_color
         self.outline_color = outline_color
 
+        self.insertion_pos = 0
+
         self.text = ''
 
         self.active = False
@@ -53,12 +55,23 @@ class Entry(Widget):
                     self.prep_text(self.text, self.text_color)
 
                     self.cursor_rect.centery = self.text_image_rect.centery
-                elif event.key not in (13, 1073742052, 1073742048, 1073742054, 1073742050):
-                    self.text += event.unicode
+                elif event.key not in (13, 1073742052, 1073742048, 1073742054,
+                                       1073742050, 1073741904, 1073741903):  # Unprintable keys
+                    new_text = self.text[:self.insertion_pos]
+                    new_text += event.unicode
+                    new_text += self.text[self.insertion_pos:]
+
+                    self.insertion_pos += 1
+
+                    self.text = new_text
 
                     self.prep_text(self.text, self.text_color)
-
-                    self.cursor_rect.centery = self.text_image_rect.centery
+                if event.key == pg.K_LEFT:
+                    if self.insertion_pos != 0:
+                        self.insertion_pos -= 1
+                elif event.key == pg.K_RIGHT:
+                    if self.insertion_pos != len(self.text) - 1:
+                        self.insertion_pos += 1
 
             self.cursor_rect.left = self.text_image_rect.right + 1
 

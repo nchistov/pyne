@@ -15,6 +15,8 @@ class Entry(Widget):
         self.bg_color = bg_color
         self.outline_color = outline_color
 
+        self.current_outline_color = (200, 200, 200)
+
         self.insertion_pos = 0
 
         self.text = ''
@@ -34,7 +36,7 @@ class Entry(Widget):
 
         self.text_image_rect = self.text_image.get_rect()
 
-        self.text_image_rect.left = self.rect.left
+        self.text_image_rect.left = self.rect.left + 5
         self.text_image_rect.centery = self.rect.centery
 
     def update(self, event):
@@ -44,8 +46,12 @@ class Entry(Widget):
             mouse_x, mouse_y = event.pos
             if self.rect.collidepoint(mouse_x, mouse_y):
                 self.active = True
+
+                self.current_outline_color = self.outline_color
             else:
                 self.active = False
+
+                self.current_outline_color = (200, 200, 200)
 
         if event.type == pg.KEYDOWN:
             if self.active:
@@ -87,22 +93,22 @@ class Entry(Widget):
         if not self.text:
             self.prep_text(self.prompt, (150, 150, 150))
 
-            self.cursor_rect.left = self.rect.left
+            self.cursor_rect.left = self.rect.left + 5
 
     def draw(self, screen: pg.Surface):
         pg.draw.rect(screen, self.bg_color, self.rect)
 
         screen.blit(self.text_image, self.text_image_rect)
 
-        if self.active:
-            # Draw outline
-            pg.draw.line(screen, self.outline_color, (self.rect.right, self.rect.bottom),
-                         (self.rect.right, self.rect.top))
-            pg.draw.line(screen, self.outline_color, (self.rect.right, self.rect.top), (self.rect.left, self.rect.top))
-            pg.draw.line(screen, self.outline_color, (self.rect.left, self.rect.top),
-                         (self.rect.left, self.rect.bottom))
-            pg.draw.line(screen, self.outline_color, (self.rect.left, self.rect.bottom),
-                         (self.rect.right, self.rect.bottom))
+        # Draw outline
+        pg.draw.line(screen, self.current_outline_color, (self.rect.right, self.rect.bottom),
+                     (self.rect.right, self.rect.top))
+        pg.draw.line(screen, self.current_outline_color, (self.rect.right, self.rect.top), (self.rect.left, self.rect.top))
+        pg.draw.line(screen, self.current_outline_color, (self.rect.left, self.rect.top),
+                     (self.rect.left, self.rect.bottom))
+        pg.draw.line(screen, self.current_outline_color, (self.rect.left, self.rect.bottom),
+                     (self.rect.right, self.rect.bottom))
 
+        if self.active:
             # Draw cursor
             pg.draw.rect(screen, (0, 0, 0), self.cursor_rect)

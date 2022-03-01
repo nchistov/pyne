@@ -50,11 +50,17 @@ class Entry(Widget):
         if event.type == pg.KEYDOWN:
             if self.active:
                 if event.key == pg.K_BACKSPACE:
-                    self.text = self.text[:-1]
+                    if self.text and self.insertion_pos != 0:
+                        new_text = self.text[:self.insertion_pos - 1]
+                        new_text += self.text[self.insertion_pos:]
 
-                    self.prep_text(self.text, self.text_color)
+                        self.insertion_pos -= 1
 
-                    self.cursor_rect.centery = self.text_image_rect.centery
+                        self.text = new_text
+
+                        self.prep_text(self.text, self.text_color)
+
+                        self.cursor_rect.centery = self.text_image_rect.centery
                 elif event.key not in (13, 1073742052, 1073742048, 1073742054,
                                        1073742050, 1073741904, 1073741903):  # Unprintable keys
                     new_text = self.text[:self.insertion_pos]

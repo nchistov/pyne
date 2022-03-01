@@ -70,10 +70,13 @@ class Entry(Widget):
                     if self.insertion_pos != 0:
                         self.insertion_pos -= 1
                 elif event.key == pg.K_RIGHT:
-                    if self.insertion_pos != len(self.text) - 1:
+                    if self.insertion_pos != len(self.text):
                         self.insertion_pos += 1
 
-            self.cursor_rect.left = self.text_image_rect.right + 1
+                # Move cursor to correct coordinates (this is a hacker solution).
+                self.prep_text(self.text[:self.insertion_pos], self.text_color)
+                self.cursor_rect.left = self.text_image_rect.right
+                self.prep_text(self.text, self.text_color)
 
         if not self.text:
             self.prep_text(self.prompt, (150, 150, 150))

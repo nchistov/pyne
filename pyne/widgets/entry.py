@@ -9,7 +9,7 @@ class Entry(Widget):
         super().__init__()
 
         self.prompt = prompt
-
+        self.prompt_color = (150, 150, 150)
         self.text_color = text_color
 
         self.bg_color = bg_color
@@ -19,28 +19,55 @@ class Entry(Widget):
 
         self.insertion_pos = 0
 
-        self.text = ''
+        self._text = ''
 
         self.active = False
 
-        self.cursor_rect = pg.Rect(self.rect.x, self.rect.y, 3, 20)
-        self.cursor_rect.left = self.rect.left
-        self.cursor_rect.top = self.rect.top
+        self.cursor_rect = pg.Rect(0, 0, 3, 20)
 
         self.font = pg.font.SysFont('', font_size)
-
-        self.prep_text(prompt, (150, 150, 150))
-
-    def prep_text(self, text, color):
-        self.text_image = self.font.render(text, True, color)
-
+        self.text_image = self.font.render(self.text, True, self.text_color)
         self.text_image_rect = self.text_image.get_rect()
+        self.text_image_rect.left = 5
+        self.text_image_rect.centery = self.rect.height // 2
+        self.render_text()
 
-        self.text_image_rect.left = self.rect.left + 5
-        self.text_image_rect.centery = self.rect.centery
+    @property
+    def text(self):
+        return self._text
+
+    @text.setter
+    def text(self, value):
+        self._text = value
+        self.render_text()
+
+    def set_rect(self, x, y, width, height):
+        super().set_rect(x, y, width, height)
+        self.render_text()
+
+    def render_text(self):
+        text, color = self.text, self.text_color
+        if not text:
+            text = self.prompt
+            color = self.prompt_color
+
+        self.text_image = self.font.render(text, True, color)
+        self.text_image_rect.centery = self.rect.height // 2
+
+    def render_cursor(self):
+        before_cursor = self.font.render(self.text[:self.insertion_pos], True, self.text_color).get_rect()
+        before_cursor.left = self.text_image_rect.left
+        self.cursor_rect.left = before_cursor.right
+        d = self.cursor_rect.right - self.rect.width
+        if d > 0:
+            self.text_image_rect.right -= d
+            self.cursor_rect.right -= d
+        if self.cursor_rect.left < 0:
+            self.text_image_rect.right -= self.cursor_rect.left
+            self.cursor_rect.left = 0
 
     def update(self, event):
-        self.cursor_rect.centery = self.rect.centery
+        self.cursor_rect.centery = self.rect.height // 2
 
         if event.type == pg.MOUSEBUTTONDOWN:
             mouse_x, mouse_y = event.pos
@@ -64,9 +91,6 @@ class Entry(Widget):
 
                         self.text = new_text
 
-                        self.prep_text(self.text, self.text_color)
-
-                        self.cursor_rect.centery = self.text_image_rect.centery
                 elif event.key == pg.K_ESCAPE:
                     self.active = False
                     self.current_outline_color = (200, 200, 200)
@@ -80,7 +104,6 @@ class Entry(Widget):
 
                     self.text = new_text
 
-                    self.prep_text(self.text, self.text_color)
                 if event.key == pg.K_LEFT:
                     if self.insertion_pos != 0:
                         self.insertion_pos -= 1
@@ -88,20 +111,18 @@ class Entry(Widget):
                     if self.insertion_pos != len(self.text):
                         self.insertion_pos += 1
 
-                # Move cursor to correct coordinates (this is a hacker solution).
-                self.prep_text(self.text[:self.insertion_pos], self.text_color)
-                self.cursor_rect.left = self.text_image_rect.right
-                self.prep_text(self.text, self.text_color)
-
-        if not self.text:
-            self.prep_text(self.prompt, (150, 150, 150))
-
-            self.cursor_rect.left = self.rect.left + 5
+        self.render_cursor()
 
     def draw(self, screen: pg.Surface):
         pg.draw.rect(screen, self.bg_color, self.rect)
 
-        screen.blit(self.text_image, self.text_image_rect)
+        surface = pg.Surface(self.rect.size)
+        surface.fill(self.bg_color)
+        surface.blit(self.text_image, self.text_image_rect)
+        if self.active:
+            # Draw cursor
+            pg.draw.rect(surface, (0, 0, 0), self.cursor_rect)
+        screen.blit(surface, self.rect)
 
         # Draw outline
         pg.draw.line(screen, self.current_outline_color, (self.rect.right, self.rect.bottom),
@@ -112,6 +133,3 @@ class Entry(Widget):
         pg.draw.line(screen, self.current_outline_color, (self.rect.left, self.rect.bottom),
                      (self.rect.right, self.rect.bottom))
 
-        if self.active:
-            # Draw cursor
-            pg.draw.rect(screen, (0, 0, 0), self.cursor_rect)

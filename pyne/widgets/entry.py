@@ -67,7 +67,10 @@ class Entry(Widget):
                         self.prep_text(self.text, self.text_color)
 
                         self.cursor_rect.centery = self.text_image_rect.centery
-                elif event.key not in (13, 1073742052, 1073742048, 1073742054,
+                elif event.key == pg.K_ESCAPE:
+                    self.active = False
+                    self.current_outline_color = (200, 200, 200)
+                elif event.key not in (9, 13, 127, 1073742052, 1073742048, 1073742054,
                                        1073742050, 1073741904, 1073741903):  # Unprintable keys
                     new_text = self.text[:self.insertion_pos]
                     new_text += event.unicode

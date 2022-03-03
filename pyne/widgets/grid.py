@@ -30,14 +30,13 @@ class Grid(Widget):
             sell_height = self.rect.height / self.rows
             sell_width = self.rect.width / self.columns
 
-            widget.rect.x = self.rect.x + (column * sell_width)
-            widget.rect.y = self.rect.y + (row * sell_height)
+            x = self.rect.x + (column * sell_width)
+            y = self.rect.x + (row * sell_height)
 
-            widget.rect.width = sell_width * width
-            widget.rect.height = sell_height * height
+            widget.set_rect(x, y, sell_width * width, sell_height * height)
 
         except AttributeError:
-            raise AttributeError("Widget must has attribute rect")
+            raise AttributeError("Widget must has method 'set_rect'")
         except ZeroDivisionError:
             pass
 

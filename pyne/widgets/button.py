@@ -45,20 +45,8 @@ class Button(Widget):
         self.text_image_rect.x = self.rect.x + 5
         self.text_image_rect.y = self.rect.y + 5
 
-    def update(self, event):
-        if event.type == pg.MOUSEBUTTONDOWN:
-            mouse_x, mouse_y = event.pos  # Get mouse pos
-            if self.rect.collidepoint(mouse_x, mouse_y):  # If button is clicked
-                self.current_color = self.active_color    # change color
-                self.is_pressed = True                    # and flag is_pressed
-                if self.command is not None:
-                    self.command()                        # If the command is registered, called it
-                if self.sound is not None:
-                    self.sound.play()
-
-        elif event.type == pg.MOUSEBUTTONUP:
-            self.current_color = self.color
-            self.is_pressed = False
+    def set_rect(self, x, y, width, height):
+        super().set_rect(x, y, width, height)
 
         self.text_image_rect.center = self.rect.center
 
@@ -93,6 +81,23 @@ class Button(Widget):
                     self.image_rect.left = self.rect.left
                 case _:
                     raise ValueError('incorrect word to pressing image')
+
+    def update(self, event):
+        if event.type == pg.MOUSEBUTTONDOWN:
+            mouse_x, mouse_y = event.pos  # Get mouse pos
+            if self.rect.collidepoint(mouse_x, mouse_y):  # If button is clicked
+                self.current_color = self.active_color    # change color
+                self.is_pressed = True                    # and flag is_pressed
+                if self.command is not None:
+                    self.command()                        # If the command is registered, called it
+                if self.sound is not None:
+                    self.sound.play()
+
+        elif event.type == pg.MOUSEBUTTONUP:
+            self.current_color = self.color
+            self.is_pressed = False
+
+        self.text_image_rect.center = self.rect.center
 
     def draw(self, screen):
         pg.draw.rect(screen, self.current_color, self.rect)

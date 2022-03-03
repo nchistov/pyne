@@ -66,43 +66,52 @@ class Entry(Widget):
             self.text_image_rect.right -= self.cursor_rect.left
             self.cursor_rect.left = 0
 
+    def check_mouse_click(self, mouse_x, mouse_y):
+        if self.rect.collidepoint(mouse_x, mouse_y):
+            self.active = True
+
+            self.current_outline_color = self.outline_color
+        else:
+            self.active = False
+
+            self.current_outline_color = (200, 200, 200)
+
+    def delete_text(self):
+        if self.text and self.insertion_pos != 0:
+            new_text = self.text[:self.insertion_pos - 1]
+            new_text += self.text[self.insertion_pos:]
+
+            self.insertion_pos -= 1
+
+            self.text = new_text
+
+    def add_letter(self, letter):
+        new_text = self.text[:self.insertion_pos]
+        new_text += letter
+        new_text += self.text[self.insertion_pos:]
+
+        self.insertion_pos += 1
+
+        self.text = new_text
+
     def update(self, event):
         self.cursor_rect.centery = self.rect.height // 2
 
         if event.type == pg.MOUSEBUTTONDOWN:
             mouse_x, mouse_y = event.pos
-            if self.rect.collidepoint(mouse_x, mouse_y):
-                self.active = True
-
-                self.current_outline_color = self.outline_color
-            else:
-                self.active = False
-
-                self.current_outline_color = (200, 200, 200)
+            self.check_mouse_click(mouse_x, mouse_y)
 
         if event.type == pg.KEYDOWN:
             if self.active:
                 if event.key == pg.K_BACKSPACE:
-                    if self.text and self.insertion_pos != 0:
-                        new_text = self.text[:self.insertion_pos - 1]
-                        new_text += self.text[self.insertion_pos:]
-
-                        self.insertion_pos -= 1
-
-                        self.text = new_text
-
+                    self.delete_text()
                 elif event.key == pg.K_ESCAPE:
                     self.active = False
                     self.current_outline_color = (200, 200, 200)
+
                 elif event.key not in (9, 13, 127, 1073742052, 1073742048, 1073742054,
                                        1073742050, 1073741904, 1073741903):  # Unprintable keys
-                    new_text = self.text[:self.insertion_pos]
-                    new_text += event.unicode
-                    new_text += self.text[self.insertion_pos:]
-
-                    self.insertion_pos += 1
-
-                    self.text = new_text
+                    self.add_letter(event.unicode)
 
                 if event.key == pg.K_LEFT:
                     if self.insertion_pos != 0:

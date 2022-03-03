@@ -4,7 +4,7 @@ from .base_widget import Widget
 
 
 class Entry(Widget):
-    def __init__(self, prompt='', text_color=(0, 0, 0), bg_color=(255, 255, 255),
+    def __init__(self, prompt='', text='', text_color=(0, 0, 0), bg_color=(255, 255, 255),
                  outline_color=(0, 0, 0), font_size=30):
         super().__init__()
 
@@ -17,9 +17,9 @@ class Entry(Widget):
 
         self.current_outline_color = (200, 200, 200)
 
-        self.insertion_pos = 0
+        self.insertion_pos = len(text)
 
-        self._text = ''
+        self._text = text
 
         self.active = False
 

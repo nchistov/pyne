@@ -15,5 +15,8 @@ for i in range(10, 361, 10):
     t.forward(10)
     t.setheading(i)
 
+t.forward(50)
+t.reset()
+
 app.run()
 t.stop()  # Stopping all process

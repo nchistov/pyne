@@ -98,6 +98,16 @@ class Beatle:
     def stop(self):
         self._running = False
 
+    def home(self):
+        self.tasks.put('home')
+
+    def clear(self):
+        self.tasks.put('clear')
+
+    def reset(self):
+        self.home()
+        self.clear()
+
     def update(self):
         while self._running:
             if not self.tasks.empty():
@@ -132,6 +142,16 @@ class Beatle:
                     self.is_down = False
                 elif task == 'down':
                     self.is_down = True
+                elif task == 'clear':
+                    self.lines.clear()
+                elif task == 'home':
+                    self.setheading(0)
+
+                    self.x = 0
+                    self.y = 0
+
+                    self.rect.x = self.screen.rect.centerx + self.x
+                    self.rect.y = self.screen.rect.centery + self.y
 
             sleep(0.02)
 

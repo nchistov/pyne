@@ -1,7 +1,7 @@
 # ToDo
 
 - [X] Class Sound
-- [ ] Beatle: methods home, clear, reset
+- [X] Beatle: methods home, clear, reset
 
 Widgets:
 - [X] Grid: add calling method set_rect

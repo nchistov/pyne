@@ -9,3 +9,4 @@ Widgets:
 - [X] Entry: add hiding text out of edge
 - [ ] CheckBox: change design
 - [ ] Button: parameter sound: exemplar of class Sound
+- [ ] Canvas: add drawing only on canvas

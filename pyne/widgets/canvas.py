@@ -11,29 +11,35 @@ class Canvas(Widget):
 
         self.bg_color = bg_color
 
+        self.surface = pg.Surface(self.rect.size)
+
         self.objects = []
 
+    def set_rect(self, x, y, width, height):
+        super().set_rect(x, y, width, height)
+
+        self.surface = pg.Surface(self.rect.size)
+
     def draw_point(self, x: int, y: int, color=(0, 0, 0)) -> int:
-        new_obj = CanvasObject(('point', (self.rect.x + x, self.rect.y + y), color))
+        new_obj = CanvasObject(('point', (x, y), color))
         self.objects.append(new_obj)
 
         return len(self.objects) - 1
 
     def draw_line(self, x1: int, y1: int, x2: int, y2: int, color=(0, 0, 0), width=1) -> int:
-        new_obj = CanvasObject(('line', (self.rect.x + x1, self.rect.y + y1), (self.rect.x + x2, self.rect.y + y2),
-                                color, width))
+        new_obj = CanvasObject(('line', (x1, y1), (x2, y2), color, width))
         self.objects.append(new_obj)
 
         return len(self.objects) - 1
 
     def draw_rect(self, x: int, y: int, width: int, height: int, color=(0, 0, 0)) -> int:
-        new_obj = CanvasObject(('rect', (self.rect.x + x, self.rect.y + y), width, height, color))
+        new_obj = CanvasObject(('rect', (x, y), width, height, color))
         self.objects.append(new_obj)
 
         return len(self.objects) - 1
 
     def draw_circle(self, x: int, y: int, R: int, color=(0, 0, 0)) -> int:
-        new_obj = CanvasObject(('circle', (self.rect.x + x, self.rect.y + y), R, color))
+        new_obj = CanvasObject(('circle', (x, y), R, color))
         self.objects.append(new_obj)
 
         return len(self.objects) - 1
@@ -45,7 +51,7 @@ class Canvas(Widget):
         return len(self.objects) - 1
 
     def draw_image(self, file_name: str, x: int, y: int) -> int:
-        new_obj = CanvasObject(('image', file_name, (self.rect.x + x, self.rect.y + y)))
+        new_obj = CanvasObject(('image', file_name, (x, y)))
         self.objects.append(new_obj)
 
         return len(self.objects) - 1
@@ -82,7 +88,9 @@ class Canvas(Widget):
             pass
 
     def draw(self, screen: pg.Surface):
-        pg.draw.rect(screen, self.bg_color, self.rect)
+        self.surface.fill(self.bg_color)
 
         for obj in self.objects:
-            obj.draw(screen)
+            obj.draw(self.surface)
+
+        screen.blit(self.surface, self.rect)

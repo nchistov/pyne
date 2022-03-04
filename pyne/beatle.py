@@ -78,8 +78,6 @@ class Beatle:
         t.start()
         self.thread = t
 
-        self.app.add_to_schedule(self.draw)
-
     def forward(self, steps):
         self.tasks.put(('fd', steps))
 
@@ -155,8 +153,8 @@ class Beatle:
 
             sleep(0.02)
 
-    def draw(self):
-        self.app.screen.blit(self.image, self.rect)
+    def draw(self, screen):
+        screen.blit(self.image, self.rect)
 
         for line in self.lines:
-            pg.draw.line(self.app.screen, (0, 0, 0), line[0], line[1])
+            pg.draw.line(screen, (0, 0, 0), line[0], line[1])

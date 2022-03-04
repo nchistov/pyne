@@ -29,9 +29,6 @@ class Button(Widget):
 
             self.has_image = True
 
-        if self.sound is not None:
-            self.sound = pg.mixer.Sound(self.sound)
-
         self.rect = pg.Rect(0, 0, len(text) * 17, 35)
 
         self.font = pg.font.SysFont('', font_size)

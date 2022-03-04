@@ -25,6 +25,8 @@ class Entry(Widget):
 
         self.cursor_rect = pg.Rect(0, 0, 3, 20)
 
+        self.surface = pg.Surface(self.rect.size)
+
         self.font = pg.font.SysFont('', font_size)
         self.text_image = self.font.render(self.text, True, self.text_color)
         self.text_image_rect = self.text_image.get_rect()
@@ -44,6 +46,8 @@ class Entry(Widget):
     def set_rect(self, x, y, width, height):
         super().set_rect(x, y, width, height)
         self.render_text()
+
+        self.surface = pg.Surface(self.rect.size)
 
     def render_text(self):
         text, color = self.text, self.text_color
@@ -125,13 +129,12 @@ class Entry(Widget):
     def draw(self, screen: pg.Surface):
         pg.draw.rect(screen, self.bg_color, self.rect)
 
-        surface = pg.Surface(self.rect.size)
-        surface.fill(self.bg_color)
-        surface.blit(self.text_image, self.text_image_rect)
+        self.surface.fill(self.bg_color)
+        self.surface.blit(self.text_image, self.text_image_rect)
         if self.active:
             # Draw cursor
-            pg.draw.rect(surface, (0, 0, 0), self.cursor_rect)
-        screen.blit(surface, self.rect)
+            pg.draw.rect(self.surface, (0, 0, 0), self.cursor_rect)
+        screen.blit(self.surface, self.rect)
 
         # Draw outline
         pg.draw.line(screen, self.current_outline_color, (self.rect.right, self.rect.bottom),

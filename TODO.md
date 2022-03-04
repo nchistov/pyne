@@ -1,6 +1,6 @@
 # ToDo
 
-- [ ] Class Sound
+- [X] Class Sound
 - [ ] Beatle: methods home, clear, reset
 
 Widgets:
@@ -8,5 +8,5 @@ Widgets:
 
 - [X] Entry: add hiding text out of edge
 - [ ] CheckBox: change design
-- [ ] Button: parameter sound: exemplar of class Sound
+- [X] Button: parameter sound: exemplar of class Sound
 - [X] Canvas: add drawing only on canvas

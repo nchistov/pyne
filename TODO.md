@@ -1,12 +1,6 @@
 # ToDo
 
-- [X] Class Sound
-- [X] Beatle: methods home, clear, reset
+ - [ ] App: add printing \n after prompt
 
 Widgets:
-- [X] Grid: add calling method set_rect
-
-- [X] Entry: add hiding text out of edge
-- [ ] CheckBox: change design
-- [X] Button: parameter sound: exemplar of class Sound
-- [X] Canvas: add drawing only on canvas
+- [ ] Grid: add scrolling

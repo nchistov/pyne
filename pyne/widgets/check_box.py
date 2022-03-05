@@ -11,6 +11,8 @@ class CheckBox(Widget):
         self.command = command
         self.text_color = text_color
 
+        self.color = (255, 255, 255)
+
         self.choosing_rect = pg.Rect(self.rect.x + 10, self.rect.y + 10, 10, 10)
 
         self.bg_rect = pg.Rect(self.rect.x + 9, self.rect.y + 9, 12, 12)
@@ -20,6 +22,15 @@ class CheckBox(Widget):
         self.is_choose = False
 
         self.prep_text(text)
+
+    def set_rect(self, x, y, width, height):
+        super().set_rect(x, y, width, height)
+
+        self.text_image_rect.left = self.rect.left + 30
+        self.text_image_rect.top = self.rect.top + 8
+
+        self.choosing_rect.x = self.rect.x + 10
+        self.choosing_rect.y = self.rect.y + 10
 
     def prep_text(self, text):
         self.text_image = self.font.render(text, True, self.text_color)
@@ -32,24 +43,22 @@ class CheckBox(Widget):
             if self.choosing_rect.collidepoint(mouse_x, mouse_y):  # If button is clicked
                 if not self.is_choose:
                     self.is_choose = True  # change flag is_choose
+                    self.color = (25, 155, 250)  # and color
+
                     if self.command is not None:
                         self.command()  # If the command is registered, called it
                 elif self.is_choose:
                     self.is_choose = False
 
-        self.text_image_rect.left = self.rect.left + 30
-        self.text_image_rect.top = self.rect.top + 8
-
-        self.choosing_rect.x = self.rect.x + 10
-        self.choosing_rect.y = self.rect.y + 10
+                    self.color = (255, 255, 255)
 
     def draw(self, screen: pg.Surface):
         screen.blit(self.text_image, self.text_image_rect)
         pg.draw.rect(screen, (0, 0, 0), self.bg_rect)
-        pg.draw.rect(screen, (255, 255, 255), self.choosing_rect)
+        pg.draw.rect(screen, self.color, self.choosing_rect)
 
         if self.is_choose:
-            pg.draw.line(screen, (0, 0, 0), (self.choosing_rect.x - 5, self.choosing_rect.y - 5),
-                         (self.choosing_rect.centerx, self.choosing_rect.bottom), width=2)
-            pg.draw.line(screen, (0, 0, 0), (self.choosing_rect.centerx, self.choosing_rect.bottom),
-                         (self.choosing_rect.right, self.choosing_rect.top), width=2)
+            pg.draw.line(screen, (255, 255, 255), (self.choosing_rect.x + 1, self.choosing_rect.y + 5),
+                         (self.choosing_rect.centerx - 2, self.choosing_rect.bottom - 1), width=2)
+            pg.draw.line(screen, (255, 255, 255), (self.choosing_rect.centerx - 2, self.choosing_rect.bottom - 1),
+                         (self.choosing_rect.right - 2, self.choosing_rect.top + 2), width=2)

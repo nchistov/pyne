@@ -1,4 +1,3 @@
 # ToDo
 
-Widgets:
-- [X] Grid: add scrolling
+Nothing to do now.

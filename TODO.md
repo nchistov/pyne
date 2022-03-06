@@ -1,4 +1,4 @@
 # ToDo
 
 Widgets:
-- [ ] Grid: add scrolling
+- [X] Grid: add scrolling

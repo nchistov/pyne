@@ -9,14 +9,19 @@ class NoSouchPositionError(Exception):
 
 
 class Grid(Widget):
-    def __init__(self, app: pyne.App, rows: int, columns: int):
+    def __init__(self, app: pyne.App, rows: int, columns: int, scrolling=False, speed=5):
         super().__init__()
         self.app = app
 
         self.rows = rows
         self.columns = columns
 
+        self.scrolling = scrolling
+        self.speed = speed
+
         self.rect = pg.Rect(0, 0, app.screen.get_width(), app.screen.get_height())
+
+        self.screen_rect = self.app.screen.get_rect()
 
         self.widgets = []
 
@@ -42,6 +47,7 @@ class Grid(Widget):
 
         if priority is None:
             self.widgets.append(widget)
+
             return
 
         self.widgets.insert(priority, widget)
@@ -51,6 +57,21 @@ class Grid(Widget):
         self.add_widget(widget, new_row, new_column, new_width, new_height, priority)
 
     def update(self, event):
+        if event.type == pg.MOUSEBUTTONDOWN:
+            if self.rect.height > self.screen_rect.width:
+                if event.button == 4:  # Up
+                    if self.rect.top <= self.screen_rect.top:
+                        self.rect.y -= self.speed
+
+                        for widget in self.widgets:
+                            widget.rect.y -= self.speed
+                elif event.button == 5:  # Down
+                    if self.rect.bottom > self.screen_rect.bottom and self.rect.top < self.screen_rect.top:
+                        self.rect.y += self.speed
+
+                        for widget in self.widgets:
+                            widget.rect.y += self.speed
+
         for widget in self.widgets:
             widget.update(event)
 

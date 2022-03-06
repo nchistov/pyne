@@ -88,19 +88,19 @@ class Beatle:
         self.tasks.put(('seth', angle))
 
     def down(self):
-        self.tasks.put('down')
+        self.tasks.put(('down',))
 
     def up(self):
-        self.tasks.put('up')
+        self.tasks.put(('up',))
 
     def stop(self):
         self._running = False
 
     def home(self):
-        self.tasks.put('home')
+        self.tasks.put(('home',))
 
     def clear(self):
-        self.tasks.put('clear')
+        self.tasks.put(('clear',))
 
     def reset(self):
         self.home()
@@ -111,45 +111,46 @@ class Beatle:
             if not self.tasks.empty():
                 task = self.tasks.get()
 
-                if task[0] == 'fd':
-                    dx = cos(radians(self.angle))
-                    dy = sin(radians(self.angle))
-                    if self.is_down:
-                        self.lines.append(((self.rect.centerx, self.rect.centery),
-                                           (self.rect.centerx + dx, self.rect.centery - dy)))
-                    for i in range(task[1]):
+                match task[0]:
+                    case 'fd':
+                        dx = cos(radians(self.angle))
+                        dy = sin(radians(self.angle))
                         if self.is_down:
-                            (start_x, start_y), _ = self.lines[-1]
-                            self.lines[-1] = ((start_x, start_y),
-                                              (self.rect.centerx + dx, self.rect.centery - dy))
-                        self.x += dx
-                        self.y -= dy
+                            self.lines.append(((self.rect.centerx, self.rect.centery),
+                                               (self.rect.centerx + dx, self.rect.centery - dy)))
+                        for i in range(task[1]):
+                            if self.is_down:
+                                (start_x, start_y), _ = self.lines[-1]
+                                self.lines[-1] = ((start_x, start_y),
+                                                  (self.rect.centerx + dx, self.rect.centery - dy))
+                            self.x += dx
+                            self.y -= dy
+
+                            self.rect.x = self.screen.rect.centerx + self.x
+                            self.rect.y = self.screen.rect.centery + self.y
+
+                            sleep(0.05 / self.speed)
+
+                    case 'seth':
+                        self.angle = task[1]
+
+                        self.angle %= 360
+
+                        self.image = pg.transform.rotate(self.base_image, self.angle)
+                    case 'up':
+                        self.is_down = False
+                    case 'down':
+                        self.is_down = True
+                    case 'clear':
+                        self.lines.clear()
+                    case 'home':
+                        self.setheading(0)
+
+                        self.x = 0
+                        self.y = 0
 
                         self.rect.x = self.screen.rect.centerx + self.x
                         self.rect.y = self.screen.rect.centery + self.y
-
-                        sleep(0.05 / self.speed)
-
-                elif task[0] == 'seth':
-                    self.angle = task[1]
-
-                    self.angle %= 360
-
-                    self.image = pg.transform.rotate(self.base_image, self.angle)
-                elif task == 'up':
-                    self.is_down = False
-                elif task == 'down':
-                    self.is_down = True
-                elif task == 'clear':
-                    self.lines.clear()
-                elif task == 'home':
-                    self.setheading(0)
-
-                    self.x = 0
-                    self.y = 0
-
-                    self.rect.x = self.screen.rect.centerx + self.x
-                    self.rect.y = self.screen.rect.centery + self.y
 
             sleep(0.02)
 

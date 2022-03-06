@@ -81,14 +81,15 @@ class Button(Widget):
 
     def update(self, event):
         if event.type == pg.MOUSEBUTTONDOWN:
-            mouse_x, mouse_y = event.pos  # Get mouse pos
-            if self.rect.collidepoint(mouse_x, mouse_y):  # If button is clicked
-                self.current_color = self.active_color    # change color
-                self.is_pressed = True                    # and flag is_pressed
-                if self.command is not None:
-                    self.command()                        # If the command is registered, called it
-                if self.sound is not None:
-                    self.sound.play()
+            if event.button == 1:
+                mouse_x, mouse_y = event.pos  # Get mouse pos
+                if self.rect.collidepoint(mouse_x, mouse_y):  # If button is clicked
+                    self.current_color = self.active_color    # change color
+                    self.is_pressed = True                    # and flag is_pressed
+                    if self.command is not None:
+                        self.command()                        # If the command is registered, called it
+                    if self.sound is not None:
+                        self.sound.play()
 
         elif event.type == pg.MOUSEBUTTONUP:
             self.current_color = self.color

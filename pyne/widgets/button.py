@@ -95,8 +95,6 @@ class Button(Widget):
             self.current_color = self.color
             self.is_pressed = False
 
-        self.text_image_rect.center = self.rect.center
-
     def draw(self, screen):
         pg.draw.rect(screen, self.current_color, self.rect)
         screen.blit(self.text_image, self.text_image_rect)

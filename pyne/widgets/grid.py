@@ -64,13 +64,15 @@ class Grid(Widget):
                         self.rect.y -= self.speed
 
                         for widget in self.widgets:
-                            widget.rect.y -= self.speed
+                            widget.set_rect(widget.rect.x, widget.rect.y - self.speed,
+                                            widget.rect.width, widget.rect.height)
                 elif event.button == 5:  # Down
                     if self.rect.bottom > self.screen_rect.bottom and self.rect.top < self.screen_rect.top:
                         self.rect.y += self.speed
 
                         for widget in self.widgets:
-                            widget.rect.y += self.speed
+                            widget.set_rect(widget.rect.x, widget.rect.y + self.speed,
+                                            widget.rect.width, widget.rect.height)
 
         for widget in self.widgets:
             widget.update(event)

@@ -35,8 +35,8 @@ We need your help to make pyne better than it's now! Pull requests are welcome
 ## Thanks
 
 I'd like to give thanks to this people:
- + [Anatoliy Chistov](https://github.com/FrCln)
- + [Vladimir Chistov](https://github.com/wchistow)
+ + [Anatoliy Chistov](https://gitflic.ru/user/codefather)
+ + [Vladimir Chistov](https://gitflic.ru/user/wchistow)
 
 ---
 

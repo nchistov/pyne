@@ -9,7 +9,7 @@ from . import widgets
 from . import beatle
 from . import sound
 
-__version__ = '0.1.0 beta'
+__version__ = '0.1.0'
 
 print("\n  // \\")
 print(" //   \\")

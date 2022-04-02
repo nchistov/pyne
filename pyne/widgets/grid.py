@@ -10,6 +10,13 @@ class NoSouchPositionError(Exception):
 
 class Grid(Widget):
     def __init__(self, app: pyne.App, rows: int, columns: int, scrolling=False, speed=5):
+        """
+        :param app: pyne.App, it's needing when grid need to know window size
+        :param rows: num of rows
+        :param columns: num of columns
+        :param scrolling: flag, if it's True, when mouse is scrolling grid scrolling too
+        :param speed: the number of pixels by which the grid is scrolled
+        """
         super().__init__()
         self.app = app
 
@@ -52,6 +59,10 @@ class Grid(Widget):
 
         self.widgets.insert(priority, widget)
 
+    def remove_widget(self, widget):
+        if widget in self.widgets:
+            self.widgets.remove(widget)
+
     def change_pos_of_widget(self, widget, new_row, new_column, new_width=1, new_height=1, priority=None):
         self.widgets.remove(widget)
         self.add_widget(widget, new_row, new_column, new_width, new_height, priority)
@@ -60,6 +71,7 @@ class Grid(Widget):
         if event.type == pg.MOUSEBUTTONDOWN:
             if self.rect.height > self.screen_rect.width:
                 if event.button == 4:  # Up
+                    # If grids edge is out of edge of window, scroll grid
                     if self.rect.top <= self.screen_rect.top:
                         self.rect.y -= self.speed
 
@@ -67,6 +79,7 @@ class Grid(Widget):
                             widget.set_rect(widget.rect.x, widget.rect.y - self.speed,
                                             widget.rect.width, widget.rect.height)
                 elif event.button == 5:  # Down
+                    # If grids edge is out of edge of window, scroll grid
                     if self.rect.bottom > self.screen_rect.bottom and self.rect.top < self.screen_rect.top:
                         self.rect.y += self.speed
 

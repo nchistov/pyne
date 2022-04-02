@@ -5,6 +5,6 @@ App:
 
 Widgets:
  - [X] Gird: add method remove_widget
- - [ ] Button: add method set_text
+ - [X] Button: add method set_text
  - [ ] Label: add redefinition of method set_rect
  - [ ] Entry: add method set_text

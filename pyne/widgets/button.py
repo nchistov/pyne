@@ -33,14 +33,13 @@ class Button(Widget):
 
         self.font = pg.font.SysFont('', font_size)
 
-        self.prep_text(text)
+        self.set_text(text)
 
-    def prep_text(self, text):
+    def set_text(self, text):
         self.text_image = self.font.render(text, True, self.text_color)
 
         self.text_image_rect = self.text_image.get_rect()
-        self.text_image_rect.x = self.rect.x + 5
-        self.text_image_rect.y = self.rect.y + 5
+        self.text_image_rect.center = self.rect.center
 
     def set_rect(self, x, y, width, height):
         super().set_rect(x, y, width, height)

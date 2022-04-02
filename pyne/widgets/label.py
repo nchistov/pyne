@@ -35,6 +35,19 @@ class Label(Widget):
 
         self.text_image_rect.centery = self.rect.centery
 
+    def set_rect(self, x, y, width, height):
+        super().set_rect(x, y, width, height)
+
+        match self.press:  # Press the text to the desired edge
+            case 'right':
+                self.text_image_rect.right = self.rect.right - 3
+            case 'left':
+                self.text_image_rect.left = self.rect.left + 3
+            case 'center':
+                self.text_image_rect.centerx = self.rect.centerx
+
+        self.text_image_rect.centery = self.rect.centery
+
     def draw(self, screen):
         pg.draw.rect(screen, self.bg_color, self.rect)
         screen.blit(self.text_image, self.text_image_rect)

@@ -1,7 +1,7 @@
 # ToDo
 
 App:
- - [ ] change prompt
+ - [X] change prompt
 
 Widgets:
  - [ ] Gird: add method remove_widget

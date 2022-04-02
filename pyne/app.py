@@ -19,11 +19,13 @@ class App:
         pg.mixer.init()
 
         self.screen = pg.display.set_mode(window_size)
+        print(f'[Pyne] window size -> {window_size}')
 
         icon = pg.image.load(os.path.join(os.path.dirname(__file__), 'icon.jpg'))
         pg.display.set_icon(icon)
 
         pg.display.set_caption(title)
+        print(f'[Pyne] window title -> "{title}"')
 
         self.clock = pg.time.Clock()
 
@@ -37,6 +39,7 @@ class App:
         self.running = False
         self.bg = bg_color
         self.fps = 30
+        print(f'[Pyne] fps -> {self.fps}')
 
     def add_to_schedule(self, func: callable, priority=None):
         if priority is None:
@@ -87,6 +90,9 @@ class App:
     def run(self):
         """starts mainloop"""
         self.running = True
+
+        print('[Pyne] application start')
+
         while self.running:
             self.screen.fill(self.bg)
 
@@ -107,3 +113,4 @@ class App:
     def quit(self):
         """change running to False"""
         self.running = False
+        print('[Pyne] application quit')

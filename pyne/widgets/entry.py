@@ -34,6 +34,9 @@ class Entry(Widget):
         self.text_image_rect.centery = self.rect.height // 2
         self.render_text()
 
+    def set_text(self, text):
+        self.text = text
+
     @property
     def text(self):
         return self._text

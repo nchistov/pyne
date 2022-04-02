@@ -8,4 +8,4 @@ Widgets:
  - [X] Button: add method set_text
  - [X] Label: add redefinition of method set_rect
  - [X] Entry: add method set_text
- - [ ] BeatleScreen: change method add_beatle
+ - [X] BeatleScreen: change method add_beatle

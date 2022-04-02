@@ -12,7 +12,7 @@ class BeatleScreen(Widget):
         self.color = color
         self.outline_color = outline_color
 
-        self.beatle = None
+        self.beatles = []
 
         self.rect = pg.Rect(0, 0, 10, 10)
 
@@ -24,13 +24,17 @@ class BeatleScreen(Widget):
         self.surface = pg.Surface(self.rect.size)
 
     def add_beatle(self, beatle):
-        self.beatle = beatle
+        self.beatles.append(beatle)
+
+    def remove_beatle(self, beatle):
+        if beatle in self.beatles:
+            self.beatles.remove(beatle)
 
     def draw(self, screen: pg.Surface):
         self.surface.fill(self.color)
 
-        if self.beatle is not None:
-            self.beatle.draw(self.surface)
+        for beatle in self.beatles:
+            beatle.draw(self.surface)
 
         screen.blit(self.surface, self.rect)
 

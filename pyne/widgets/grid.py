@@ -8,6 +8,10 @@ class NoSouchPositionError(Exception):
     pass
 
 
+class NoSouchItemError(Exception):
+    pass
+
+
 class Grid(Widget):
     def __init__(self, app: pyne.App, rows: int, columns: int, scrolling=False, speed=5):
         """
@@ -62,9 +66,15 @@ class Grid(Widget):
     def remove_widget(self, widget):
         if widget in self.widgets:
             self.widgets.remove(widget)
+        else:
+            raise NoSouchItemError(f'can not find widget {widget} in widgets.')
 
     def change_pos_of_widget(self, widget, new_row, new_column, new_width=1, new_height=1, priority=None):
-        self.widgets.remove(widget)
+        if widget in self.widgets:
+            self.widgets.remove(widget)
+        else:
+            raise NoSouchItemError(f'can not find widget {widget} in widgets.')
+
         self.add_widget(widget, new_row, new_column, new_width, new_height, priority)
 
     def update(self, event):

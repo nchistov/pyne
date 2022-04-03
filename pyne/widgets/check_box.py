@@ -4,11 +4,12 @@ from .base_widget import Widget
 
 
 class CheckBox(Widget):
-    def __init__(self, text, command=None, text_color=(0, 0, 0), font_size=25):
+    def __init__(self, text, command=None, unset_command=None, text_color=(0, 0, 0), font_size=25):
         super().__init__()
 
         self.text = text
         self.command = command
+        self.unset_command = unset_command
         self.text_color = text_color
 
         self.color = (255, 255, 255)
@@ -49,6 +50,9 @@ class CheckBox(Widget):
                         self.command()  # If the command is registered, called it
                 elif self.is_choose:
                     self.is_choose = False
+
+                    if self.unset_command is not None:
+                        self.unset_command()  # If the unset_command is registered, called it
 
                     self.color = (255, 255, 255)
 

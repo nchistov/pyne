@@ -1,7 +1,12 @@
 import json
 import os
+from typing import Callable
 
 import pygame as pg
+
+
+class NoSouchItemError(Exception):
+    pass
 
 
 class App:
@@ -41,16 +46,18 @@ class App:
         self.fps = 30
         print(f'[Pyne] fps -> {self.fps}')
 
-    def add_to_schedule(self, func: callable, priority=None):
+    def add_to_schedule(self, func: Callable, priority=None):
         if priority is None:
             self.schedule.append(func)
             return
 
         self.schedule.insert(priority, func)
 
-    def remove_from_schedule(self, func):
+    def remove_from_schedule(self, func: Callable):
         if func in self.schedule:
             self.schedule.remove(func)
+        else:
+            raise NoSouchItemError(f'can not find func {func} in schedule.')
 
     def add_widget(self, widget, priority=None):
         if priority is None:
@@ -62,13 +69,17 @@ class App:
     def remove_widget(self, widget):
         if widget in self.widgets:
             self.widgets.remove(widget)
+        else:
+            raise NoSouchItemError(f'can not find widget {widget} in widgets.')
 
-    def add_handler(self, key: str, func: callable):
+    def add_handler(self, key: str, func: Callable):
         self.handlers[key] = func
 
     def remove_handler(self, key):
         if key in self.handlers.keys():
             del self.handlers[key]
+        else:
+            raise NoSouchItemError(f'can not find key {key} in handlers.')
 
     def _check_events(self):
         keys = pg.key.get_pressed()

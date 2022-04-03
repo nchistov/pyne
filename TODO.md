@@ -2,7 +2,7 @@
 
 App:
  - [X] change prompt
- - [ ] add more errors
+ - [X] add more errors
 
 Widgets:
  - Change:

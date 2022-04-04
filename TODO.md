@@ -22,4 +22,4 @@ Widgets:
  - [ ] ImageBox
 
 Add:
- - [ ] GameGUIController
+ - [X] GameGUIController

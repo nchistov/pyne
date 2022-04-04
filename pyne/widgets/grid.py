@@ -2,13 +2,10 @@ import pygame as pg
 
 import pyne
 from .base_widget import Widget
+from pyne.app import NoSouchItemError
 
 
 class NoSouchPositionError(Exception):
-    pass
-
-
-class NoSouchItemError(Exception):
     pass
 
 

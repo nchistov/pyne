@@ -79,23 +79,25 @@ class Grid(Widget):
 
     def update(self, event):
         if event.type == pg.MOUSEBUTTONDOWN:
-            if self.rect.height > self.screen_rect.width:
-                if event.button == 4:  # Up
-                    # If grids edge is out of edge of window, scroll grid
-                    if self.rect.top <= self.screen_rect.top:
-                        self.rect.y -= self.speed
+            mouse_x, mouse_y = event.pos
+            if self.rect.collidepoint(mouse_x, mouse_y):
+                if self.rect.height > self.screen_rect.width:
+                    if event.button == 4:  # Up
+                        # If grids edge is out of edge of window, scroll grid
+                        if self.rect.top <= self.screen_rect.top:
+                            self.rect.y -= self.speed
 
-                        for widget in self.widgets:
-                            widget.set_rect(widget.rect.x, widget.rect.y - self.speed,
-                                            widget.rect.width, widget.rect.height)
-                elif event.button == 5:  # Down
-                    # If grids edge is out of edge of window, scroll grid
-                    if self.rect.bottom > self.screen_rect.bottom and self.rect.top < self.screen_rect.top:
-                        self.rect.y += self.speed
+                            for widget in self.widgets:
+                                widget.set_rect(widget.rect.x, widget.rect.y - self.speed,
+                                                widget.rect.width, widget.rect.height)
+                    elif event.button == 5:  # Down
+                        # If grids edge is out of edge of window, scroll grid
+                        if self.rect.bottom > self.screen_rect.bottom and self.rect.top < self.screen_rect.top:
+                            self.rect.y += self.speed
 
-                        for widget in self.widgets:
-                            widget.set_rect(widget.rect.x, widget.rect.y + self.speed,
-                                            widget.rect.width, widget.rect.height)
+                            for widget in self.widgets:
+                                widget.set_rect(widget.rect.x, widget.rect.y + self.speed,
+                                                widget.rect.width, widget.rect.height)
 
         for widget in self.widgets:
             widget.update(event)

@@ -19,7 +19,7 @@ Widgets:
  - [X] RadioButton
  - [ ] RadioButtonsBlock
  - [ ] ProgressBar
- - [ ] ImageBox
+ - [X] ImageBox
 
 Add:
  - [X] GameGUIController

@@ -6,3 +6,4 @@ from .check_box import CheckBox
 from .canvas import Canvas
 from .grid import Grid
 from .entry import Entry
+from .radio_button import RadioButton

@@ -16,7 +16,7 @@ Widgets:
  - [X] CheckBox: add command on unset
  - Add:
  - [ ] FileDialog
- - [ ] RadioButton
+ - [X] RadioButton
  - [ ] RadioButtonsBlock
  - [ ] ProgressBar
  - [ ] ImageBox

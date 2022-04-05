@@ -22,11 +22,7 @@ app = pyne.App()
 
 app.run()
 ```
-Other examples you can find [here](https://github.com/nchistov/Pyne/examples)
-
----
-## Help
-Documentation you can find [here](https://github.com/nchistov/Pyne/DOC.md)
+Other examples you can find [here](https://gitflic.ru/project/pyne/pyne/file?file=examples)
 
 ---
 

@@ -42,3 +42,5 @@ def f():
 
 app.add_to_schedule(f)
 app.run()
+
+canvas.save_to_file('canvas_image.png')

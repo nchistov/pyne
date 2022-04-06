@@ -22,7 +22,7 @@ class CheckBox(Widget):
 
         self.is_choose = False
 
-        self.prep_text(text)
+        self.set_text(text)
 
     def set_rect(self, x, y, width, height):
         super().set_rect(x, y, width, height)
@@ -33,10 +33,24 @@ class CheckBox(Widget):
         self.choosing_rect.x = self.rect.x + 10
         self.choosing_rect.y = self.rect.y + 10
 
-    def prep_text(self, text):
+    def set_text(self, text):
         self.text_image = self.font.render(text, True, self.text_color)
 
         self.text_image_rect = self.text_image.get_rect()
+
+        self.text_image_rect.left = self.rect.left + 30
+        self.text_image_rect.top = self.rect.top + 8
+
+        self.choosing_rect.x = self.rect.x + 10
+        self.choosing_rect.y = self.rect.y + 10
+
+    def set(self):
+        self.is_choose = True
+        self.color = (25, 155, 250)
+
+    def unset(self):
+        self.is_choose = False
+        self.color = (255, 255, 255)
 
     def update(self, event):
         if event.type == pg.MOUSEBUTTONDOWN:

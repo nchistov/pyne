@@ -17,7 +17,7 @@ Widgets:
  - Add:
  - [ ] FileDialog
  - [X] RadioButton
- - [ ] RadioButtonsBlock
+ - [X] RadioButtonsBlock
  - [ ] ProgressBar
  - [X] ImageBox
 

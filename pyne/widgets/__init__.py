@@ -8,3 +8,4 @@ from .grid import Grid
 from .entry import Entry
 from .radio_button import RadioButton
 from .image_box import ImageBox
+from .radio_buttons_block import RadioButtonsBlock

@@ -28,10 +28,12 @@ class SpecialRadioButton(RadioButton):
 
 
 class RadioButtonsBlock(Widget):
-    def __init__(self, texts: list[str]):
+    def __init__(self, texts: list[str], y_step=15):
         super().__init__()
 
         self.texts = texts
+        self.y_step = y_step
+
         self._current_text = ''
         self.current_radio_button = None
 
@@ -40,6 +42,7 @@ class RadioButtonsBlock(Widget):
         self._generate()
 
     def _generate(self):
+        self.radio_buttons = []
         y = 5
 
         for text in self.texts:
@@ -47,7 +50,17 @@ class RadioButtonsBlock(Widget):
             new_radio_button.set_rect(self.rect.x, self.rect.y + y, 10, 10)
             self.radio_buttons.append(new_radio_button)
 
-            y += 15
+            y += self.y_step
+
+    def get_selected(self) -> str | None:
+        for r_btn in self.radio_buttons:
+            if r_btn.is_choose:
+                return r_btn.text
+        return None
+
+    def set_rect(self, x, y, width, height):
+        super().set_rect(x, y, width, height)
+        self._generate()
 
     def update(self, event):
         for radio_button in self.radio_buttons:

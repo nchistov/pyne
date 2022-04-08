@@ -1,5 +1,7 @@
 # ToDo
 
+- [ ] events.json: add new keys
+
 App:
  - [X] change prompt
  - [X] add more errors
@@ -15,6 +17,7 @@ Widgets:
  - [X] BeatleScreen: change method add_beatle
  - [X] CheckBox: add command on unset
  - Add:
+ - [ ] Slider
  - [ ] FileDialog
  - [X] RadioButton
  - [X] RadioButtonsBlock

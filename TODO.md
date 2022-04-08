@@ -1,6 +1,6 @@
 # ToDo
 
-- [ ] events.json: add new keys
+- [X] events.json: add new keys
 
 App:
  - [X] change prompt

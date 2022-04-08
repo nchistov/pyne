@@ -37,6 +37,8 @@ class App:
         self.schedule = []
         self.widgets = []
         self.handlers = {}
+        self.used_handlers = {}
+        self.unused_handlers = {}
 
         with open(os.path.join(os.path.dirname(__file__), 'events.json')) as f:
             self.events = json.load(f)
@@ -74,22 +76,36 @@ class App:
 
     def add_handler(self, key: str, func: Callable):
         self.handlers[key] = func
+        self.used_handlers[key] = func
 
     def remove_handler(self, key):
-        if key in self.handlers.keys():
+        if key in self.handlers.keys() and key in self.used_handlers.keys():
             del self.handlers[key]
+            del self.used_handlers[key]
         else:
             raise NoSouchItemError(f'can not find key {key} in handlers.')
+
+    def _is_press(self, keys, handler):
+        for key in handler.split('-'):
+            if not keys[self.events[key]]:
+                break
+        else:
+            return True
+        return False
 
     def _check_events(self):
         keys = pg.key.get_pressed()
 
         for handler, func in self.handlers.items():
-            for key in handler.split('-'):
-                if not keys[self.events[key]]:
-                    break
+            if handler in self.used_handlers:
+                if self._is_press(keys, handler):
+                    func()
+                    del self.used_handlers[handler]
+                    self.unused_handlers[handler] = func
             else:
-                func()
+                if not self._is_press(keys, handler):
+                    del self.unused_handlers[handler]
+                    self.used_handlers[handler] = func
 
         for event in pg.event.get():
             if event.type == pg.QUIT:

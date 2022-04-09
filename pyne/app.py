@@ -99,10 +99,8 @@ class App:
     def _is_press(self, keys, handler):
         for key in handler.split('-'):
             if not keys[self.events[key]]:
-                break
-        else:
-            return True
-        return False
+                return False
+        return True
 
     def _check_events(self):
         keys = pg.key.get_pressed()

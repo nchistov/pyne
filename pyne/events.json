@@ -81,12 +81,15 @@
 
   "RightShift": 1073742053,
   "LeftShift": 1073742049,
+  "Shift": 1073742049,
 
   "RightCtrl": 1073742052,
   "LeftCtrl": 1073742048,
+  "Ctrl": 1073742048,
 
   "RightAlt": 1073742054,
   "LeftAlt": 1073742050,
+  "Alt": 1073742050,
 
   "Command": 1073742055,
 

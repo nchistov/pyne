@@ -97,12 +97,25 @@ class App:
             raise NoSouchItemError(f'can not find key {key} in handlers.')
 
     def _is_press(self, keys, handler):
+        """Returns True if handler is pressed, else returns False"""
         for key in handler.split('-'):
-            if not keys[self.events[key]]:
+            if key.startswith('Mouse'):  # If register handler on mouse
+                mouse_state = pg.mouse.get_pressed(5)  # Get state of mouse
+                if key.endswith('Left'):
+                    if not mouse_state[0]:
+                        return False
+                elif key.endswith('Right'):
+                    if not mouse_state[2]:
+                        return False
+                elif key.endswith('Wheel'):
+                    if not mouse_state[1]:
+                        return False
+            elif not keys[self.events[key]]:
                 return False
         return True
 
     def _check_events(self):
+        """Checks quit event and all handlers"""
         keys = pg.key.get_pressed()
 
         for handler, func in self.handlers.items():

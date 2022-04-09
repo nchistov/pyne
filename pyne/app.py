@@ -34,7 +34,7 @@ class App:
 
         self.clock = pg.time.Clock()
 
-        self.schedule = []
+        self.tasks = []
         self.widgets = []
         self.handlers = {}
         self.used_handlers = {}
@@ -48,16 +48,16 @@ class App:
         self.fps = 30
         print(f'[Pyne] fps -> {self.fps}')
 
-    def add_to_schedule(self, func: Callable, priority=None):
+    def add_task(self, func: Callable, priority=None):
         if priority is None:
-            self.schedule.append(func)
+            self.tasks.append(func)
             return
 
-        self.schedule.insert(priority, func)
+        self.tasks.insert(priority, func)
 
-    def remove_from_schedule(self, func: Callable):
-        if func in self.schedule:
-            self.schedule.remove(func)
+    def remove_task(self, func: Callable):
+        if func in self.tasks:
+            self.tasks.remove(func)
         else:
             raise NoSouchItemError(f'can not find func {func} in schedule.')
 
@@ -126,8 +126,8 @@ class App:
             for widget in self.widgets:
                 widget.draw(self.screen)
 
-            for business in self.schedule:
-                business()
+            for task in self.tasks:
+                task()
 
             self._check_events()
 

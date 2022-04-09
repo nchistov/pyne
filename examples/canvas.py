@@ -40,7 +40,7 @@ def f():
         moving = 'left'
 
 
-app.add_to_schedule(f)
+app.add_task(f)
 app.run()
 
 canvas.save_to_file('canvas_image.png')

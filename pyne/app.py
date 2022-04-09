@@ -48,6 +48,17 @@ class App:
         self.fps = 30
         print(f'[Pyne] fps -> {self.fps}')
 
+    def clear_tasks(self):
+        self.tasks.clear()
+
+    def clear_widgets(self):
+        self.widgets.clear()
+
+    def clear_handlers(self):
+        self.handlers.clear()
+        self.used_handlers.clear()
+        self.unused_handlers.clear()
+
     def add_task(self, func: Callable, priority=None):
         if priority is None:
             self.tasks.append(func)

@@ -44,6 +44,9 @@ class CheckBox(Widget):
         self.choosing_rect.x = self.rect.x + 10
         self.choosing_rect.y = self.rect.y + 10
 
+        self.bg_rect.x = self.rect.x + 9
+        self.bg_rect.y = self.rect.y + 9
+
     def set(self):
         self.is_choose = True
         self.color = (25, 155, 250)

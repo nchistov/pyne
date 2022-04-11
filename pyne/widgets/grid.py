@@ -81,7 +81,8 @@ class Grid(Widget):
                 if self.rect.height > self.screen_rect.width:
                     if event.button == 4:  # Up
                         # If grids edge is out of edge of window, scroll grid
-                        if self.rect.top <= self.screen_rect.top:
+                        if self.rect.top <= self.screen_rect.top and \
+                                self.rect.bottom > self.screen_rect.bottom + self.speed:
                             self.rect.y -= self.speed
 
                             for widget in self.widgets:

@@ -33,6 +33,9 @@ class CheckBox(Widget):
         self.choosing_rect.x = self.rect.x + 10
         self.choosing_rect.y = self.rect.y + 10
 
+        self.bg_rect.x = self.rect.x + 9
+        self.bg_rect.y = self.rect.y + 9
+
     def set_text(self, text):
         self.text_image = self.font.render(text, True, self.text_color)
 
@@ -43,9 +46,6 @@ class CheckBox(Widget):
 
         self.choosing_rect.x = self.rect.x + 10
         self.choosing_rect.y = self.rect.y + 10
-
-        self.bg_rect.x = self.rect.x + 9
-        self.bg_rect.y = self.rect.y + 9
 
     def set(self):
         self.is_choose = True

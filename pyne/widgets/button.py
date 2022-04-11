@@ -1,3 +1,5 @@
+from typing import Callable
+
 import pygame as pg
 
 from .base_widget import Widget
@@ -5,7 +7,7 @@ from .base_widget import Widget
 
 class Button(Widget):
     def __init__(self, text: str, color=(150, 150, 150), active_color=(70, 200, 215),
-                 text_color=(0, 0, 0), outline_color=(200, 200, 200), font_size=40, command: callable = None,
+                 text_color=(0, 0, 0), outline_color=(200, 200, 200), font_size=40, command: Callable = None,
                  image=None, press='left', sound=None):
         super().__init__()
         self.text = text

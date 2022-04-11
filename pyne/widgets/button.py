@@ -5,13 +5,14 @@ from .base_widget import Widget
 
 class Button(Widget):
     def __init__(self, text: str, color=(150, 150, 150), active_color=(70, 200, 215),
-                 text_color=(0, 0, 0), font_size=40, command: callable = None,
+                 text_color=(0, 0, 0), outline_color=(200, 200, 200), font_size=40, command: callable = None,
                  image=None, press='left', sound=None):
         super().__init__()
         self.text = text
         self.color = color
         self.active_color = active_color
         self.text_color = text_color
+        self.outline_color = outline_color
         self.command = command
 
         self.press = press
@@ -99,11 +100,11 @@ class Button(Widget):
         screen.blit(self.text_image, self.text_image_rect)
 
         if not self.is_pressed:  # If button isn't clicked draw outlines
-            pg.draw.line(screen, (200, 200, 200), (self.rect.right - 1,
-                                                   self.rect.bottom),
+            pg.draw.line(screen, self.outline_color, (self.rect.right - 1,
+                                                      self.rect.bottom),
                          (self.rect.right - 1, self.rect.top))
 
-            pg.draw.line(screen, (200, 200, 200), (self.rect.right, self.rect.top),
+            pg.draw.line(screen, self.outline_color, (self.rect.right, self.rect.top),
                          (self.rect.left, self.rect.top))
         if self.has_image:
             screen.blit(self.image, self.image_rect)

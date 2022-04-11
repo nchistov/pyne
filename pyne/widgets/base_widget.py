@@ -11,6 +11,9 @@ class Widget:
         self.rect.width = width
         self.rect.height = height
 
+    def hit(self, x, y):
+        return self.rect.collidepoint(x, y)
+
     def update(self, event):
         pass
 

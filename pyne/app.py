@@ -59,6 +59,9 @@ class App:
     def set_window_pos(self, new_pos):
         os.environ['SDL_VIDEO_WINDOW_POS'] = str(new_pos[0]) + ', ' + str(new_pos[1])  # Set window coordinates
 
+    def get_mouse_pos(self):
+        return pg.mouse.get_pos()
+
     def clear_tasks(self):
         self.tasks.clear()
 

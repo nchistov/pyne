@@ -12,7 +12,7 @@ class NoSouchItemError(Exception):
 class App:
     """Class App, it is a class which manages windows"""
 
-    def __init__(self, window_size=(500, 500), title="Pyne", bg_color=(255, 255, 255)):
+    def __init__(self, window_size=(500, 500), title="Pyne", bg_color=(255, 255, 255), window_pos=(0, 0)):
         """
         :param window_size: list or tuple of two numbers: first width and last height
         :param title: title of the window
@@ -32,6 +32,8 @@ class App:
         pg.display.set_caption(title)
         print(f'[Pyne] window title -> "{title}"')
 
+        os.environ['SDL_VIDEO_WINDOW_POS'] = str(window_pos[0]) + ', ' + str(window_pos[1])  # Set window coordinates
+
         self.clock = pg.time.Clock()
 
         self.tasks = []
@@ -47,6 +49,15 @@ class App:
         self.bg = bg_color
         self.fps = 30
         print(f'[Pyne] fps -> {self.fps}')
+
+    def set_title(self, new_title):
+        pg.display.set_caption(new_title)
+
+    def set_window_size(self, new_size):
+        self.screen = pg.display.set_mode(new_size)
+
+    def set_window_pos(self, new_pos):
+        os.environ['SDL_VIDEO_WINDOW_POS'] = str(new_pos[0]) + ', ' + str(new_pos[1])  # Set window coordinates
 
     def clear_tasks(self):
         self.tasks.clear()

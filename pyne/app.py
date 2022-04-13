@@ -23,6 +23,8 @@ class App:
         pg.font.init()
         pg.mixer.init()
 
+        os.environ['SDL_VIDEO_WINDOW_POS'] = str(window_pos[0]) + ', ' + str(window_pos[1])  # Set window coordinates
+
         self.screen = pg.display.set_mode(window_size)
         print(f'[Pyne] window size -> {window_size}')
 
@@ -31,8 +33,6 @@ class App:
 
         pg.display.set_caption(title)
         print(f'[Pyne] window title -> "{title}"')
-
-        os.environ['SDL_VIDEO_WINDOW_POS'] = str(window_pos[0]) + ', ' + str(window_pos[1])  # Set window coordinates
 
         self.clock = pg.time.Clock()
 
@@ -55,9 +55,6 @@ class App:
 
     def set_window_size(self, new_size):
         self.screen = pg.display.set_mode(new_size)
-
-    def set_window_pos(self, new_pos):
-        os.environ['SDL_VIDEO_WINDOW_POS'] = str(new_pos[0]) + ', ' + str(new_pos[1])  # Set window coordinates
 
     def get_mouse_pos(self):
         return pg.mouse.get_pos()

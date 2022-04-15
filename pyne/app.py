@@ -12,7 +12,7 @@ class NoSouchItemError(Exception):
 class App:
     """Class App, it is a class which manages windows"""
 
-    def __init__(self, window_size=(500, 500), title="Pyne", bg_color=(255, 255, 255), window_pos=(0, 0)):
+    def __init__(self, window_size=(500, 500), title="Pyne", bg_color=(255, 255, 255), window_pos=None):
         """
         :param window_size: list or tuple of two numbers: first width and last height
         :param title: title of the window
@@ -23,7 +23,8 @@ class App:
         pg.font.init()
         pg.mixer.init()
 
-        os.environ['SDL_VIDEO_WINDOW_POS'] = str(window_pos[0]) + ', ' + str(window_pos[1])  # Set window coordinates
+        if window_pos:
+            os.environ['SDL_VIDEO_WINDOW_POS'] = str(window_pos[0]) + ', ' + str(window_pos[1])  # Set window coordinates
 
         self.screen = pg.display.set_mode(window_size)
         print(f'[Pyne] window size -> {window_size}')

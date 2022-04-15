@@ -8,7 +8,7 @@ class Entry(Widget):
                  outline_color=(0, 0, 0), font_size=30):
         super().__init__()
 
-        self.prompt = prompt
+        self._prompt = prompt
         self.prompt_color = (150, 150, 150)
         self.text_color = text_color
 
@@ -44,6 +44,15 @@ class Entry(Widget):
     @text.setter
     def text(self, value):
         self._text = value
+        self.render_text()
+
+    @property
+    def prompt(self):
+        return self._prompt
+
+    @prompt.setter
+    def prompt(self, value):
+        self._prompt = value
         self.render_text()
 
     def set_rect(self, x, y, width, height):

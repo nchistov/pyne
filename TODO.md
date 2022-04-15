@@ -17,6 +17,7 @@ Widgets:
  - [X] BeatleScreen: change method add_beatle
  - [X] CheckBox: add command on unset
  - Add:
+ - [ ] LinkLabel
  - [ ] Slider
  - [ ] FileDialog
  - [X] RadioButton

@@ -156,4 +156,3 @@ class Entry(Widget):
                      (self.rect.left, self.rect.bottom))
         pg.draw.line(screen, self.current_outline_color, (self.rect.left, self.rect.bottom),
                      (self.rect.right, self.rect.bottom))
-

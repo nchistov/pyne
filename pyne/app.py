@@ -81,7 +81,7 @@ class App:
         if func in self.tasks:
             self.tasks.remove(func)
         else:
-            raise NoSouchItemError(f'can not find func {func} in schedule.')
+            raise NoSouchItemError(f'can not find task {func}.')
 
     def add_widget(self, widget, priority=None):
         if priority is None:
@@ -94,7 +94,7 @@ class App:
         if widget in self.widgets:
             self.widgets.remove(widget)
         else:
-            raise NoSouchItemError(f'can not find widget {widget} in widgets.')
+            raise NoSouchItemError(f'can not find widget {widget}.')
 
     def add_handler(self, key: str, func: Callable):
         self.handlers[key] = func
@@ -105,7 +105,7 @@ class App:
             del self.handlers[key]
             del self.used_handlers[key]
         else:
-            raise NoSouchItemError(f'can not find key {key} in handlers.')
+            raise NoSouchItemError(f'can not find handler {key}.')
 
     def _is_press(self, keys, handler):
         """Returns True if handler is pressed, else returns False"""

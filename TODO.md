@@ -22,7 +22,7 @@ Widgets:
  - [ ] FileDialog
  - [X] RadioButton
  - [X] RadioButtonsBlock
- - [ ] ProgressBar
+ - [ ] NumericUpDown
  - [X] ImageBox
 
 Add:

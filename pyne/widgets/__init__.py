@@ -10,3 +10,4 @@ from .radio_button import RadioButton
 from .image_box import ImageBox
 from .radio_buttons_block import RadioButtonsBlock
 from .link_label import LinkLabel
+from .slider import Slider

@@ -18,7 +18,7 @@ Widgets:
  - [X] CheckBox: add command on unset
  - Add:
  - [X] LinkLabel
- - [ ] Slider
+ - [X] Slider
  - [ ] FileDialog
  - [X] RadioButton
  - [X] RadioButtonsBlock

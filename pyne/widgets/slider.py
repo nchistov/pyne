@@ -4,13 +4,15 @@ from .base_widget import Widget
 
 
 class Slider(Widget):
-    def __init__(self, min_value: int, max_value: int):
+    def __init__(self, min_value: int, max_value: int, color=(0, 0, 0), circle_color=(150, 150, 150)):
         super().__init__()
 
-        self.slider_rect = pg.Rect(0, 0, 10, 10)
+        self.slider_rect = pg.Rect(0, 0, 15, 15)
 
         self.min_value = min_value
         self.max_value = max_value
+        self.color = color
+        self.circle_color = circle_color
 
         self.is_mouse_pressed = False
 
@@ -44,9 +46,8 @@ class Slider(Widget):
             self.is_mouse_pressed = False
 
     def draw(self, screen: pg.Surface):
-        pg.draw.rect(screen, (0, 0, 0), self.slider_rect)
+        pg.draw.line(screen, self.color, (self.rect.left, self.rect.y), (self.rect.left, self.rect.y + 15))
+        pg.draw.line(screen, self.color, (self.rect.right, self.rect.y), (self.rect.right, self.rect.y + 15))
+        pg.draw.line(screen, self.color, (self.rect.left, self.rect.y + 7), (self.rect.right, self.rect.y + 7))
 
-        pg.draw.line(screen, (0, 0, 0), (self.rect.left, self.rect.y), (self.rect.left, self.rect.y + 15))
-        pg.draw.line(screen, (0, 0, 0), (self.rect.right, self.rect.y), (self.rect.right, self.rect.y + 15))
-
-        pg.draw.line(screen, (0, 0, 0), (self.rect.left, self.rect.y + 7), (self.rect.right, self.rect.y + 7))
+        pg.draw.circle(screen, self.circle_color, self.slider_rect.center, self.slider_rect.height / 2)

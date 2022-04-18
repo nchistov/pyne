@@ -12,3 +12,4 @@ from .radio_buttons_block import RadioButtonsBlock
 from .link_label import LinkLabel
 from .slider import Slider
 from .numeric_up_down import NumericUpDown
+from .file_dialog import FileDialog

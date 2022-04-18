@@ -114,8 +114,9 @@ class Entry(Widget):
         self.cursor_rect.centery = self.rect.height // 2
 
         if event.type == pg.MOUSEBUTTONDOWN:
-            mouse_x, mouse_y = event.pos
-            self.check_mouse_click(mouse_x, mouse_y)
+            if event.button == 1:
+                mouse_x, mouse_y = event.pos
+                self.check_mouse_click(mouse_x, mouse_y)
 
         if event.type == pg.KEYDOWN:
             if self.active:

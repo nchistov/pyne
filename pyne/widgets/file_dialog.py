@@ -68,18 +68,20 @@ class FileDialog(Widget):
 
     def update(self, event):
         if event.type == pg.MOUSEBUTTONDOWN:
-            if event.button == 4:  # Up
-                if self._bottom_y > self.canvas.height:
-                    for obj in self.canvas_objects:
-                        self.canvas.move(obj, 0, -self._speed)
-                    self._top_y -= self._speed
-                    self._bottom_y -= self._speed
-            elif event.button == 5:  # Down
-                if self._top_y < 0:
-                    for obj in self.canvas_objects:
-                        self.canvas.move(obj, 0, self._speed)
-                    self._top_y += self._speed
-                    self._bottom_y += self._speed
+            mouse_x, mouse_y = event.pos
+            if self.canvas.hit(mouse_x, mouse_y):
+                if event.button == 4:  # Up
+                    if self._bottom_y > self.canvas.height:
+                        for obj in self.canvas_objects:
+                            self.canvas.move(obj, 0, -self._speed)
+                        self._top_y -= self._speed
+                        self._bottom_y -= self._speed
+                elif event.button == 5:  # Down
+                    if self._top_y < 0:
+                        for obj in self.canvas_objects:
+                            self.canvas.move(obj, 0, self._speed)
+                        self._top_y += self._speed
+                        self._bottom_y += self._speed
 
         for obj in self.save_or_open_btn, self.cancel_btn, self.filename_entry, self.canvas:
             obj.update(event)

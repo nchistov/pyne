@@ -6,10 +6,11 @@ from ._canvas_object import CanvasObject
 
 
 class Canvas(Widget):
-    def __init__(self, bg_color=(255, 255, 255)):
+    def __init__(self, bg_color=(255, 255, 255), outline_color=(255, 255, 255)):
         super().__init__()
 
         self.bg_color = bg_color
+        self.outline_color = outline_color
 
         self.surface = pg.Surface(self.rect.size)
 
@@ -97,3 +98,13 @@ class Canvas(Widget):
             obj.draw(self.surface)
 
         screen.blit(self.surface, self.rect)
+
+        # Draw outline
+        pg.draw.line(screen, self.outline_color, (self.rect.right, self.rect.bottom),
+                     (self.rect.right, self.rect.top))
+        pg.draw.line(screen, self.outline_color, (self.rect.right, self.rect.top),
+                     (self.rect.left, self.rect.top))
+        pg.draw.line(screen, self.outline_color, (self.rect.left, self.rect.top),
+                     (self.rect.left, self.rect.bottom))
+        pg.draw.line(screen, self.outline_color, (self.rect.left, self.rect.bottom),
+                     (self.rect.right, self.rect.bottom))

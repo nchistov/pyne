@@ -1,6 +1,6 @@
 # Examples
 
-### How to run they:
+### How to run them:
 
 At first install _Pyne_
 ```

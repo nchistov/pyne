@@ -14,10 +14,15 @@ class Canvas(Widget):
 
         self.surface = pg.Surface(self.rect.size)
 
+        self.width = 0
+        self.height = 0
+
         self.objects = []
 
     def set_rect(self, x, y, width, height):
         super().set_rect(x, y, width, height)
+
+        self.width, self.height = width, height
 
         self.surface = pg.Surface(self.rect.size)
 

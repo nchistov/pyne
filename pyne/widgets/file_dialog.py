@@ -49,7 +49,7 @@ class FileDialog(Widget):
 
         self.canvas.set_rect(x + 5, y + 5, width - 10, height - 100)
 
-        result = self._read_ls(os.getcwd())
+        result = self._read_ls('/home/nick/')
         y = 5
 
         for folder in result[0]:
@@ -62,6 +62,8 @@ class FileDialog(Widget):
 
         for file in result[1]:
             self.canvas_objects.append(self.canvas.draw_text(file, 25, y, 30))
+            self.canvas_objects.append(self.canvas.draw_image(os.path.join(os.path.dirname(__file__), 'file.gif'),
+                                                              5, y))
             y += 40
             self._max_y = y
             self._bottom_y = y

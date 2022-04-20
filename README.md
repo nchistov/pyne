@@ -7,7 +7,7 @@
 ## History
 Why we call it 'Pyne'? Because we create it on Python and I want to call it 'Pine' 🌳
 The first idea of Pyne created when I saw the Kivy.
-It was time when my brother created his first programming language [_EPL_](https://github.com/wchistow/EPL/),
+It was time when my brother created his first programming language [_EPL_](https://gitflic.ru/project/wchistow/elementary),
 and I wanted to create pyne for _EPL IDE_(now it's on _Tkinter_, and I don't like it)
 
 ----

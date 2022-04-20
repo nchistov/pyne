@@ -1,4 +1,5 @@
 import os
+import sys
 
 import pygame as pg
 
@@ -10,20 +11,43 @@ class FileDialog(Widget):
     def __init__(self):
         super().__init__()
 
-        self._speed = 10
+        self._speed = 15
         self._min_y = 5
         self._max_y = 0
         self._top_y = 5
         self._bottom_y = 5
 
+        self.path = os.getcwd()
+
         self.save_or_open_btn = Button(text='Open', font_size=30)
         self.cancel_btn = Button(text='Cancel', font_size=30)
+
+        self.back_btn = Button(text='^', font_size=30, command=self.back)
 
         self.filename_entry = Entry()
 
         self.canvas = Canvas(outline_color=(100, 100, 100))
 
+        self.widgets = (self.save_or_open_btn, self.cancel_btn, self.filename_entry, self.canvas, self.back_btn)
+
         self.canvas_objects = []
+
+    def back(self):
+        """Go back by directories tree."""
+        if sys.platform == 'win32':
+            if self.path.count('\\') > 1:
+                new_end = self.path.rfind('\\')
+                self.path = self.path[:new_end]
+        else:
+            if self.path.count('/') > 1:
+                new_end = self.path.rfind('/')
+                self.path = self.path[:new_end]
+
+        for item in self.canvas_objects[::-1]:
+            self.canvas.delete(item)
+        self.canvas_objects.clear()
+
+        self.draw_items()
 
     def _read_ls(self, path):
         """Returns sorted lists of folders and files."""
@@ -45,11 +69,16 @@ class FileDialog(Widget):
         self.save_or_open_btn.set_rect(x + (width - 80),  y + (height - 90), 80, 40)
         self.cancel_btn.set_rect(x + (width - 80),  y + (height - 40), 80, 40)
 
+        self.back_btn.set_rect(x + (width - 80),  y + 5, 80, 40)
+
         self.filename_entry.set_rect(x + 10, y + (height - 90), width - 100, 40)
 
-        self.canvas.set_rect(x + 5, y + 5, width - 10, height - 100)
+        self.canvas.set_rect(x + 5, y + 50, width - 10, height - 150)
 
-        result = self._read_ls('/home/nick/')
+        self.draw_items()
+
+    def draw_items(self):
+        result = self._read_ls(self.path)
         y = 5
 
         for folder in result[0]:
@@ -85,9 +114,9 @@ class FileDialog(Widget):
                         self._top_y += self._speed
                         self._bottom_y += self._speed
 
-        for obj in self.save_or_open_btn, self.cancel_btn, self.filename_entry, self.canvas:
+        for obj in self.widgets:
             obj.update(event)
 
     def draw(self, screen: pg.Surface):
-        for obj in self.save_or_open_btn, self.cancel_btn, self.filename_entry, self.canvas:
+        for obj in self.widgets:
             obj.draw(screen)

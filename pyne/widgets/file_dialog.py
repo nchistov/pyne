@@ -113,6 +113,19 @@ class FileDialog(Widget):
                             self.canvas.move(obj, 0, self._speed)
                         self._top_y += self._speed
                         self._bottom_y += self._speed
+                elif event.button == 1:
+                    for obj in self.canvas.objects:
+                        if obj.info[0] == 'text':
+                            if self.canvas.hit(mouse_x, mouse_y):
+                                if obj.text_image_rect.collidepoint(mouse_x - self.canvas.rect.x, mouse_y - self.canvas.rect.y):
+                                    if os.path.isdir(os.path.join(self.path, obj.text)):
+                                        self.path = os.path.join(self.path, obj.text)
+
+                                        for item in self.canvas_objects[::-1]:
+                                            self.canvas.delete(item)
+                                        self.canvas_objects.clear()
+
+                                        self.draw_items()
 
         for obj in self.widgets:
             obj.update(event)

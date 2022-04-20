@@ -52,6 +52,8 @@ class CanvasObject:
             case 'text':
                 self.font = pg.font.SysFont('', info[3])
 
+                self.text = info[2]
+
                 self.text_image = self.font.render(info[2], True, info[4])
 
                 self.text_image_rect = self.text_image.get_rect()

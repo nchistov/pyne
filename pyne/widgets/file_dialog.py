@@ -1,5 +1,6 @@
 import os
 import sys
+from enum import Enum
 
 import pygame as pg
 
@@ -7,9 +8,19 @@ from . import Button, Entry, Canvas
 from .base_widget import Widget
 
 
+class State(Enum):
+    waiting = 0
+    opening = 1
+    saving = 2
+
+
 class FileDialog(Widget):
     def __init__(self):
         super().__init__()
+
+        self.state = State.waiting
+
+        self.result = ''
 
         self._speed = 15
         self._min_y = 5
@@ -19,8 +30,8 @@ class FileDialog(Widget):
 
         self.path = os.getcwd()
 
-        self.save_or_open_btn = Button(text='Open', font_size=30)
-        self.cancel_btn = Button(text='Cancel', font_size=30)
+        self.save_or_open_btn = Button(text='Open', font_size=30, command=self.save_or_open)
+        self.cancel_btn = Button(text='Cancel', font_size=30, command=self.cancel)
 
         self.back_btn = Button(text='^', font_size=30, command=self.back)
 
@@ -31,6 +42,20 @@ class FileDialog(Widget):
         self.widgets = (self.save_or_open_btn, self.cancel_btn, self.filename_entry, self.canvas, self.back_btn)
 
         self.canvas_objects = []
+
+    def askopenfile(self):
+        self.state = State.opening
+        self.save_or_open_btn.set_text('Open')
+
+    def asksavefile(self):
+        self.state = State.saving
+        self.save_or_open_btn.set_text('Save')
+
+    def save_or_open(self):
+        self.result = os.path.join(self.path, self.filename_entry.text)
+
+    def cancel(self):
+        self.state = State.waiting
 
     def back(self):
         """Go back by directories tree."""
@@ -98,38 +123,42 @@ class FileDialog(Widget):
             self._bottom_y = y
 
     def update(self, event):
-        if event.type == pg.MOUSEBUTTONDOWN:
-            mouse_x, mouse_y = event.pos
-            if self.canvas.hit(mouse_x, mouse_y):
-                if event.button == 4:  # Up
-                    if self._bottom_y > self.canvas.height:
-                        for obj in self.canvas_objects:
-                            self.canvas.move(obj, 0, -self._speed)
-                        self._top_y -= self._speed
-                        self._bottom_y -= self._speed
-                elif event.button == 5:  # Down
-                    if self._top_y < 0:
-                        for obj in self.canvas_objects:
-                            self.canvas.move(obj, 0, self._speed)
-                        self._top_y += self._speed
-                        self._bottom_y += self._speed
-                elif event.button == 1:
-                    for obj in self.canvas.objects:
-                        if obj.info[0] == 'text':
-                            if self.canvas.hit(mouse_x, mouse_y):
-                                if obj.text_image_rect.collidepoint(mouse_x - self.canvas.rect.x, mouse_y - self.canvas.rect.y):
-                                    if os.path.isdir(os.path.join(self.path, obj.text)):
-                                        self.path = os.path.join(self.path, obj.text)
+        if self.state != State.waiting:
+            if event.type == pg.MOUSEBUTTONDOWN:
+                mouse_x, mouse_y = event.pos
+                if self.canvas.hit(mouse_x, mouse_y):
+                    if event.button == 4:  # Up
+                        if self._bottom_y > self.canvas.height:
+                            for obj in self.canvas_objects:
+                                self.canvas.move(obj, 0, -self._speed)
+                            self._top_y -= self._speed
+                            self._bottom_y -= self._speed
+                    elif event.button == 5:  # Down
+                        if self._top_y < 0:
+                            for obj in self.canvas_objects:
+                                self.canvas.move(obj, 0, self._speed)
+                            self._top_y += self._speed
+                            self._bottom_y += self._speed
+                    elif event.button == 1:
+                        for obj in self.canvas.objects:
+                            if obj.info[0] == 'text':
+                                if self.canvas.hit(mouse_x, mouse_y):
+                                    if obj.text_image_rect.collidepoint(mouse_x - self.canvas.rect.x, mouse_y - self.canvas.rect.y):
+                                        if os.path.isdir(os.path.join(self.path, obj.text)):
+                                            self.path = os.path.join(self.path, obj.text)
 
-                                        for item in self.canvas_objects[::-1]:
-                                            self.canvas.delete(item)
-                                        self.canvas_objects.clear()
+                                            for item in self.canvas_objects[::-1]:
+                                                self.canvas.delete(item)
+                                            self.canvas_objects.clear()
 
-                                        self.draw_items()
+                                            self.draw_items()
+                                        else:
+                                            self.filename_entry.set_text(obj.text)
 
-        for obj in self.widgets:
-            obj.update(event)
+            for obj in self.widgets:
+                obj.update(event)
 
     def draw(self, screen: pg.Surface):
-        for obj in self.widgets:
-            obj.draw(screen)
+        if self.state != State.waiting:
+            for obj in self.widgets:
+                obj.draw(screen)

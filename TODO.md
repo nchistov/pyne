@@ -19,7 +19,7 @@ Widgets:
  - Add:
  - [X] LinkLabel
  - [X] Slider
- - [ ] FileDialog
+ - [X] FileDialog
  - [X] RadioButton
  - [X] RadioButtonsBlock
  - [X] NumericUpDown

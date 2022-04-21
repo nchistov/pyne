@@ -3,6 +3,7 @@
 - [X] events.json: add new keys
 
 App:
+ - [ ] add set user icons
  - [X] change prompt
  - [X] add more errors
 

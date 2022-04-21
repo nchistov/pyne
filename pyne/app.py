@@ -12,11 +12,13 @@ class NoSouchItemError(Exception):
 class App:
     """Class App, it is a class which manages windows"""
 
-    def __init__(self, window_size=(500, 500), title="Pyne", bg_color=(255, 255, 255), window_pos=None):
+    def __init__(self, window_size=(500, 500), title="Pyne", bg_color=(255, 255, 255), window_pos=None,
+                 icon: str = None):
         """
         :param window_size: list or tuple of two numbers: first width and last height
         :param title: title of the window
         :param bg_color: color of background, in format RGB
+        :param icon: if it's None, App will set default icon, else set user icon
         """
 
         pg.init()
@@ -29,8 +31,12 @@ class App:
         self.screen = pg.display.set_mode(window_size)
         print(f'[Pyne] window size -> {window_size}')
 
-        icon = pg.image.load(os.path.join(os.path.dirname(__file__), 'icon.jpg'))
-        pg.display.set_icon(icon)
+        if icon is None:
+            icon = pg.image.load(os.path.join(os.path.dirname(__file__), 'icon.jpg'))
+            pg.display.set_icon(icon)
+        else:
+            icon = pg.image.load(icon)
+            pg.display.set_icon(icon)
 
         pg.display.set_caption(title)
         print(f'[Pyne] window title -> "{title}"')

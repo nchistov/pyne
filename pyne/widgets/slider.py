@@ -16,7 +16,7 @@ class Slider(Widget):
 
         self.is_mouse_pressed = False
 
-        self.value = 0
+        self.value = min_value
 
         self.value_per_pixel = 0
 
@@ -35,7 +35,7 @@ class Slider(Widget):
             elif self.slider_rect.x < self.rect.x:
                 self.slider_rect.x = self.rect.x
 
-            self.value = round((self.slider_rect.x - self.rect.left) * self.value_per_pixel)
+            self.value = self.min_value + round((self.slider_rect.x - self.rect.left) * self.value_per_pixel)
 
         if event.type == pg.MOUSEBUTTONDOWN:
             if event.button == 1:

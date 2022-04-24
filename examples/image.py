@@ -1,7 +1,7 @@
 import pyne
 
 app = pyne.App(icon='image.png')
-grid = pyne.widgets.Grid(app, 3, 3)
+grid = pyne.widgets.Grid(3, 3)
 app.add_widget(grid)
 
 img = pyne.widgets.ImageBox('image.png')

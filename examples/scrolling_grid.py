@@ -1,10 +1,10 @@
 import pyne
 
 app = pyne.App()
-grid = pyne.widgets.Grid(app, 1, 1)
+grid = pyne.widgets.Grid(1, 1)
 app.add_widget(grid)
 
-scrolling_grid = pyne.widgets.Grid(app, 3, 3, scrolling=True)
+scrolling_grid = pyne.widgets.Grid(3, 3, scrolling=True)
 grid.add_widget(scrolling_grid, 0, 0, 1, 3)
 
 btn = pyne.widgets.Button('OK', command=lambda: print('OK'))

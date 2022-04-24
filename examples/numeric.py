@@ -1,7 +1,7 @@
 import pyne
 
 app = pyne.App()
-grid = pyne.widgets.Grid(app, 10, 10)
+grid = pyne.widgets.Grid(10, 10)
 app.add_widget(grid)
 
 numeric = pyne.widgets.NumericUpDown()

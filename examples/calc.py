@@ -4,7 +4,7 @@ calculation = ''
 
 app = pyne.App((500, 700), title='Calc')
 
-grid = pyne.widgets.Grid(app, 5, 4)
+grid = pyne.widgets.Grid(5, 4)
 app.add_widget(grid)
 
 

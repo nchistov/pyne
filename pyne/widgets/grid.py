@@ -10,7 +10,7 @@ class NoSouchPositionError(Exception):
 
 
 class Grid(Widget):
-    def __init__(self, app: pyne.App, rows: int, columns: int, scrolling=False, speed=5):
+    def __init__(self, rows: int, columns: int, scrolling=False, speed=5):
         """
         :param app: pyne.App, it's needing when grid need to know window size
         :param rows: num of rows
@@ -19,17 +19,15 @@ class Grid(Widget):
         :param speed: the number of pixels by which the grid is scrolled
         """
         super().__init__()
-        self.app = app
-
         self.rows = rows
         self.columns = columns
 
         self.scrolling = scrolling
         self.speed = speed
 
-        self.rect = pg.Rect(0, 0, app.screen.get_width(), app.screen.get_height())
+        self.rect = pg.Rect(0, 0, pg.display.get_window_size()[0], pg.display.get_window_size()[1])
 
-        self.screen_rect = self.app.screen.get_rect()
+        self.screen_rect = pg.display.get_surface().get_rect()
 
         self.widgets = []
 

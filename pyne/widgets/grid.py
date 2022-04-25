@@ -1,6 +1,5 @@
 import pygame as pg
 
-import pyne
 from .base_widget import Widget
 from pyne.app import NoSouchItemError
 
@@ -12,7 +11,6 @@ class NoSouchPositionError(Exception):
 class Grid(Widget):
     def __init__(self, rows: int, columns: int, scrolling=False, speed=5):
         """
-        :param app: pyne.App, it's needing when grid need to know window size
         :param rows: num of rows
         :param columns: num of columns
         :param scrolling: flag, if it's True, when mouse is scrolling grid scrolling too

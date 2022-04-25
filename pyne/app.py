@@ -49,6 +49,8 @@ class App:
         self.used_handlers = {}
         self.unused_handlers = {}
 
+        self.func_on_exit = None
+
         with open(os.path.join(os.path.dirname(__file__), 'events.json')) as f:
             self.events = json.load(f)
 
@@ -76,6 +78,9 @@ class App:
         self.handlers.clear()
         self.used_handlers.clear()
         self.unused_handlers.clear()
+
+    def add_func_on_exit(self, func: Callable):
+        self.func_on_exit = func
 
     def add_task(self, func: Callable, priority=None):
         if priority is None:
@@ -181,3 +186,6 @@ class App:
         """change running to False"""
         self.running = False
         print('[Pyne] application quit')
+
+        if self.func_on_exit is not None:
+            self.func_on_exit()

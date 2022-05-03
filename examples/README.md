@@ -2,12 +2,9 @@
 
 ### How to run them:
 
-At first install _Pyne_
-```
-pip install pyne
-```
+At first [install Pyne](https://gitflic.ru/project/pyne/pyne)
 
-and for example run file simple.py:
+And, for example, run file simple.py:
 ```
 python simple.py
 ```

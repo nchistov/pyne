@@ -36,7 +36,7 @@ We need your help to make pyne better than it's now! [Write issues](https://gitf
 ---
 
 ## Development
-Read [developers guide](https://gitflic.ru/project/pyne/pyne/blob?file=DEVELOPERS.md).
+Read [developers guide](https://gitflic.ru/project/pyne/pyne/blob?file=DEVELOPERS_GUIDE.md).
 
 ## Thanks
 

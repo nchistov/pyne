@@ -13,11 +13,7 @@ and I wanted to create pyne for _EPL IDE_(now it's on _Tkinter_, and I don't lik
 ----
 
 ## Installing
-If you have Linux, [install pygi](https://gitflic.ru/project/wchistow/pygi).
-And then, enter this line in terminal:
-```shell
-pygi install https://gitflic.ru/project/pyne/pyne.git pyne
-```
+[Instruction](https://gitflic.ru/project/pyne/pyne/blob?file=INSTALLING.md)
 
 ----
 

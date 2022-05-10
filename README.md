@@ -33,6 +33,11 @@ Other examples you can find [here](https://gitflic.ru/project/pyne/pyne/file?fil
 
 We need your help to make pyne better than it's now! [Write issues](https://gitflic.ru/project/pyne/pyne/issue).
 
+---
+
+## Development
+Read [developers guide](https://gitflic.ru/project/pyne/pyne/blob?file=DEVELOPERS.md).
+
 ## Thanks
 
 I'd like to give thanks to this people:

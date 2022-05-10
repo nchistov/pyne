@@ -37,12 +37,17 @@ We need your help to make pyne better than it's now! [Write issues](https://gitf
 
 ## Development
 Read [developers guide](https://gitflic.ru/project/pyne/pyne/blob?file=DEVELOPERS_GUIDE.md).
+Then, [write issue](https://gitflic.ru/project/pyne/pyne/issue).
 
 ## Thanks
 
 I'd like to give thanks to this people:
  + [Anatoliy Chistov](https://gitflic.ru/user/codefather)
  + [Vladimir Chistov](https://gitflic.ru/user/wchistow)
+
+---
+
+You can find whats-new file [here](https://gitflic.ru/project/pyne/pyne/blob?file=WHATS_NEW.md).
 
 ---
 

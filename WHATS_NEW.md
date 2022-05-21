@@ -1,7 +1,8 @@
 # What's New
 
 ## Version 0.2.1 (??.??.2022)
-Now in developing
+### Add:
+ - LinkLabel: add drawing line only on collision with mouse
 
 ## Version 0.2.0 (30.04.2022):
 ### Add:

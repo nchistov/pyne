@@ -16,14 +16,22 @@ class LinkLabel(Label):
             self.text = url
             self.set_text(self.text)
 
+        self.active = False
+
     def update(self, event):
+        mouse_x, mouse_y = pg.mouse.get_pos()
+        if self.text_image_rect.collidepoint(mouse_x, mouse_y):
+            self.active = True
+        else:
+            self.active = False
+
         if event.type == pg.MOUSEBUTTONDOWN:
             if event.button == 1:
-                mouse_x, mouse_y = event.pos
-                if self.text_image_rect.collidepoint(mouse_x, mouse_y):
+                if self.active:
                     webbrowser.open_new_tab(self.url)
 
     def draw(self, screen):
         super().draw(screen)
-        pg.draw.line(screen, (0, 0, 255), (self.text_image_rect.left, self.text_image_rect.bottom),
-                     (self.text_image_rect.right, self.text_image_rect.bottom))
+        if self.active:
+            pg.draw.line(screen, (0, 0, 255), (self.text_image_rect.left, self.text_image_rect.bottom),
+                         (self.text_image_rect.right, self.text_image_rect.bottom))

@@ -1,7 +1,7 @@
 # ToDo
 
  + [X] Add file errors.py
- + [ ] Add file constants
+ + [X] Add file constants.py
 
 Widgets:
  + [ ] FileDialog: add view of files only with given extension

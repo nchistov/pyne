@@ -4,6 +4,7 @@
 [Install pygi](https://gitflic.ru/project/wchistow/pygi).
 And then, enter this line in terminal:
 ```shell
+pip install pygame
 pygi install https://gitflic.ru/project/pyne/pyne.git pyne
 ```
 

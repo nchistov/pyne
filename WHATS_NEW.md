@@ -1,5 +1,8 @@
 # What's New
 
+## Version 0.2.1 (??.??.2022)
+Now in developing
+
 ## Version 0.2.0 (30.04.2022):
 ### Add:
  - events.json: add new keys

@@ -4,9 +4,7 @@ from typing import Callable
 
 import pygame as pg
 
-
-class NoSouchItemError(Exception):
-    pass
+from pyne.errors import NoSouchItemError
 
 
 class App:

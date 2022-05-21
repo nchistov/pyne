@@ -1,6 +1,6 @@
 # ToDo
 
- + [ ] Add file errors.py
+ + [X] Add file errors.py
  + [ ] Add file constants
 
 Widgets:

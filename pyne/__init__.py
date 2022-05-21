@@ -5,6 +5,7 @@ from . import widgets
 from . import beatle
 from . import sound
 from .game_gui_controller import GameGUIController
+from . import errors
 
 __version__ = '0.2.1 alpha'
 

@@ -2,6 +2,9 @@
 
 ## Version 0.2.1 (??.??.2022)
 ### Add:
+ - file errors.py
+
+#### Widgets
  - LinkLabel: add drawing line only on collision with mouse
 
 ## Version 0.2.0 (30.04.2022):

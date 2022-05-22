@@ -4,5 +4,5 @@
  + [X] Add file constants.py
 
 Widgets:
- + [ ] FileDialog: add view of files only with given extension
+ + [X] FileDialog: add view of files only with given extension
  + [X] LinkLabel: add drawing line only on collision with mouse

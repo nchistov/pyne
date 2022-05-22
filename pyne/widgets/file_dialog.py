@@ -15,8 +15,13 @@ class State(Enum):
 
 
 class FileDialog(Widget):
-    def __init__(self):
+    def __init__(self, files=None):
         super().__init__()
+
+        if files is None:
+            self.files = []
+        else:
+            self.files = files
 
         self.state = State.waiting
 
@@ -53,6 +58,7 @@ class FileDialog(Widget):
 
     def save_or_open(self):
         self.result = os.path.join(self.path, self.filename_entry.text)
+        self.state = State.waiting
 
     def cancel(self):
         self.state = State.waiting
@@ -85,7 +91,12 @@ class FileDialog(Widget):
             if os.path.isdir(os.path.join(path, item)):
                 directories.append(item)
             else:
-                files.append(item)
+                if not self.files:
+                    files.append(item)
+                else:
+                    for file in self.files:
+                        if not item.startswith('.') and item.endswith(file):
+                            files.append(item)
 
         return sorted(directories), sorted(files)
 
@@ -127,13 +138,13 @@ class FileDialog(Widget):
             if event.type == pg.MOUSEBUTTONDOWN:
                 mouse_x, mouse_y = event.pos
                 if self.canvas.hit(mouse_x, mouse_y):
-                    if event.button == 4:  # Up
+                    if event.button == 5:  # Up
                         if self._bottom_y > self.canvas.height:
                             for obj in self.canvas_objects:
                                 self.canvas.move(obj, 0, -self._speed)
                             self._top_y -= self._speed
                             self._bottom_y -= self._speed
-                    elif event.button == 5:  # Down
+                    elif event.button == 4:  # Down
                         if self._top_y < 0:
                             for obj in self.canvas_objects:
                                 self.canvas.move(obj, 0, self._speed)

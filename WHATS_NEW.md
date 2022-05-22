@@ -7,6 +7,7 @@
 
 #### Widgets
  - LinkLabel: add drawing line only on collision with mouse
+ - FileDialog: add view of files only with given extension
 
 ## Version 0.2.0 (30.04.2022):
 ### Add:

@@ -1,6 +1,6 @@
 # Pyne
 ## Python application lib
-## version 0.2.1 alpha
+## version 0.2.1
 
 ### Warning, python version must be 3.10 or high!
 

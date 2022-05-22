@@ -1,6 +1,6 @@
 # What's New
 
-## Version 0.2.1 (??.??.2022)
+## Version 0.2.1 (22.05.2022)
 ### Add:
  - file errors.py
  - file constants.py

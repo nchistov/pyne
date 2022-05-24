@@ -1,25 +1,25 @@
 # Pyne
-## Python application lib
-## version 0.2.1
+## Библиотека для создания приложений на Python
+## Версия 0.2.1
 
-### Warning, python version must be 3.10 or high!
+### Внимание версия Python должна быть не ниже 3.10!
 
-## History
-Why we call it 'Pyne'? Because we create it on Python and I want to call it 'Pine' 🌳
-The first idea of Pyne created when I saw the Kivy.
-It was time when my brother created his first programming language [_EPL_](https://gitflic.ru/project/wchistow/elementary),
-and I wanted to create pyne for _EPL IDE_(now it's on _Tkinter_, and I don't like it)
-
-----
-
-## Installing
-[Instruction](https://gitflic.ru/project/pyne/pyne/blob?file=INSTALLING.md)
+## История
+Почему мы назвали это «Pyne»? Потому-что, мы пишем его на Python, и я захотел назвать его «Pine». 🌳
+Я задумался о создании Pyne, когда я увидел Kivy.
+В то время мой брат писал свой первый язык программирования [_EPL_](https://gitflic.ru/project/wchistow/elementary),
+а я захотел создать Pyne для _EPL IDE_(сейчас он на _Tkinter_, и мне он не очень нравится)
 
 ----
 
-## Get started
-#### simple example
-This code create white window 500x500
+## Установка
+[Инструкция](https://gitflic.ru/project/pyne/pyne/blob?file=INSTALLING.md)
+
+----
+
+## Первые шаги
+#### Самый простой пример
+Этот код создает белое окно 500 на 500 пикселей.
 ```python
 import pyne
 
@@ -27,29 +27,33 @@ app = pyne.App()
 
 app.run()
 ```
-Other examples you can find [here](https://gitflic.ru/project/pyne/pyne/file?file=examples)
+Другие примеры вы можете найти [здесь](https://gitflic.ru/project/pyne/pyne/file?file=examples)
 
 ---
 
-We need your help to make pyne better than it's now! [Write issues](https://gitflic.ru/project/pyne/pyne/issue).
+## Ошибки
+
+Если вы нашли ошибку то, пишите об этом [здесь](https://gitflic.ru/project/pyne/pyne/issue).
 
 ---
 
-## Development
-Read [developers guide](https://gitflic.ru/project/pyne/pyne/blob?file=DEVELOPERS_GUIDE.md).
-Then, [write issue](https://gitflic.ru/project/pyne/pyne/issue).
+## Разработка
+Прочитайте [руководство для разработчиков](https://gitflic.ru/project/pyne/pyne/blob?file=DEVELOPERS_GUIDE.md).
+Далее, напишите о том, что вы хотите стать разработчиком [здесь](https://gitflic.ru/project/pyne/pyne/issue).
 
-## Thanks
+## Благодарности
 
-I'd like to give thanks to this people:
- + [Anatoliy Chistov](https://gitflic.ru/user/codefather)
- + [Vladimir Chistov](https://gitflic.ru/user/wchistow)
-
----
-
-You can find whats-new file [here](https://gitflic.ru/project/pyne/pyne/blob?file=WHATS_NEW.md).
+Я хотел бы поблагодарить этих людей:
+ + [Анатолий Чистов](https://gitflic.ru/user/codefather)
+ + [Владимир Чистов](https://gitflic.ru/user/wchistow)
 
 ---
 
-By Nickolay Chistov\
+## What's New
+
+Вы можете посмотреть Whats New файл [здесь](https://gitflic.ru/project/pyne/pyne/blob?file=WHATS_NEW.md).
+
+---
+
+Николай Чистов\
 2022

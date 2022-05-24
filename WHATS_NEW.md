@@ -1,30 +1,30 @@
 # What's New
 
-## Version 0.2.1 (22.05.2022)
-### Add:
- - file errors.py
- - file constants.py
+## Версия 0.2.1 (22.05.2022)
+### Добавлено:
+ - файл errors.py
+ - файл constants.py
 
-#### Widgets
- - LinkLabel: add drawing line only on collision with mouse
- - FileDialog: add view of files only with given extension
+#### Widgets:
+ - LinkLabel: добавлено рисование линии под текстом только при наведении указатель мыши
+ - FileDialog: добавлена возможность показывание файлов только с заданными расширениями
 
-## Version 0.2.0 (30.04.2022):
-### Add:
- - events.json: add new keys
+## Версия 0.2.0 (30.04.2022):
+### Добавлено:
+ - events.json: добавлены новые ключи
  - GameGUIController
 
 #### App:
- - add set user icons
- - add more errors
+ - добавлена возможность задавать иконку
+ - добавлено больше ошибок
 
 #### Widgets:
- - Grid: add method `remove_widget`
- - Grid: add more errors
- - Button: add method `set_text`
- - Label: add redefinition of method `set_rect`
- - Entry: add method `set_text`
- - CheckBox: add command on unset
+ - Grid: добавлен метод `remove_widget`
+ - Grid: добавлено больше ошибок
+ - Button: добавлен метод `set_text`
+ - Label: добавлено переопределение метода `set_rect`
+ - Entry: добавлен метод `set_text`
+ - CheckBox: добавлена команда на отпускание
 
 
  - LinkLabel
@@ -35,19 +35,19 @@
  - NumericUpDown
  - ImageBox
 
-### Change:
+### Изменено:
 
 #### App:
- - change prompt
- - change name of methods `add_to_schedule` to `add_task` and `remove_from_schedule` to `remove_task`
+ - приглашение
+ - имена методов из `add_to_schedule` в `add_task` и из `remove_from_schedule` в `remove_task`
 
 #### Widgets:
- - Grid: scrolling only on collision with mouse
- - BeatleScreen: change method `add_beatle`
+ - Grid: прокрутка только при наведении указатель мыши
+ - BeatleScreen: метод `add_beatle`
 
-### Remove:
+### Удалено:
 Widgets:
- - Grid: remove parameter `app`
+ - Grid: параметр `app`
 
-## Version 0.1.0 (17.03.2022):
-First version
+## Версия 0.1.0 (17.03.2022):
+Первая версия

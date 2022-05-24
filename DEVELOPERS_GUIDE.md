@@ -1,8 +1,8 @@
-# Developers Guide
-## Responsibilities of developers when writing code:
+# Руководство для разработчиков
+## Обязанности разработчиков при написании кода::
 
- + Follow PEP guidelines.
- + Write examples for all added functionality.
- + Do not release versions without the knowledge of the main developer.
- + Add your name to file [DEVELOPERS](https://gitflic.ru/project/pyne/pyne/blob?file=DEVELOPERS.md).
- + Add all added functionality to file [WHATS_NEW](https://gitflic.ru/project/pyne/pyne/blob?file=WHATS_NEW.md)
+ + Соблюдать рекомендации PEP.
+ + Писать примеры к любой добавленной или измененной функциональности.
+ + Не выпускать версии без ведома главного разработчика.
+ + Добавить свое имя в файл [DEVELOPERS](https://gitflic.ru/project/pyne/pyne/blob?file=DEVELOPERS.md).
+ + Добавлять любую добавленную или измененную функциональность в файл [WHATS_NEW](https://gitflic.ru/project/pyne/pyne/blob?file=WHATS_NEW.md)

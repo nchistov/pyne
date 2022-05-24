@@ -1,6 +1,6 @@
-# Developers
+# Разработчики
 
-### Main Developers
- + [Nickolay Chistov](https://gitflic.ru/user/nchistov)
-### Other Developers
-No other developers
+### Главные разработчики
+ + [Николай Чистов](https://gitflic.ru/user/nchistov)
+### Остальные разработчики
+Пока-что нет остальных разработчиков

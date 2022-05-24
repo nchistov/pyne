@@ -1,12 +1,12 @@
-# Installing
+# Установка
 
 ## Linux
-[Install pygi](https://gitflic.ru/project/wchistow/pygi).
-And then, enter this line in terminal:
+[Установите pygi](https://gitflic.ru/project/wchistow/pygi).
+И введите эти строки в терминале:
 ```shell
 pip install pygame
 pygi install https://gitflic.ru/project/pyne/pyne.git pyne
 ```
 
-## Other platforms
-I can't give you instruction for installing pyne on other platforms.
+## Другие системы
+Я не могу дать вам инструкцию по установке Pyne на другие платформы.

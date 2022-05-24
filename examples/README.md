@@ -1,11 +1,11 @@
-# Examples
+# Примеры
 
-### How to run them:
+### Как их запускать:
 
-At first [install Pyne](https://gitflic.ru/project/pyne/pyne/blob?file=INSTALLING.md)
+[Установите Pyne](https://gitflic.ru/project/pyne/pyne/blob?file=INSTALLING.md)
 
-And, for example, run file simple.py:
+И, запустите к примеру simple.py:
 ```
 python simple.py
 ```
-that's all.
+Это все.

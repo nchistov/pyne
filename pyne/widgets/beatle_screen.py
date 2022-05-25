@@ -4,10 +4,8 @@ import pygame as pg
 
 
 class BeatleScreen(Widget):
-    def __init__(self, app,  color=(255, 255, 255), outline_color=(150, 150, 150)):
+    def __init__(self,  color=(255, 255, 255), outline_color=(150, 150, 150)):
         super().__init__()
-
-        self.app = app
 
         self.color = color
         self.outline_color = outline_color
@@ -38,7 +36,7 @@ class BeatleScreen(Widget):
 
         screen.blit(self.surface, self.rect)
 
-        # Draw outlines
+        # Рисуем рамку
         pg.draw.line(screen, self.outline_color, (self.rect.x, self.rect.y), (self.rect.right, self.rect.y))
         pg.draw.line(screen, self.outline_color, (self.rect.right, self.rect.y), (self.rect.right, self.rect.bottom))
         pg.draw.line(screen, self.outline_color, (self.rect.right, self.rect.bottom),

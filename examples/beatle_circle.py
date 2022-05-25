@@ -1,17 +1,17 @@
 import pyne
 
-app = pyne.App(window_size=(1100, 500))  # Creating white window 1100x500
+app = pyne.App(window_size=(1100, 500))
 
-grid = pyne.widgets.Grid(1, 2)  # Adding grid
+grid = pyne.widgets.Grid(1, 2)
 app.add_widget(grid)
 
-beatle_screen = pyne.widgets.BeatleScreen(app)  # Adding screen for beatle
+beatle_screen = pyne.widgets.BeatleScreen()  # Создаем экран для Beatle
 grid.add_widget(beatle_screen, 0, 0, 1)
 
-t = pyne.beatle.Beatle(beatle_screen)  # Creating Beatle
+t = pyne.beatle.Beatle(beatle_screen)  # Создаем Beatle
 beatle_screen.add_beatle(t)
 
-# Draw circle
+# Рисуем круг
 for i in range(10, 361, 10):
     t.forward(10)
     t.setheading(i)
@@ -20,4 +20,4 @@ t.forward(500)
 t.reset()
 
 app.run()
-t.stop()  # Stopping all process
+t.stop()  # Останавливаем все процессы

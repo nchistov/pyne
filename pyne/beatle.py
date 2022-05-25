@@ -9,49 +9,45 @@ import pygame as pg
 
 class Beatle:
     """
-    class Beatle (analog of class turtle.Pen)
+    класс Beatle (аналог класса turtle.Pen)
 
-    Attributes:
-    app: exemplar of class pyne.App
-    screen: exemplar of class pyne.widgets.BeatleScreen
+    Атрибуты:
+    screen: экземпляр класса pyne.widgets.BeatleScreen
 
-    x: turtle x
-    y: turtle y
+    x: черепаший x
+    y: черепаший y
 
-    is_down: if it is True beatle draw line else no
+    is_down: если True то Beatle рисует линию, иначе нет
 
-    base_image: the image intended for rotation
-    image: image which one is drawing on screen
+    base_image: изображение предназначенное для поворота
+    image: изображение отображаемое на экране
 
-    rect: rectangle of image
+    rect: rect изображения
 
     speed: int
     angle: int
 
-    tasks: exemplar of class queue.Queue
+    tasks: экземпляр класса queue.Queue
 
-    lines: list of coordinates for drawing lines
+    lines: список координат для рисования линий
 
-    Methods:
-    forward: moving beatle forward by steps
-    forward: moving beatle backward by steps
+    Методы:
+    forward: двигает Beatle вперед на steps шагов
+    backward: двигает Beatle назад на steps шагов
 
-    setheading: rotate beatle by angle
+    setheading: устанавливает направление Beatle в angle углов
 
-    down: set flag is_down to True
-    up: set flag is_down to False
-    stop: stopping process self.thread
+    down: изменяет флаг is_down в True
+    up: изменяет флаг is_down в False
+    stop: останавливает поток self.thread
 
-    update: updating pos and angle
-    draw: drawing beatle and lines on screen
-
+    update: обновляет Beatle
+    draw: рисует Beatle и линии
     """
     def __init__(self,  beatle_screen):
         """
-        :param beatle_screen: exemplar of class pyne.widgets BeatleScreen
+        :param beatle_screen: экземпляр класса pyne.widgets.BeatleScreen
         """
-        self.app = beatle_screen.app
-
         self.screen = beatle_screen
 
         self.x = 0

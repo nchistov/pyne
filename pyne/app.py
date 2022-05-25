@@ -8,15 +8,15 @@ from pyne.errors import NoSouchItemError
 
 
 class App:
-    """Class App, it is a class which manages windows"""
+    """Управляет окнами"""
 
     def __init__(self, window_size=(500, 500), title="Pyne", bg_color=(255, 255, 255), window_pos=None,
                  icon: str = None):
         """
-        :param window_size: list or tuple of two numbers: first width and last height
-        :param title: title of the window
-        :param bg_color: color of background, in format RGB
-        :param icon: if it's None, App will set default icon, else set user icon
+        :param список или кортеж из двух чисел: первая ширина, а последняя высота.
+        :param title: заголовок окна.
+        :param bg_color: цвет окна, в формате RGB.
+        :param icon: если это None, приложение установит значок по умолчанию, иначе установите значок пользователя.
         """
 
         pg.init()
@@ -24,7 +24,7 @@ class App:
         pg.mixer.init()
 
         if window_pos:
-            os.environ['SDL_VIDEO_WINDOW_POS'] = str(window_pos[0]) + ', ' + str(window_pos[1])  # Set window coordinates
+            os.environ['SDL_VIDEO_WINDOW_POS'] = str(window_pos[0]) + ', ' + str(window_pos[1])
 
         self.screen = pg.display.set_mode(window_size)
         print(f'[Pyne] window size -> {window_size}')
@@ -118,10 +118,10 @@ class App:
             raise NoSouchItemError(f'can not find handler {key}.')
 
     def _is_press(self, keys, handler):
-        """Returns True if handler is pressed, else returns False"""
+        """Возвращает True, если handler нажат, иначе возвращает False"""
         for key in handler.split('-'):
-            if key.startswith('Mouse'):  # If register handler on mouse
-                mouse_state = pg.mouse.get_pressed(5)  # Get state of mouse
+            if key.startswith('Mouse'):  # Если зарегистрирован handler на мышь
+                mouse_state = pg.mouse.get_pressed(5)  # Получить состояние мыши
                 if key.endswith('Left'):
                     if not mouse_state[0]:
                         return False
@@ -136,7 +136,7 @@ class App:
         return True
 
     def _check_events(self):
-        """Checks quit event and all handlers"""
+        """Проверяет событие выхода и все обработчики"""
         keys = pg.key.get_pressed()
 
         for handler, func in self.handlers.items():
@@ -158,7 +158,7 @@ class App:
                 widget.update(event)
 
     def run(self):
-        """starts mainloop"""
+        """Запускает главный цикл"""
         self.running = True
 
         print('[Pyne] application start')
@@ -181,7 +181,7 @@ class App:
         pg.quit()
 
     def quit(self):
-        """change running to False"""
+        """Завершает главный цикл"""
         self.running = False
         print('[Pyne] application quit')
 

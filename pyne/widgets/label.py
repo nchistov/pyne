@@ -25,7 +25,7 @@ class Label(Widget):
 
         self.text_image_rect = self.text_image.get_rect()
 
-        match self.press:  # Press the text to the desired edge
+        match self.press:  # Прижимаем текст к нужному краю
             case 'right':
                 self.text_image_rect.right = self.rect.right - 3
             case 'left':
@@ -38,7 +38,7 @@ class Label(Widget):
     def set_rect(self, x, y, width, height):
         super().set_rect(x, y, width, height)
 
-        match self.press:  # Press the text to the desired edge
+        match self.press:  # Прижимаем текст к нужному краю
             case 'right':
                 self.text_image_rect.right = self.rect.right - 3
             case 'left':
@@ -52,7 +52,7 @@ class Label(Widget):
         pg.draw.rect(screen, self.bg_color, self.rect)
         screen.blit(self.text_image, self.text_image_rect)
 
-        # Draw outline
+        # Рисуем рамку
         pg.draw.line(screen, self.outline_color, (self.rect.right, self.rect.bottom), (self.rect.right, self.rect.top))
         pg.draw.line(screen, self.outline_color, (self.rect.right, self.rect.top), (self.rect.left, self.rect.top))
         pg.draw.line(screen, self.outline_color, (self.rect.left, self.rect.top), (self.rect.left, self.rect.bottom))

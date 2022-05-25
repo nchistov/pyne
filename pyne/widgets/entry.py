@@ -127,7 +127,7 @@ class Entry(Widget):
                     self.current_outline_color = (200, 200, 200)
 
                 elif event.key not in (9, 13, 127, 1073742052, 1073742048, 1073742054,
-                                       1073742050, 1073741904, 1073741903):  # Unprintable keys
+                                       1073742050, 1073741904, 1073741903):  # Непечатаемые клавиши
                     self.add_letter(event.unicode)
 
                 if event.key == pg.K_LEFT:
@@ -145,11 +145,11 @@ class Entry(Widget):
         self.surface.fill(self.bg_color)
         self.surface.blit(self.text_image, self.text_image_rect)
         if self.active:
-            # Draw cursor
+            # Рисуем курсор
             pg.draw.rect(self.surface, (0, 0, 0), self.cursor_rect)
         screen.blit(self.surface, self.rect)
 
-        # Draw outline
+        # Рисуем рамку
         pg.draw.line(screen, self.current_outline_color, (self.rect.right, self.rect.bottom),
                      (self.rect.right, self.rect.top))
         pg.draw.line(screen, self.current_outline_color, (self.rect.right, self.rect.top), (self.rect.left, self.rect.top))

@@ -13,7 +13,7 @@ class Panel(Widget):
     def draw(self, screen: pg.Surface):
         pg.draw.rect(screen, self.color, self.rect)
 
-        # Draw outline
+        # Рисуем рамку
         pg.draw.line(screen, self.outline_color, (self.rect.right, self.rect.bottom), (self.rect.right, self.rect.top))
         pg.draw.line(screen, self.outline_color, (self.rect.right, self.rect.top), (self.rect.left, self.rect.top))
         pg.draw.line(screen, self.outline_color, (self.rect.left, self.rect.top), (self.rect.left, self.rect.bottom))

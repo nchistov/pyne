@@ -8,10 +8,10 @@ from pyne.errors import NoSouchPositionError
 class Grid(Widget):
     def __init__(self, rows: int, columns: int, scrolling=False, speed=5):
         """
-        :param rows: num of rows
-        :param columns: num of columns
-        :param scrolling: flag, if it's True, when mouse is scrolling grid scrolling too
-        :param speed: the number of pixels by which the grid is scrolled
+        :param rows: количество рядов
+        :param columns: количество столбцов
+        :param scrolling: если это True, когда мышь прокручивается, сетка тоже прокручивается
+        :param speed: количество пикселей, на которое прокручивается сетка
         """
         super().__init__()
         self.rows = rows
@@ -72,8 +72,8 @@ class Grid(Widget):
             mouse_x, mouse_y = event.pos
             if self.rect.collidepoint(mouse_x, mouse_y):
                 if self.rect.height > self.screen_rect.width:
-                    if event.button == 4:  # Up
-                        # If grids edge is out of edge of window, scroll grid
+                    if event.button == 4:  # Вверх
+                        # Если край сетки выходит за край окна
                         if self.rect.top <= self.screen_rect.top and \
                                 self.rect.bottom > self.screen_rect.bottom + self.speed:
                             self.rect.y -= self.speed
@@ -81,8 +81,8 @@ class Grid(Widget):
                             for widget in self.widgets:
                                 widget.set_rect(widget.rect.x, widget.rect.y - self.speed,
                                                 widget.rect.width, widget.rect.height)
-                    elif event.button == 5:  # Down
-                        # If grids edge is out of edge of window, scroll grid
+                    elif event.button == 5:  # Вниз
+                        # Если край сетки выходит за край окна
                         if self.rect.bottom > self.screen_rect.bottom and self.rect.top < self.screen_rect.top:
                             self.rect.y += self.speed
 

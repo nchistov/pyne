@@ -57,19 +57,19 @@ class CheckBox(Widget):
 
     def update(self, event):
         if event.type == pg.MOUSEBUTTONDOWN:
-            mouse_x, mouse_y = event.pos  # Get mouse pos
-            if self.choosing_rect.collidepoint(mouse_x, mouse_y):  # If button is clicked
+            mouse_x, mouse_y = event.pos  # Получаем координаты мыши
+            if self.choosing_rect.collidepoint(mouse_x, mouse_y):  # Если кнопка нажата
                 if not self.is_choose:
-                    self.is_choose = True  # change flag is_choose
-                    self.color = (25, 155, 250)  # and color
+                    self.is_choose = True  # изменяем флаг is_choose
+                    self.color = (25, 155, 250)  # и цвет
 
                     if self.command is not None:
-                        self.command()  # If the command is registered, called it
+                        self.command()  # Если команда зарегистрирована, вызываем ее
                 elif self.is_choose:
                     self.is_choose = False
 
                     if self.unset_command is not None:
-                        self.unset_command()  # If the unset_command is registered, called it
+                        self.unset_command()  # Если команда на отпускание зарегистрирована, вызываем ее
 
                     self.color = (255, 255, 255)
 

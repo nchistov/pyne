@@ -12,11 +12,11 @@ class SpecialRadioButton(RadioButton):
 
     def update(self, event):
         if event.type == pg.MOUSEBUTTONDOWN:
-            mouse_x, mouse_y = event.pos  # Get mouse pos
-            if self.choosing_rect.collidepoint(mouse_x, mouse_y):  # If button is clicked
+            mouse_x, mouse_y = event.pos  # Получаем координаты мыши
+            if self.choosing_rect.collidepoint(mouse_x, mouse_y):  # Если кнопка нажата
                 if not self.is_choose:
-                    self.is_choose = True  # change flag is_choose
-                    self.color = (25, 155, 250)  # and color
+                    self.is_choose = True  # Изменяем флаг is_choose
+                    self.color = (25, 155, 250)  # и цвет
 
                     for r_btn in self.radio_buttons:
                         if r_btn != self:

@@ -71,7 +71,7 @@ class Canvas(Widget):
     def move(self, obj: int, x, y):
         new_coordinates = []
 
-        if self.objects[obj].info[0] == 'polygon':  # If we need to move polygon, we move all coordinates
+        if self.objects[obj].info[0] == 'polygon':  # Если надо двигать многоугольник, подвинем все углы
             for pos in self.objects[obj].coordinates:
                 new_coordinates.append((pos[0] + x, pos[1] + y))
 
@@ -82,8 +82,8 @@ class Canvas(Widget):
         self.objects[obj].x += x
         self.objects[obj].y += y
 
-        if self.objects[obj].info[0] == 'line':  # If we need to move the line, we change not only start pos
-            new_end_pos = self.objects[obj].end_pos[0] + x, self.objects[obj].end_pos[1] + y  # end pos too
+        if self.objects[obj].info[0] == 'line':  # Если надо двигать линию, изменяем не только start_pos
+            new_end_pos = self.objects[obj].end_pos[0] + x, self.objects[obj].end_pos[1] + y  # end_pos тоже
 
             self.objects[obj].end_pos = new_end_pos
 
@@ -104,7 +104,7 @@ class Canvas(Widget):
 
         screen.blit(self.surface, self.rect)
 
-        # Draw outline
+        # Рисуем рамку
         pg.draw.line(screen, self.outline_color, (self.rect.right, self.rect.bottom),
                      (self.rect.right, self.rect.top))
         pg.draw.line(screen, self.outline_color, (self.rect.right, self.rect.top),

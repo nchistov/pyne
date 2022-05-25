@@ -84,12 +84,12 @@ class Button(Widget):
     def update(self, event):
         if event.type == pg.MOUSEBUTTONDOWN:
             if event.button == 1:
-                mouse_x, mouse_y = event.pos  # Get mouse pos
-                if self.rect.collidepoint(mouse_x, mouse_y):  # If button is clicked
-                    self.current_color = self.active_color    # change color
-                    self.is_pressed = True                    # and flag is_pressed
+                mouse_x, mouse_y = event.pos  # Получаем координаты мыши
+                if self.rect.collidepoint(mouse_x, mouse_y):  # Если кнопка нажата
+                    self.current_color = self.active_color    # изменяем цвет
+                    self.is_pressed = True                    # и флаг is_pressed
                     if self.command is not None:
-                        self.command()                        # If the command is registered, called it
+                        self.command()                        # Если команда зарегистрирована, вызываем ее
                     if self.sound is not None:
                         self.sound.play()
 
@@ -101,7 +101,7 @@ class Button(Widget):
         pg.draw.rect(screen, self.current_color, self.rect)
         screen.blit(self.text_image, self.text_image_rect)
 
-        if not self.is_pressed:  # If button isn't clicked draw outlines
+        if not self.is_pressed:  # Если кнопка не нажата, рисуем рамку
             pg.draw.line(screen, self.outline_color, (self.rect.right - 1,
                                                       self.rect.bottom),
                          (self.rect.right - 1, self.rect.top))

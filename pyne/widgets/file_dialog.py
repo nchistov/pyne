@@ -64,7 +64,7 @@ class FileDialog(Widget):
         self.state = State.waiting
 
     def back(self):
-        """Go back by directories tree."""
+        """Возвращается назад по дереву каталогов."""
         if sys.platform == 'win32':
             if self.path.count('\\') > 1:
                 new_end = self.path.rfind('\\')
@@ -81,7 +81,7 @@ class FileDialog(Widget):
         self.draw_items()
 
     def _read_ls(self, path):
-        """Returns sorted lists of folders and files."""
+        """Возвращает отсортированные списки папок и файлов."""
         ls_out = os.listdir(path)
 
         directories = []
@@ -138,13 +138,13 @@ class FileDialog(Widget):
             if event.type == pg.MOUSEBUTTONDOWN:
                 mouse_x, mouse_y = event.pos
                 if self.canvas.hit(mouse_x, mouse_y):
-                    if event.button == 5:  # Up
+                    if event.button == 5:  # Вверх
                         if self._bottom_y > self.canvas.height:
                             for obj in self.canvas_objects:
                                 self.canvas.move(obj, 0, -self._speed)
                             self._top_y -= self._speed
                             self._bottom_y -= self._speed
-                    elif event.button == 4:  # Down
+                    elif event.button == 4:  # Вниз
                         if self._top_y < 0:
                             for obj in self.canvas_objects:
                                 self.canvas.move(obj, 0, self._speed)

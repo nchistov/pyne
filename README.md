@@ -49,9 +49,9 @@ app.run()
 
 ---
 
-## What's New
+## Что нового
 
-Вы можете посмотреть Whats New файл [здесь](https://gitflic.ru/project/pyne/pyne/blob?file=WHATS_NEW.md).
+Вы можете посмотреть что нового в pyne [здесь](https://gitflic.ru/project/pyne/pyne/blob?file=WHATS_NEW.md).
 
 ---
 

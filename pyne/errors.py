@@ -4,3 +4,7 @@ class NoSouchItemError(Exception):
 
 class NoSouchPositionError(Exception):
     pass
+
+
+class VersionError(Exception):
+    pass

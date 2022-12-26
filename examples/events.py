@@ -1,6 +1,6 @@
 import pyne
 
-app = pyne.App(window_pos=(0, 0))
+app = pyne.App(window_pos=(50, 50))
 
 app.add_handler("MouseLeft-Alt", lambda: print("Hello"))
 

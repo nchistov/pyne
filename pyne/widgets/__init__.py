@@ -13,3 +13,7 @@ from .link_label import LinkLabel
 from .slider import Slider
 from .numeric_up_down import NumericUpDown
 from .file_dialog import FileDialog
+
+__all__ = ['BeatleScreen', 'Button', 'Canvas', 'CheckBox', 'Entry', 'FileDialog',
+           'Grid', 'ImageBox', 'Label', 'LinkLabel', 'NumericUpDown', 'Panel',
+           'RadioButton', 'RadioButtonsBlock', 'Slider']

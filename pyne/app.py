@@ -5,13 +5,14 @@ from typing import Callable
 import pygame as pg
 
 from pyne.errors import NoSouchItemError
+from pyne.widgets.base_widget import Widget
 
 
 class App:
     """Управляет окнами"""
 
-    def __init__(self, window_size=(500, 500), title="Pyne", bg_color=(255, 255, 255), window_pos=None,
-                 icon: str = None):
+    def __init__(self, window_size=(500, 500), title="Pyne", bg_color=(255, 255, 255),
+                 window_pos: tuple[int, int] | None = None, icon: str | None = None):
         """
         :param window_size: список или кортеж из двух чисел: первая ширина, а последняя высота окна.
         :param title: заголовок окна.
@@ -30,24 +31,23 @@ class App:
         print(f'[Pyne] window size -> {window_size}')
 
         if icon is None:
-            icon = pg.image.load(os.path.join(os.path.dirname(__file__), 'icon.jpg'))
-            pg.display.set_icon(icon)
+            self.icon = pg.image.load(os.path.join(os.path.dirname(__file__), 'icon.jpg'))
         else:
-            icon = pg.image.load(icon)
-            pg.display.set_icon(icon)
+            self.icon = pg.image.load(icon)
+        pg.display.set_icon(self.icon)
 
         pg.display.set_caption(title)
         print(f'[Pyne] window title -> "{title}"')
 
         self.clock = pg.time.Clock()
 
-        self.tasks = []
-        self.widgets = []
-        self.handlers = {}
-        self.used_handlers = {}
-        self.unused_handlers = {}
+        self.tasks: list[Callable] = []
+        self.widgets: list[Widget] = []
+        self.handlers: dict[str, Callable] = {}
+        self.used_handlers: dict[str, Callable] = {}
+        self.unused_handlers: dict[str, Callable] = {}
 
-        self.func_on_exit = None
+        self.func_on_exit: Callable | None = None
 
         with open(os.path.join(os.path.dirname(__file__), 'events.json')) as f:
             self.events = json.load(f)

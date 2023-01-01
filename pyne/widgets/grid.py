@@ -24,7 +24,7 @@ class Grid(Widget):
 
         self.screen_rect = pg.display.get_surface().get_rect()
 
-        self.widgets = []
+        self.widgets: list[Widget] = []
 
     def add_widget(self, widget, row, column, width=1, height=1, priority=None):
         if row >= self.rows:

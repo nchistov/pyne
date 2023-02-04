@@ -37,7 +37,7 @@ class RadioButtonsBlock(Widget):
         self._current_text = ''
         self.current_radio_button = None
 
-        self.radio_buttons = []
+        self.radio_buttons: list[SpecialRadioButton] = []
 
         self._generate()
 

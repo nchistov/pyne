@@ -1,13 +1,14 @@
 import pygame as pg
 
 from pyne.app import NoSouchItemError
+from .widgets.base_widget import Widget
 
 
 class GameGUIController:
     def __init__(self, screen: pg.Surface):
         self.screen = screen
 
-        self.widgets = []
+        self.widgets: list[Widget] = []
 
     def add_widget(self, widget, x, y, width, height, priority=None):
         widget.set_rect(x, y, width, height)

@@ -12,7 +12,7 @@ class App:
     """Управляет окнами"""
 
     def __init__(self, window_size=(500, 500), title="Pyne", bg_color=(255, 255, 255),
-                 window_pos: tuple[int, int] | None = None, icon: str | None = None):
+                 icon: str | None = None):
         """
         :param window_size: список или кортеж из двух чисел: первая ширина, а последняя высота окна.
         :param title: заголовок окна.
@@ -23,9 +23,6 @@ class App:
         pg.init()
         pg.font.init()
         pg.mixer.init()
-
-        if window_pos:
-            os.environ['SDL_VIDEO_WINDOW_POS'] = str(window_pos[0]) + ', ' + str(window_pos[1])
 
         self.screen = pg.display.set_mode(window_size)
         print(f'[Pyne] window size -> {window_size}')

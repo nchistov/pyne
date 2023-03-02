@@ -1,53 +1,57 @@
 # Что нового
 
+## Версия 0.3.0 (??.??.2023)
+### Удалено:
+ + Из `App` параметр `window_pos`
+
 ## Версия 0.2.1 (22.05.2022)
 ### Добавлено:
- - файл errors.py
- - файл constants.py
+ + файл errors.py
+ + файл constants.py
 
 #### Виджеты:
- - LinkLabel: добавлено рисование линии под текстом только при наведении указатель мыши
- - FileDialog: добавлена возможность показывание файлов только с заданными расширениями
+ + LinkLabel: добавлено рисование линии под текстом только при наведении указатель мыши
+ + FileDialog: добавлена возможность показывание файлов только с заданными расширениями
 
 ## Версия 0.2.0 (30.04.2022):
 ### Добавлено:
- - events.json: добавлены новые ключи
- - GameGUIController
+ + events.json: добавлены новые ключи
+ + GameGUIController
 
 #### App:
- - добавлена возможность задавать иконку
- - добавлено больше ошибок
+ + добавлена возможность задавать иконку
+ + добавлено больше ошибок
 
 #### Виджеты:
- - Grid: добавлен метод `remove_widget`
- - Grid: добавлено больше ошибок
- - Button: добавлен метод `set_text`
- - Label: добавлено переопределение метода `set_rect`
- - Entry: добавлен метод `set_text`
- - CheckBox: добавлена команда на отпускание
+ + Grid: добавлен метод `remove_widget`
+ + Grid: добавлено больше ошибок
+ + Button: добавлен метод `set_text`
+ + Label: добавлено переопределение метода `set_rect`
+ + Entry: добавлен метод `set_text`
+ + CheckBox: добавлена команда на отпускание
 
 
- - LinkLabel
- - Slider
- - FileDialog
- - RadioButton
- - RadioButtonsBlock
- - NumericUpDown
- - ImageBox
+ + LinkLabel
+ + Slider
+ + FileDialog
+ + RadioButton
+ + RadioButtonsBlock
+ + NumericUpDown
+ + ImageBox
 
 ### Изменено:
 
 #### App:
- - приглашение
- - имена методов из `add_to_schedule` в `add_task` и из `remove_from_schedule` в `remove_task`
+ + приглашение
+ + имена методов из `add_to_schedule` в `add_task` и из `remove_from_schedule` в `remove_task`
 
 #### Виджеты:
- - Grid: прокрутка только при наведении указатель мыши
- - BeatleScreen: метод `add_beatle`
+ + Grid: прокрутка только при наведении указатель мыши
+ + BeatleScreen: метод `add_beatle`
 
 ### Удалено:
 #### Виджеты:
- - Grid: параметр `app`
+ + Grid: параметр `app`
 
 ## Версия 0.1.0 (17.03.2022):
 Первая версия

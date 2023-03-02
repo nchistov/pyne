@@ -17,6 +17,6 @@ if not (sys.version_info.major == 3 and sys.version_info.minor >= 10):  # Вер
 __all__ = ['App', 'widgets', 'beatle', 'sound', 'GameGUIController', 'errors', '__version__'] +\
           [d for d in dir(constants) if not d.startswith('__')]
 
-__version__ = '0.2.1'
+__version__ = '0.3.0 alpha'
 
 print(f'\n[Pyne] version -> {__version__}')

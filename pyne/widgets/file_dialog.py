@@ -119,7 +119,8 @@ class FileDialog(Widget):
 
         for folder in result[0]:
             self.canvas_objects.append(self.canvas.draw_text(folder, 25, y, 30))
-            self.canvas_objects.append(self.canvas.draw_image(os.path.join(os.path.dirname(__file__), 'folder.gif'),
+            self.canvas_objects.append(self.canvas.draw_image(os.path.join(os.path.dirname(__file__),
+                                                                           'images/folder.gif'),
                                                               5, y))
             y += 40
             self._max_y = y
@@ -127,7 +128,8 @@ class FileDialog(Widget):
 
         for file in result[1]:
             self.canvas_objects.append(self.canvas.draw_text(file, 25, y, 30))
-            self.canvas_objects.append(self.canvas.draw_image(os.path.join(os.path.dirname(__file__), 'file.gif'),
+            self.canvas_objects.append(self.canvas.draw_image(os.path.join(os.path.dirname(__file__),
+                                                                           'images/file.gif'),
                                                               5, y))
             y += 40
             self._max_y = y

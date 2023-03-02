@@ -28,7 +28,7 @@ class App:
         print(f'[Pyne] window size -> {window_size}')
 
         if icon is None:
-            self.icon = pg.image.load(os.path.join(os.path.dirname(__file__), 'icon.jpg'))
+            self.icon = pg.image.load(os.path.join(os.path.dirname(__file__), 'images/icon.jpg'))
         else:
             self.icon = pg.image.load(icon)
         pg.display.set_icon(self.icon)

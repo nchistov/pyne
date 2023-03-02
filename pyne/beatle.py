@@ -55,7 +55,7 @@ class Beatle:
 
         self.is_down = True
 
-        self.base_image = pg.image.load(os.path.join(os.path.dirname(__file__), 'beatle.png'))
+        self.base_image = pg.image.load(os.path.join(os.path.dirname(__file__), 'images/beatle.png'))
         self.image = self.base_image
 
         self.rect = self.image.get_rect()

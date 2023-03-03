@@ -77,7 +77,7 @@ class App:
     def add_func_on_exit(self, func: Callable):
         self.func_on_exit = func
 
-    def add_task(self, func: Callable, priority=None):
+    def add_task(self, func: Callable, priority: int | None = None):
         if priority is None:
             self.tasks.append(func)
             return
@@ -90,7 +90,7 @@ class App:
         else:
             raise NoSouchItemError(f'can not find task {func}.')
 
-    def add_widget(self, widget, priority=None):
+    def add_widget(self, widget: Widget, priority: int | None = None):
         if priority is None:
             self.widgets.append(widget)
             return

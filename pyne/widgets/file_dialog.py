@@ -35,10 +35,10 @@ class FileDialog(Widget):
 
         self.path = os.getcwd()
 
-        self.save_or_open_btn = Button(text='Open', font_size=30, command=self.save_or_open)
-        self.cancel_btn = Button(text='Cancel', font_size=30, command=self.cancel)
+        self.save_or_open_btn = Button(text='Open', font_size=25, command=self.save_or_open)
+        self.cancel_btn = Button(text='Cancel', font_size=25, command=self.cancel)
 
-        self.back_btn = Button(text='^', font_size=30, command=self.back)
+        self.back_btn = Button(text='^', font_size=25, command=self.back)
 
         self.filename_entry = Entry()
 
@@ -118,19 +118,19 @@ class FileDialog(Widget):
         y = 5
 
         for folder in result[0]:
-            self.canvas_objects.append(self.canvas.draw_text(folder, 25, y, 30))
+            self.canvas_objects.append(self.canvas.draw_text(folder, 25, y, 25))
             self.canvas_objects.append(self.canvas.draw_image(os.path.join(os.path.dirname(__file__),
                                                                            'images/folder.gif'),
-                                                              5, y))
+                                                              5, y + 10))
             y += 40
             self._max_y = y
             self._bottom_y = y
 
         for file in result[1]:
-            self.canvas_objects.append(self.canvas.draw_text(file, 25, y, 30))
+            self.canvas_objects.append(self.canvas.draw_text(file, 25, y, 25))
             self.canvas_objects.append(self.canvas.draw_image(os.path.join(os.path.dirname(__file__),
                                                                            'images/file.gif'),
-                                                              5, y))
+                                                              5, y + 10))
             y += 40
             self._max_y = y
             self._bottom_y = y

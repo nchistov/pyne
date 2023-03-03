@@ -1,3 +1,5 @@
+import os
+
 import pygame as pg
 
 from .base_widget import Widget
@@ -16,7 +18,7 @@ class Label(Widget):
 
         self.press = press
 
-        self.font = pg.font.SysFont('', font_size)
+        self.font = pg.font.Font(os.path.join(os.path.dirname(__file__), '../fonts/font.ttf'), font_size)
 
         self.set_text(text)
 

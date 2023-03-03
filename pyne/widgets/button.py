@@ -1,3 +1,4 @@
+import os
 from typing import Callable
 
 import pygame as pg
@@ -7,7 +8,7 @@ from .base_widget import Widget
 
 class Button(Widget):
     def __init__(self, text: str, color=(150, 150, 150), active_color=(70, 200, 215),
-                 text_color=(0, 0, 0), outline_color=(200, 200, 200), font_size=40, command: Callable | None = None,
+                 text_color=(0, 0, 0), outline_color=(200, 200, 200), font_size=30, command: Callable | None = None,
                  image=None, press='left', sound=None):
         super().__init__()
         self.text = text
@@ -34,7 +35,7 @@ class Button(Widget):
 
         self.rect = pg.Rect(0, 0, len(text) * 17, 35)
 
-        self.font = pg.font.SysFont('', font_size)
+        self.font = pg.font.Font(os.path.join(os.path.dirname(__file__), '../fonts/font.ttf'), font_size)
 
         self.set_text(text)
 

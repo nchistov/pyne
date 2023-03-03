@@ -1,3 +1,5 @@
+import os
+
 import pygame as pg
 
 from .base_widget import Widget
@@ -5,7 +7,7 @@ from .base_widget import Widget
 
 class Entry(Widget):
     def __init__(self, prompt='', text='', text_color=(0, 0, 0), bg_color=(255, 255, 255),
-                 outline_color=(0, 0, 0), font_size=30):
+                 outline_color=(0, 0, 0), font_size=25):
         super().__init__()
 
         self._prompt = prompt
@@ -27,7 +29,7 @@ class Entry(Widget):
 
         self.surface = pg.Surface(self.rect.size)
 
-        self.font = pg.font.SysFont('', font_size)
+        self.font = pg.font.Font(os.path.join(os.path.dirname(__file__), '../fonts/font.ttf'), font_size)
         self.text_image = self.font.render(self.text, True, self.text_color)
         self.text_image_rect = self.text_image.get_rect()
         self.text_image_rect.left = 5

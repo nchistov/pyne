@@ -1,3 +1,5 @@
+import os
+
 import pygame as pg
 
 from .base_widget import Widget
@@ -18,7 +20,7 @@ class CheckBox(Widget):
 
         self.bg_rect = pg.Rect(self.rect.x + 9, self.rect.y + 9, 12, 12)
 
-        self.font = pg.font.SysFont('', font_size)
+        self.font = pg.font.Font(os.path.join(os.path.dirname(__file__), '../fonts/font.ttf'), font_size)
 
         self.is_choose = False
 
@@ -31,10 +33,10 @@ class CheckBox(Widget):
         self.text_image_rect.top = self.rect.top + 8
 
         self.choosing_rect.x = self.rect.x + 10
-        self.choosing_rect.y = self.rect.y + 10
+        self.choosing_rect.y = self.text_image_rect.centery
 
         self.bg_rect.x = self.rect.x + 9
-        self.bg_rect.y = self.rect.y + 9
+        self.bg_rect.y = self.text_image_rect.centery - 1
 
     def set_text(self, text):
         self.text_image = self.font.render(text, True, self.text_color)
@@ -45,7 +47,7 @@ class CheckBox(Widget):
         self.text_image_rect.top = self.rect.top + 8
 
         self.choosing_rect.x = self.rect.x + 10
-        self.choosing_rect.y = self.rect.y + 10
+        self.choosing_rect.y = self.text_image_rect.centery
 
     def set(self):
         self.is_choose = True

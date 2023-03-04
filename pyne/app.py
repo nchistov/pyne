@@ -4,8 +4,8 @@ from typing import Callable
 
 import pygame as pg
 
-from pyne.errors import NoSouchItemError
-from pyne.widgets.base_widget import Widget
+from .errors import NoSouchItemError
+from .widgets.base_widget import Widget
 
 
 class App:
@@ -54,13 +54,13 @@ class App:
         self.fps = 30
         print(f'[Pyne] fps -> {self.fps}')
 
-    def set_title(self, new_title):
+    def set_title(self, new_title: str):
         pg.display.set_caption(new_title)
 
-    def set_window_size(self, new_size):
+    def set_window_size(self, new_size: tuple[int, int]):
         self.screen = pg.display.set_mode(new_size)
 
-    def get_mouse_pos(self):
+    def get_mouse_pos(self) -> tuple[int, int]:
         return pg.mouse.get_pos()
 
     def clear_tasks(self):
@@ -97,7 +97,7 @@ class App:
 
         self.widgets.insert(priority, widget)
 
-    def remove_widget(self, widget):
+    def remove_widget(self, widget: Widget):
         if widget in self.widgets:
             self.widgets.remove(widget)
         else:
@@ -107,7 +107,7 @@ class App:
         self.handlers[key] = func
         self.used_handlers[key] = func
 
-    def remove_handler(self, key):
+    def remove_handler(self, key: str):
         if key in self.handlers.keys() and key in self.used_handlers.keys():
             del self.handlers[key]
             del self.used_handlers[key]

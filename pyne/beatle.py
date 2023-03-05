@@ -6,6 +6,8 @@ from time import sleep
 
 import pygame as pg
 
+from .widgets import BeatleScreen
+
 
 class Beatle:
     """
@@ -44,7 +46,7 @@ class Beatle:
     update: обновляет Beatle
     draw: рисует Beatle и линии
     """
-    def __init__(self,  beatle_screen):
+    def __init__(self,  beatle_screen: BeatleScreen):
         """
         :param beatle_screen: экземпляр класса pyne.widgets.BeatleScreen
         """
@@ -74,13 +76,13 @@ class Beatle:
         t.start()
         self.thread = t
 
-    def forward(self, steps):
+    def forward(self, steps: int):
         self.tasks.put(('fd', steps))
 
-    def backward(self, steps):
+    def backward(self, steps: int):
         self.forward(-steps)
 
-    def setheading(self, angle):
+    def setheading(self, angle: int):
         self.tasks.put(('seth', angle))
 
     def down(self):
@@ -150,7 +152,7 @@ class Beatle:
 
             sleep(0.02)
 
-    def draw(self, screen):
+    def draw(self, screen: pg.Surface):
         screen.blit(self.image, self.rect)
 
         for line in self.lines:

@@ -1,7 +1,7 @@
 import pygame as pg
 
-from pyne.app import NoSouchItemError
-from .widgets.base_widget import Widget
+from pyne.errors import NoSouchItemError
+from pyne.widgets.base_widget import Widget
 
 
 class GameGUIController:

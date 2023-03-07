@@ -1,8 +1,7 @@
 import pygame as pg
 
 from .base_widget import Widget
-from pyne.errors import NoSouchItemError
-from pyne.errors import NoSouchPositionError
+from ..errors import NoSouchItemError, NoSouchPositionError
 
 
 class Grid(Widget):

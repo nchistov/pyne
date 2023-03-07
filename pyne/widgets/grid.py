@@ -24,7 +24,18 @@ class Grid(Widget):
 
         self.screen_rect = pg.display.get_surface().get_rect()
 
-        self.widgets: list[Widget] = []
+        # Этот флаг говорит на весь ли экран растянута grid
+        # если да то она должна растягиваться вслед за окном.
+        self.is_on_all_screen = True
+
+        self.widgets: dict[Widget: tuple[int, int, int, int]] = {}
+
+    def set_rect(self, x, y, width, height):
+        super().set_rect(x, y, width, height)
+
+        self.update_widgets_pos()
+
+        self.is_on_all_screen = False
 
     def add_widget(self, widget, row, column, width=1, height=1, priority=None):
         if row >= self.rows:
@@ -47,21 +58,21 @@ class Grid(Widget):
             pass
 
         if priority is None:
-            self.widgets.append(widget)
+            widget.priority = 0
+        else:
+            widget.priority = priority
 
-            return
-
-        self.widgets.insert(priority, widget)
+        self.widgets[widget] = (row, column, width, height)
 
     def remove_widget(self, widget):
         if widget in self.widgets:
-            self.widgets.remove(widget)
+            self.widgets.pop(widget)
         else:
             raise NoSouchItemError(f'can not find widget {widget} in widgets.')
 
     def change_pos_of_widget(self, widget, new_row, new_column, new_width=1, new_height=1, priority=None):
         if widget in self.widgets:
-            self.widgets.remove(widget)
+            self.widgets.pop(widget)
         else:
             raise NoSouchItemError(f'can not find widget {widget} in widgets.')
 
@@ -92,6 +103,19 @@ class Grid(Widget):
 
         for widget in self.widgets:
             widget.update(event)
+
+        if self.is_on_all_screen:
+            self.screen_rect = pg.display.get_surface().get_rect()
+            if self.rect.width != self.screen_rect.width:
+                self.set_rect(0, 0, self.screen_rect.width, self.rect.height)
+                self.is_on_all_screen = True
+            if self.rect.height != self.screen_rect.height:
+                self.set_rect(0, 0, self.rect.width, self.screen_rect.height)
+                self.is_on_all_screen = True
+
+    def update_widgets_pos(self):
+        for widget, info in self.widgets.copy().items():
+            self.change_pos_of_widget(widget, *info)
 
     def draw(self, screen: pg.Surface):
         for widget in self.widgets:

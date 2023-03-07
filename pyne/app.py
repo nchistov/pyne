@@ -24,7 +24,7 @@ class App:
         pg.font.init()
         pg.mixer.init()
 
-        self.screen = pg.display.set_mode(window_size)
+        self.screen = pg.display.set_mode(window_size, flags=pg.RESIZABLE)
         print(f'[Pyne] window size -> {window_size}')
 
         if icon is None:

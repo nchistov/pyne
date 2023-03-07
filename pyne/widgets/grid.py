@@ -28,7 +28,7 @@ class Grid(Widget):
         # если да то она должна растягиваться вслед за окном.
         self.is_on_all_screen = True
 
-        self.widgets: dict[Widget: tuple[int, int, int, int]] = {}
+        self.widgets: dict[Widget, tuple[int, int, int, int]] = {}
 
     def set_rect(self, x, y, width, height):
         super().set_rect(x, y, width, height)

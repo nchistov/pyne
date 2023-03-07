@@ -3,13 +3,14 @@ from typing import Callable
 
 import pygame as pg
 
+import pyne.sound
 from .base_widget import Widget
 
 
 class Button(Widget):
     def __init__(self, text: str, color=(150, 150, 150), active_color=(70, 200, 215),
                  text_color=(0, 0, 0), outline_color=(200, 200, 200), font_size=30, command: Callable | None = None,
-                 image=None, press='left', sound=None):
+                 image=None, press='left', sound: pyne.sound.Sound | None = None):
         super().__init__()
         self.text = text
         self.color = color
@@ -39,13 +40,13 @@ class Button(Widget):
 
         self.set_text(text)
 
-    def set_text(self, text):
+    def set_text(self, text: str):
         self.text_image = self.font.render(text, True, self.text_color)
 
         self.text_image_rect = self.text_image.get_rect()
         self.text_image_rect.center = self.rect.center
 
-    def set_rect(self, x, y, width, height):
+    def set_rect(self, x: int, y: int, width: int, height: int):
         super().set_rect(x, y, width, height)
 
         self.text_image_rect.center = self.rect.center
@@ -82,7 +83,7 @@ class Button(Widget):
                 case _:
                     raise ValueError('incorrect word to pressing image')
 
-    def update(self, event):
+    def update(self, event: pg.event.Event):
         if event.type == pg.MOUSEBUTTONDOWN:
             if event.button == 1:
                 mouse_x, mouse_y = event.pos  # Получаем координаты мыши
@@ -98,7 +99,7 @@ class Button(Widget):
             self.current_color = self.color
             self.is_pressed = False
 
-    def draw(self, screen):
+    def draw(self, screen: pg.Surface):
         pg.draw.rect(screen, self.current_color, self.rect)
         screen.blit(self.text_image, self.text_image_rect)
 

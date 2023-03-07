@@ -67,9 +67,9 @@ class Beatle:
         self.speed = 5
         self.angle = 0
 
-        self.tasks = Queue(maxsize=10000)
+        self.tasks: Queue = Queue(maxsize=10000)
 
-        self.lines = []
+        self.lines: list[tuple[tuple[float, float], tuple[float, float]]] = []
 
         t = Thread(target=self.update)
         self._running = True
@@ -155,5 +155,6 @@ class Beatle:
     def draw(self, screen: pg.Surface):
         screen.blit(self.image, self.rect)
 
+        print(self.lines)
         for line in self.lines:
             pg.draw.line(screen, (0, 0, 0), line[0], line[1])

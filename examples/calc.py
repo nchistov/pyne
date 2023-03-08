@@ -1,6 +1,7 @@
 import pyne
 
 calculation = ''
+result = ''
 
 app = pyne.App((500, 700), title='Calc')
 
@@ -14,23 +15,26 @@ def add_symbol(symbol: str):
         calculation += symbol
     elif symbol.isdigit():
         calculation += symbol
-    label.set_text(calculation)
+    calculation_label.set_text(calculation)
 
 
 def equal():
-    global calculation
+    global calculation, result
+
     try:
-        calculation = str(eval(calculation))
-        label.set_text(calculation)
+        result = str(eval(calculation))
+        calculation = ''
+        calculation_label.set_text('')
+        result_label.set_text(result)
     except (ArithmeticError, SyntaxError, TypeError):
         calculation = ''
-        label.set_text('-E-')
+        result_label.set_text('-E-')
 
 
 def clear():
     global calculation
     calculation = ''
-    label.set_text(calculation)
+    calculation_label.set_text(calculation)
 
 
 # Создаем кнопки
@@ -54,7 +58,11 @@ enter = pyne.widgets.Button('=', command=equal)
 
 clear_btn = pyne.widgets.Button('AC', command=clear)
 
-label = pyne.widgets.Label(calculation, outline_color=(0, 0, 0))
+calculation_label = pyne.widgets.Label(calculation, outline_color=(0, 0, 0),
+                                       font_size=45, press='left')
+result_label = pyne.widgets.Label(result, outline_color=(0, 0, 0), font_size=45)
+
+sub_grid = pyne.widgets.Grid(3, 1)
 
 grid.add_widget(btn0, 4, 0)
 grid.add_widget(btn1, 3, 0)
@@ -76,6 +84,9 @@ grid.add_widget(enter, 4, 1)
 
 grid.add_widget(clear_btn, 1, 3)
 
-grid.add_widget(label, 0, 0, 4, 1)
+grid.add_widget(sub_grid, 0, 0, 4, 1)
+
+sub_grid.add_widget(calculation_label, 0, 0, 1, 1)
+sub_grid.add_widget(result_label, 1, 0, 1, 2)
 
 app.run()

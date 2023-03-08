@@ -28,6 +28,7 @@ app = pyne.App()
 app.run()
 ```
 Другие примеры вы можете найти [здесь](https://gitflic.ru/project/pyne/pyne/file?file=examples)
+А так-же читайте документацию [здесь](https://pyne-docs.gitflic.space/)
 
 ---
 

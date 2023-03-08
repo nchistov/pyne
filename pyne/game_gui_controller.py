@@ -23,7 +23,7 @@ class GameGUIController:
         if widget in self.widgets:
             self.widgets.remove(widget)
         else:
-            raise NoSouchItemError(f'can not find widget {widget} in widgets.')
+            raise NoSouchItemError(f'can not find widget {widget}.')
 
     def update(self, event: pg.event.Event):
         for widget in self.widgets:

@@ -5,7 +5,7 @@ from ..errors import NoSouchItemError, NoSouchPositionError
 
 
 class Grid(Widget):
-    def __init__(self, rows: int, columns: int, scrolling=False, speed=5):
+    def __init__(self, rows: int, columns: int, scrolling: bool = False, speed: int = 5):
         """
         :param rows: количество рядов
         :param columns: количество столбцов
@@ -29,14 +29,15 @@ class Grid(Widget):
 
         self.widgets: dict[Widget, tuple[int, int, int, int]] = {}
 
-    def set_rect(self, x, y, width, height):
+    def set_rect(self, x: int, y: int, width: int, height: int):
         super().set_rect(x, y, width, height)
 
         self.update_widgets_pos()
 
         self.is_on_all_screen = False
 
-    def add_widget(self, widget, row, column, width=1, height=1, priority=None):
+    def add_widget(self, widget: Widget, row: int, column: int, width: int = 1, height: int = 1,
+                   priority: int | None = None):
         if row >= self.rows:
             raise NoSouchPositionError("Row must be less then max rows")
         if column >= self.columns:
@@ -46,10 +47,10 @@ class Grid(Widget):
             sell_height = self.rect.height / self.rows
             sell_width = self.rect.width / self.columns
 
-            x = self.rect.x + (column * sell_width)
-            y = self.rect.x + (row * sell_height)
+            x = int(self.rect.x + (column * sell_width))
+            y = int(self.rect.x + (row * sell_height))
 
-            widget.set_rect(x, y, sell_width * width, sell_height * height)
+            widget.set_rect(x, y, int(sell_width * width), int(sell_height * height))
 
         except AttributeError:
             raise AttributeError("Widget must has method 'set_rect'")
@@ -69,7 +70,8 @@ class Grid(Widget):
         else:
             raise NoSouchItemError(f'can not find widget {widget} in widgets.')
 
-    def change_pos_of_widget(self, widget, new_row, new_column, new_width=1, new_height=1, priority=None):
+    def change_pos_of_widget(self, widget, new_row, new_column, new_width=1, new_height=1,
+                             priority=None):
         if widget in self.widgets:
             self.widgets.pop(widget)
         else:
@@ -93,7 +95,8 @@ class Grid(Widget):
                                                 widget.rect.width, widget.rect.height)
                     elif event.button == 5:  # Вниз
                         # Если край сетки выходит за край окна
-                        if self.rect.bottom > self.screen_rect.bottom and self.rect.top < self.screen_rect.top:
+                        if self.rect.bottom > self.screen_rect.bottom and \
+                            self.rect.top < self.screen_rect.top:
                             self.rect.y += self.speed
 
                             for widget in self.widgets:

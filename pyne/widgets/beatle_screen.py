@@ -2,6 +2,8 @@ from .base_widget import Widget
 
 import pygame as pg
 
+from ..beatle import Beatle
+
 
 class BeatleScreen(Widget):
     def __init__(self,  color=(255, 255, 255), outline_color=(150, 150, 150)):
@@ -10,21 +12,21 @@ class BeatleScreen(Widget):
         self.color = color
         self.outline_color = outline_color
 
-        self.beatles = []
+        self.beatles: list[Beatle] = []
 
         self.rect = pg.Rect(0, 0, 10, 10)
 
         self.surface = pg.Surface(self.rect.size)
 
-    def set_rect(self, x, y, width, height):
+    def set_rect(self, x: int, y: int, width: int, height: int):
         super().set_rect(x, y, width, height)
 
         self.surface = pg.Surface(self.rect.size)
 
-    def add_beatle(self, beatle):
+    def add_beatle(self, beatle: Beatle):
         self.beatles.append(beatle)
 
-    def remove_beatle(self, beatle):
+    def remove_beatle(self, beatle: Beatle):
         if beatle in self.beatles:
             self.beatles.remove(beatle)
 

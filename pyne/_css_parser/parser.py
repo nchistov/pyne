@@ -1,5 +1,13 @@
+from enum import Enum, auto
+
 import tinycss2
 from tinycss2 import ast
+
+
+class StateWaiting(Enum):
+    KEY = auto()
+    VALUE = auto()
+    COLON = auto()
 
 
 def parse(css_style_sheet: str):
@@ -7,17 +15,38 @@ def parse(css_style_sheet: str):
 
     result = {}
 
-    _current_hash = ''
     for rule in rules:
+        current_hash = ''
+        current_name = ''
         # Обработать заголовок.
         for token in rule.prelude:
             if isinstance(token, ast.IdentToken):
                 result[token.serialize()] = {}
-                if _current_hash:
-                    result[token.serialize()]['hash'] = _current_hash
-                    _current_hash = ''
+                current_name = token.serialize()
+                if current_hash:
+                    result[token.serialize()]['hash'] = current_hash
+                    current_hash = ''
             elif isinstance(token, ast.HashToken):
-                _current_hash = token.serialize()
+                current_hash = token.serialize()
+
+        current_key = ''
+        current_value = None
+        state = StateWaiting.KEY
+        result[current_name]['value'] = {}
+        # Обработать тело.
+        for token in rule.content:
+            if token.type == 'whitespace' or token.type == 'comment':
+                pass
+            elif state == StateWaiting.KEY and token.type == 'ident':
+                current_key = token.serialize()
+                state = StateWaiting.COLON
+            elif state == StateWaiting.COLON and token.type == 'literal' and token.value == ':':
+                state = StateWaiting.VALUE
+            elif state == StateWaiting.VALUE:
+                current_value = token.serialize()
+                result[current_name]['value'][current_key] = current_value
+                current_key = ''
+                current_value = None
 
     return result
 

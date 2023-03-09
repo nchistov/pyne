@@ -28,6 +28,7 @@ class Grid(Widget):
         self.is_on_all_screen = True
 
         self.widgets: dict[Widget, tuple[int, int, int, int]] = {}
+        self.sorted_widgets: list[Widget] = []
 
     def set_rect(self, x: int, y: int, width: int, height: int):
         super().set_rect(x, y, width, height)
@@ -64,9 +65,12 @@ class Grid(Widget):
 
         self.widgets[widget] = (row, column, width, height)
 
+        self.sorted_widgets = sorted(self.widgets, key=lambda w: w.priority)
+
     def remove_widget(self, widget):
         if widget in self.widgets:
             self.widgets.pop(widget)
+            self.sorted_widgets = sorted(self.widgets, key=lambda w: w.priority)
         else:
             raise NoSouchItemError(f'can not find widget {widget} in widgets.')
 
@@ -96,14 +100,14 @@ class Grid(Widget):
                     elif event.button == 5:  # Вниз
                         # Если край сетки выходит за край окна
                         if self.rect.bottom > self.screen_rect.bottom and \
-                            self.rect.top < self.screen_rect.top:
+                             self.rect.top < self.screen_rect.top:
                             self.rect.y += self.speed
 
                             for widget in self.widgets:
                                 widget.set_rect(widget.rect.x, widget.rect.y + self.speed,
                                                 widget.rect.width, widget.rect.height)
 
-        for widget in self.widgets:
+        for widget in self.sorted_widgets:
             widget.update(event)
 
         if self.is_on_all_screen:
@@ -120,5 +124,5 @@ class Grid(Widget):
             self.change_pos_of_widget(widget, *info)
 
     def draw(self, screen: pg.Surface):
-        for widget in self.widgets:
+        for widget in self.sorted_widgets:
             widget.draw(screen)

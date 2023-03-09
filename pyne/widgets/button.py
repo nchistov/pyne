@@ -9,8 +9,9 @@ from .base_widget import Widget
 
 class Button(Widget):
     def __init__(self, text: str, color=(150, 150, 150), active_color=(70, 200, 215),
-                 text_color=(0, 0, 0), outline_color=(200, 200, 200), font_size=30, command: Callable | None = None,
-                 image=None, press='left', sound: Sound | None = None):
+                 text_color=(0, 0, 0), outline_color=(200, 200, 200), font_size=30,
+                 command: Callable | None = None, image: str | None = None,
+                 press='left', sound: Sound | None = None):
         super().__init__()
         self.text = text
         self.color = color

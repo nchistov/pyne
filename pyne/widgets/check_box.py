@@ -1,4 +1,5 @@
 import os
+from typing import Callable
 
 import pygame as pg
 
@@ -6,7 +7,8 @@ from .base_widget import Widget
 
 
 class CheckBox(Widget):
-    def __init__(self, text, command=None, unset_command=None, text_color=(0, 0, 0), font_size=25):
+    def __init__(self, text: str, command: Callable | None = None,
+                 unset_command: Callable | None = None, text_color=(0, 0, 0), font_size=25):
         super().__init__()
 
         self.text = text
@@ -20,13 +22,14 @@ class CheckBox(Widget):
 
         self.bg_rect = pg.Rect(self.rect.x + 9, self.rect.y + 9, 12, 12)
 
-        self.font = pg.font.Font(os.path.join(os.path.dirname(__file__), '../fonts/font.ttf'), font_size)
+        self.font = pg.font.Font(os.path.join(os.path.dirname(__file__),
+                                              '../fonts/font.ttf'), font_size)
 
         self.is_choose = False
 
         self.set_text(text)
 
-    def set_rect(self, x, y, width, height):
+    def set_rect(self, x: int, y: int, width: int, height: int):
         super().set_rect(x, y, width, height)
 
         self.text_image_rect.left = self.rect.left + 30
@@ -38,7 +41,7 @@ class CheckBox(Widget):
         self.bg_rect.x = self.rect.x + 9
         self.bg_rect.y = self.text_image_rect.centery - 1
 
-    def set_text(self, text):
+    def set_text(self, text: str):
         self.text_image = self.font.render(text, True, self.text_color)
 
         self.text_image_rect = self.text_image.get_rect()
@@ -57,7 +60,7 @@ class CheckBox(Widget):
         self.is_choose = False
         self.color = (255, 255, 255)
 
-    def update(self, event):
+    def update(self, event: pg.event.Event):
         if event.type == pg.MOUSEBUTTONDOWN:
             mouse_x, mouse_y = event.pos  # Получаем координаты мыши
             if self.choosing_rect.collidepoint(mouse_x, mouse_y):  # Если кнопка нажата
@@ -71,7 +74,8 @@ class CheckBox(Widget):
                     self.is_choose = False
 
                     if self.unset_command is not None:
-                        self.unset_command()  # Если команда на отпускание зарегистрирована, вызываем ее
+                        # Если команда на отпускание зарегистрирована, вызываем ее
+                        self.unset_command()
 
                     self.color = (255, 255, 255)
 
@@ -81,7 +85,9 @@ class CheckBox(Widget):
         pg.draw.rect(screen, self.color, self.choosing_rect)
 
         if self.is_choose:
-            pg.draw.line(screen, (255, 255, 255), (self.choosing_rect.x + 1, self.choosing_rect.y + 5),
+            pg.draw.line(screen, (255, 255, 255),
+                         (self.choosing_rect.x + 1, self.choosing_rect.y + 5),
                          (self.choosing_rect.centerx - 2, self.choosing_rect.bottom - 1), width=2)
-            pg.draw.line(screen, (255, 255, 255), (self.choosing_rect.centerx - 2, self.choosing_rect.bottom - 1),
+            pg.draw.line(screen, (255, 255, 255),
+                         (self.choosing_rect.centerx - 2, self.choosing_rect.bottom - 1),
                          (self.choosing_rect.right - 2, self.choosing_rect.top + 2), width=2)

@@ -93,7 +93,7 @@ class Canvas(Widget):
         except IndexError:
             pass
 
-    def save_to_file(self, file_name):
+    def save_to_file(self, file_name: str):
         pg.image.save(self.surface, file_name)
 
     def draw(self, screen: pg.Surface):

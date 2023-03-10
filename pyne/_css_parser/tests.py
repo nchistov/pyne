@@ -1,5 +1,7 @@
 import unittest
+
 from parser import parse
+from pyne.errors import CSSParseError
 
 
 class ParserTestCase(unittest.TestCase):
@@ -37,3 +39,6 @@ class ParserTestCase(unittest.TestCase):
         expected = {'p': {'value': {'color': {'red': 0, 'green': 0, 'blue': 0}}}}
         actual = parse("p { color: {'red': 0, 'green': 0, 'blue': 0} }")
         self.assertEqual(actual, expected)
+
+    def test_unclosed_brackets(self):
+        self.assertRaises(CSSParseError, lambda: parse('p { color: (0, 0, 0 }'))

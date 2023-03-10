@@ -8,3 +8,7 @@ class NoSouchPositionError(Exception):
 
 class VersionError(Exception):
     pass
+
+
+class CSSParseError(Exception):
+    pass

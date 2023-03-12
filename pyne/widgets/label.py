@@ -7,7 +7,7 @@ from .base_widget import Widget
 
 class Label(Widget):
     def __init__(self, text: str, bg_color=(255, 255, 255), outline_color=(255, 255, 255),
-                 text_color=(0, 0, 0), font_size=60, press='right'):
+                 text_color=(0, 0, 0), font_size=60, press='right', font: str | None = None):
         super().__init__()
 
         self.text = text
@@ -18,7 +18,7 @@ class Label(Widget):
 
         self.press = press
 
-        self.font = pg.font.Font(os.path.join(os.path.dirname(__file__), '../fonts/font.ttf'), font_size)
+        self.font = pg.font.Font(font or os.path.join(os.path.dirname(__file__), '../fonts/font.ttf'), font_size)
 
         self.set_text(text)
 

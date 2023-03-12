@@ -8,7 +8,8 @@ from .base_widget import Widget
 
 class CheckBox(Widget):
     def __init__(self, text: str, command: Callable | None = None,
-                 unset_command: Callable | None = None, text_color=(0, 0, 0), font_size=25):
+                 unset_command: Callable | None = None, text_color=(0, 0, 0), font_size=25,
+                 font: str | None = None):
         super().__init__()
 
         self.text = text
@@ -22,8 +23,7 @@ class CheckBox(Widget):
 
         self.bg_rect = pg.Rect(self.rect.x + 9, self.rect.y + 9, 12, 12)
 
-        self.font = pg.font.Font(os.path.join(os.path.dirname(__file__),
-                                              '../fonts/font.ttf'), font_size)
+        self.font = pg.font.Font(font or os.path.join(os.path.dirname(__file__), '../fonts/font.ttf'), font_size)
 
         self.is_choose = False
 

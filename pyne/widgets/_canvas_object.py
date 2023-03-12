@@ -52,7 +52,7 @@ class CanvasObject:
 
                 self.color = info[2]
             case 'text':
-                self.font = pg.font.Font(os.path.join(os.path.dirname(__file__), '../fonts/font.ttf'), info[3])
+                self.font = pg.font.Font(info[5] or os.path.join(os.path.dirname(__file__), '../fonts/font.ttf'), info[3])
 
                 self.text = info[2]
 

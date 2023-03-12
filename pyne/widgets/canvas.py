@@ -62,8 +62,8 @@ class Canvas(Widget):
 
         return len(self.objects) - 1
 
-    def draw_text(self, text: str, x: int, y: int, font_size: int, color=(0, 0, 0)):
-        new_obj = CanvasObject(('text', (x, y), text, font_size, color))
+    def draw_text(self, text: str, x: int, y: int, font_size: int, color=(0, 0, 0), font: str | None = None):
+        new_obj = CanvasObject(('text', (x, y), text, font_size, color, font))
         self.objects.append(new_obj)
 
         return len(self.objects) - 1

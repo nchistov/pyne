@@ -5,8 +5,8 @@ from .base_widget import Widget
 
 
 class SpecialRadioButton(RadioButton):
-    def __init__(self, text, radio_buttons, text_color=(0, 0, 0), font_size=25):
-        super().__init__(text, text_color=text_color, font_size=font_size)
+    def __init__(self, text, radio_buttons, text_color=(0, 0, 0), font_size=25, font: str | None = None):
+        super().__init__(text, text_color=text_color, font_size=font_size, font=font)
 
         self.radio_buttons = radio_buttons
 

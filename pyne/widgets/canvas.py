@@ -17,7 +17,7 @@ class Canvas(Widget):
         self.width = 0
         self.height = 0
 
-        self.objects = []
+        self.objects: list[CanvasObject] = []
 
     def set_rect(self, x, y, width, height):
         super().set_rect(x, y, width, height)
@@ -62,7 +62,7 @@ class Canvas(Widget):
 
         return len(self.objects) - 1
 
-    def draw_text(self, text: str, x: int, y: int, font_size: int, color=(0, 0, 0), font: str | None = None):
+    def draw_text(self, text: str, x: int, y: int, font_size: int, color=(0, 0, 0), font: str | None = None) -> int:
         new_obj = CanvasObject(('text', (x, y), text, font_size, color, font))
         self.objects.append(new_obj)
 

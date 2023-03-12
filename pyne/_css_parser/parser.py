@@ -45,7 +45,7 @@ def parse(css_style_sheet: str):
                 state = StateWaiting.COLON
             elif state == StateWaiting.COLON and token.type == 'literal' and token.value == ':':
                 state = StateWaiting.VALUE
-            elif state == StateWaiting.VALUE:
+            elif state == StateWaiting.VALUE and current_key:
                 try:
                     match token.type:
                         case 'number':  # число
@@ -53,12 +53,13 @@ def parse(css_style_sheet: str):
                         case 'percentage' | 'dimension':  # именованное значение
                             current_value = token.serialize()
                         case '() block':  # кортеж
-                            current_value = token.serialize().replace('(', '[').replace(')', ']')  # преобразуем в список
+                            # преобразуем в список
+                            current_value = token.serialize().replace('(', '[').replace(')', ']')
                             current_value = json.loads(current_value)
                         case '[] block' | '{} block':  # список или словарь
                             current_value = json.loads(token.serialize())
-                except json.JSONDecodeError:
-                    raise CSSParseError('неверный CSS.')
+                except json.JSONDecodeError as e:
+                    raise CSSParseError('неверный CSS.') from e
 
                 result[current_name]['value'][current_key] = current_value
                 current_key = ''

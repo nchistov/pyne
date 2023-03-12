@@ -12,12 +12,15 @@
      ```
 
      JSON:
-     
+
      ```json
      {
-       "Button": {
-         "color": [255, 0, 0]
-       }
+       "Button":
+         {"value":
+           {
+             "color": [255, 0, 0]
+           }
+         }
      }
      ```
 

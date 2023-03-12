@@ -6,6 +6,6 @@ app.add_widget(grid)
 
 numeric = pyne.widgets.NumericUpDown()
 
-grid.add_widget(numeric, 1, 1)
+grid.add_widget(numeric, 1, 1, 2)
 
 app.run()

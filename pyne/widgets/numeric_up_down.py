@@ -16,10 +16,12 @@ class NumericUpDown(Widget):
         self.btn2 = Button('v', command=self.down, font_size=30)
 
     def up(self):
+        self.value = int(self.entry.text)
         self.value += 1
         self.entry.text = str(self.value)
 
     def down(self):
+        self.value = int(self.entry.text)
         self.value -= 1
         self.entry.text = str(self.value)
 

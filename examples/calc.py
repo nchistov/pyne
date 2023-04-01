@@ -59,7 +59,7 @@ enter = pyne.widgets.Button('=', command=equal)
 clear_btn = pyne.widgets.Button('AC', command=clear)
 
 calculation_label = pyne.widgets.Label(calculation, outline_color=(0, 0, 0),
-                                       font_size=45, press='left')
+                                       font_size=45, press='left', font="calc_font.ttf")
 result_label = pyne.widgets.Label(result, outline_color=(0, 0, 0), font_size=45)
 
 sub_grid = pyne.widgets.Grid(3, 1)

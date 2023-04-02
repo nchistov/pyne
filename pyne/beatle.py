@@ -155,6 +155,5 @@ class Beatle:
     def draw(self, screen: pg.Surface):
         screen.blit(self.image, self.rect)
 
-        print(self.lines)
         for line in self.lines:
             pg.draw.line(screen, (0, 0, 0), line[0], line[1])

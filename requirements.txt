@@ -1,2 +1,2 @@
-pygame==2.2.0
+pygame==2.3.0
 tinycss2==1.2.1

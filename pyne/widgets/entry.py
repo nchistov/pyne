@@ -7,8 +7,8 @@ from .base_widget import Widget
 
 class Entry(Widget):
     def __init__(self, prompt='', text='', text_color=(0, 0, 0), bg_color=(255, 255, 255),
-                 outline_color=(0, 0, 0), font_size=25, font: str | None = None):
-        super().__init__()
+                 outline_color=(0, 0, 0), font_size=25, font: str | None = None, name: str = ''):
+        super().__init__(name=name)
 
         self._prompt = prompt
         self.prompt_color = (150, 150, 150)

@@ -5,14 +5,15 @@ from ..errors import NoSouchItemError, NoSouchPositionError
 
 
 class Grid(Widget):
-    def __init__(self, rows: int, columns: int, scrolling: bool = False, speed: int = 5):
+    def __init__(self, rows: int, columns: int, scrolling: bool = False, speed: int = 5,
+                 name: str = ''):
         """
         :param rows: количество рядов
         :param columns: количество столбцов
         :param scrolling: если это True, когда мышь прокручивается, сетка тоже прокручивается
         :param speed: количество пикселей, на которое прокручивается сетка
         """
-        super().__init__()
+        super().__init__(name=name)
         self.rows = rows
         self.columns = columns
 

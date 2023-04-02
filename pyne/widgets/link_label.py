@@ -7,9 +7,11 @@ from .label import Label
 
 class LinkLabel(Label):
     def __init__(self, text: str, url: str, bg_color: tuple[int, int, int] = (255, 255, 255),
-                 outline_color: tuple[int, int, int] = (255, 255, 255), text_color: tuple[int, int, int] = (0, 0, 255),
-                 font_size: int = 60, press: str = 'right', font: str | None = None):
-        super().__init__(text, bg_color, outline_color, text_color, font_size, press, font)
+                 outline_color: tuple[int, int, int] = (255, 255, 255),
+                 text_color: tuple[int, int, int] = (0, 0, 255), font_size: int = 60,
+                 press: str = 'right', font: str | None = None, name: str = ''):
+        super().__init__(text, bg_color, outline_color, text_color,
+                         font_size, press, font, name=name)
 
         self.url = url
         if not text:

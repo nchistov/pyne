@@ -4,8 +4,9 @@ from .base_widget import Widget
 
 
 class Slider(Widget):
-    def __init__(self, min_value: int, max_value: int, color=(0, 0, 0), circle_color=(150, 150, 150)):
-        super().__init__()
+    def __init__(self, min_value: int, max_value: int, color=(0, 0, 0),
+                 circle_color=(150, 150, 150), name: str = ''):
+        super().__init__(name=name)
 
         self.slider_rect = pg.Rect(0, 0, 15, 15)
 

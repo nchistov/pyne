@@ -2,8 +2,9 @@ import pygame as pg
 
 
 class Widget:
-    def __init__(self):
+    def __init__(self, name: str = ''):
         self.priority = 0
+        self.name = name
 
         self.rect = pg.Rect(0, 0, 1, 1)
 

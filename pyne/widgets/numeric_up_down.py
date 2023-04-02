@@ -5,8 +5,8 @@ from .base_widget import Widget
 
 
 class NumericUpDown(Widget):
-    def __init__(self):
-        super().__init__()
+    def __init__(self, name: str = ''):
+        super().__init__(name=name)
 
         self.value = 0
 

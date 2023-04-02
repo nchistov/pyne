@@ -15,8 +15,8 @@ class State(Enum):
 
 
 class FileDialog(Widget):
-    def __init__(self, files=None):
-        super().__init__()
+    def __init__(self, files=None, name: str = ''):
+        super().__init__(name=name)
 
         if files is None:
             self.files = []

@@ -6,8 +6,8 @@ from ._canvas_object import CanvasObject
 
 
 class Canvas(Widget):
-    def __init__(self, bg_color=(255, 255, 255), outline_color=(255, 255, 255)):
-        super().__init__()
+    def __init__(self, bg_color=(255, 255, 255), outline_color=(255, 255, 255), name: str = ''):
+        super().__init__(name=name)
 
         self.bg_color = bg_color
         self.outline_color = outline_color

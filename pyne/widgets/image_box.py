@@ -4,8 +4,8 @@ from .base_widget import Widget
 
 
 class ImageBox(Widget):
-    def __init__(self, file_name):
-        super().__init__()
+    def __init__(self, file_name, name: str = ''):
+        super().__init__(name=name)
 
         self.image = pg.image.load(file_name)
 

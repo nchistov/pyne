@@ -4,8 +4,8 @@ from .base_widget import Widget
 
 
 class Panel(Widget):
-    def __init__(self, color=(255, 255, 255), outline_color=(255, 255, 255)):
-        super().__init__()
+    def __init__(self, color=(255, 255, 255), outline_color=(255, 255, 255), name: str = ''):
+        super().__init__(name=name)
 
         self.color = color
         self.outline_color = outline_color

@@ -1,11 +1,14 @@
+from typing import Callable
+
 import pygame as pg
 
 from .check_box import CheckBox
 
 
 class RadioButton(CheckBox):
-    def __init__(self, text, command=None, unset_command=None,
-                 text_color=(0, 0, 0), font_size=25, font: str | None = None, name: str = ''):
+    def __init__(self, text: str, command: Callable | None = None,
+                 unset_command: Callable | None = None, text_color=(0, 0, 0),
+                 font_size=25, font: str | None = None, name: str = ''):
         super().__init__(text, command, unset_command, text_color, font_size, font, name=name)
 
         self.choosing_rect = pg.Rect(self.rect.x + 10, self.rect.y + 10, 15, 15)

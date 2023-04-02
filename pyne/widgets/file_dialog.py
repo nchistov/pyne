@@ -15,13 +15,10 @@ class State(Enum):
 
 
 class FileDialog(Widget):
-    def __init__(self, files=None, name: str = ''):
+    def __init__(self, files: list[str] | None = None, name: str = ''):
         super().__init__(name=name)
 
-        if files is None:
-            self.files = []
-        else:
-            self.files = files
+        self.files = files or []
 
         self.state = State.waiting
 
@@ -46,7 +43,7 @@ class FileDialog(Widget):
 
         self.widgets = (self.save_or_open_btn, self.cancel_btn, self.filename_entry, self.canvas, self.back_btn)
 
-        self.canvas_objects = []
+        self.canvas_objects: list[int] = []  # Идентификаторы объектов на холсте.
 
     def askopenfile(self):
         self.state = State.opening

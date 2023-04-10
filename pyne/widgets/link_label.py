@@ -20,7 +20,7 @@ class LinkLabel(Label):
 
         self.active = False
 
-    def update(self, event):
+    def update(self, event: pg.event.Event):
         mouse_x, mouse_y = pg.mouse.get_pos()
         if self.text_image_rect.collidepoint(mouse_x, mouse_y):
             self.active = True
@@ -32,7 +32,7 @@ class LinkLabel(Label):
                 if self.active:
                     webbrowser.open_new_tab(self.url)
 
-    def draw(self, screen):
+    def draw(self, screen: pg.Surface):
         super().draw(screen)
         if self.active:
             pg.draw.line(screen, (0, 0, 255), (self.text_image_rect.left, self.text_image_rect.bottom),

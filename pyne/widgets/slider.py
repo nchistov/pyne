@@ -21,14 +21,14 @@ class Slider(Widget):
 
         self.value_per_pixel = 0
 
-    def set_rect(self, x, y, width, height):
+    def set_rect(self, x: int, y: int, width: int, height: int):
         super().set_rect(x, y, width, height)
         self.slider_rect.centery = y + 7
         self.slider_rect.x = self.rect.x
 
         self.value_per_pixel = (self.max_value - self.min_value) / (self.rect.right - self.rect.left)
 
-    def update(self, event):
+    def update(self, event: pg.event.Event):
         if self.is_mouse_pressed:
             self.slider_rect.x = pg.mouse.get_pos()[0]
             if self.slider_rect.right > self.rect.right:

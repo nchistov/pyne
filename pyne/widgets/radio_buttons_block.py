@@ -5,13 +5,13 @@ from .base_widget import Widget
 
 
 class SpecialRadioButton(RadioButton):
-    def __init__(self, text, radio_buttons, text_color=(0, 0, 0), font_size=25,
-                 font: str | None = None, name: str = ''):
+    def __init__(self, text: str, radio_buttons: list['SpecialRadioButton'], text_color=(0, 0, 0),
+                 font_size=25, font: str | None = None, name: str = ''):
         super().__init__(text, text_color=text_color, font_size=font_size, font=font, name=name)
 
         self.radio_buttons = radio_buttons
 
-    def update(self, event):
+    def update(self, event: pg.event.Event):
         if event.type == pg.MOUSEBUTTONDOWN:
             mouse_x, mouse_y = event.pos  # Получаем координаты мыши
             if self.choosing_rect.collidepoint(mouse_x, mouse_y):  # Если кнопка нажата
@@ -59,11 +59,11 @@ class RadioButtonsBlock(Widget):
                 return r_btn.text
         return None
 
-    def set_rect(self, x, y, width, height):
+    def set_rect(self, x: int, y: int, width: int, height: int):
         super().set_rect(x, y, width, height)
         self._generate()
 
-    def update(self, event):
+    def update(self, event: pg.event.Event):
         for radio_button in self.radio_buttons:
             radio_button.update(event)
 

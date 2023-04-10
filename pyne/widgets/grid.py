@@ -68,15 +68,15 @@ class Grid(Widget):
 
         self.sorted_widgets = sorted(self.widgets, key=lambda w: w.priority)
 
-    def remove_widget(self, widget):
+    def remove_widget(self, widget: Widget):
         if widget in self.widgets:
             self.widgets.pop(widget)
             self.sorted_widgets = sorted(self.widgets, key=lambda w: w.priority)
         else:
             raise NoSouchItemError(f'can not find widget {widget} in widgets.')
 
-    def change_pos_of_widget(self, widget, new_row, new_column, new_width=1, new_height=1,
-                             priority=None):
+    def change_pos_of_widget(self, widget: Widget, new_row: int, new_column: int,
+                             new_width=1, new_height=1, priority=None):
         if widget in self.widgets:
             self.widgets.pop(widget)
         else:
@@ -84,7 +84,7 @@ class Grid(Widget):
 
         self.add_widget(widget, new_row, new_column, new_width, new_height, priority)
 
-    def update(self, event):
+    def update(self, event: pg.event.Event):
         if event.type == pg.MOUSEBUTTONDOWN:
             mouse_x, mouse_y = event.pos
             if self.rect.collidepoint(mouse_x, mouse_y):

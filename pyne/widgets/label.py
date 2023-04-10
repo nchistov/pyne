@@ -23,7 +23,7 @@ class Label(Widget):
 
         self.set_text(text)
 
-    def set_text(self, text):
+    def set_text(self, text: str):
         self.text_image = self.font.render(text, True, self.text_color)
 
         self.text_image_rect = self.text_image.get_rect()
@@ -38,7 +38,7 @@ class Label(Widget):
 
         self.text_image_rect.centery = self.rect.centery
 
-    def set_rect(self, x, y, width, height):
+    def set_rect(self, x: int, y: int, width: int, height: int):
         super().set_rect(x, y, width, height)
 
         match self.press:  # Прижимаем текст к нужному краю
@@ -51,7 +51,7 @@ class Label(Widget):
 
         self.text_image_rect.centery = self.rect.centery
 
-    def draw(self, screen):
+    def draw(self, screen: pg.Surface):
         pg.draw.rect(screen, self.bg_color, self.rect)
         screen.blit(self.text_image, self.text_image_rect)
 

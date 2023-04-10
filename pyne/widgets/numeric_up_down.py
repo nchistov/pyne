@@ -25,14 +25,14 @@ class NumericUpDown(Widget):
         self.value -= 1
         self.entry.text = str(self.value)
 
-    def set_rect(self, x, y, width, height):
+    def set_rect(self, x: int, y: int, width: int, height: int):
         super().set_rect(x, y, width, height)
         self.entry.set_rect(x, y, width - 20, height)
 
         self.btn1.set_rect(x + (width - 20), y, 20, height // 2)
         self.btn2.set_rect(x + (width - 20), y + (height // 2), 20, height // 2)
 
-    def update(self, event):
+    def update(self, event: pg.event.Event):
         self.entry.update(event)
 
         self.btn1.update(event)

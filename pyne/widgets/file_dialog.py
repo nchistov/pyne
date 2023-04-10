@@ -77,7 +77,7 @@ class FileDialog(Widget):
 
         self.draw_items()
 
-    def _read_ls(self, path):
+    def _read_ls(self, path: str):
         """Возвращает отсортированные списки папок и файлов."""
         ls_out = os.listdir(path)
 

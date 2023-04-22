@@ -11,7 +11,7 @@ from . import errors
 from . import constants  # Для __all__
 from .constants import *  # Для использования, например pyne.RED
 
-if not (sys.version_info.major == 3 and sys.version_info.minor >= 10):  # Версия Python должна быть >= 3.10
+if sys.version_info < (3, 10):
     raise errors.VersionError('Версия Python должна быть >= 3.10')
 
 __all__ = ['App', 'widgets', 'beatle', 'sound', 'GameGUIController', 'errors', '__version__'] +\

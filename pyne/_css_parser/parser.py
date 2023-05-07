@@ -1,7 +1,7 @@
 import json
 from enum import Enum, auto
 
-import tinycss2
+import tinycss2  # type: ignore[import]
 from tinycss2 import ast
 
 from pyne.errors import CSSParseError
@@ -61,7 +61,7 @@ def parse(css_style_sheet: str):
                 except json.JSONDecodeError as e:
                     raise CSSParseError('неверный CSS.') from e
 
-                result[current_name]['value'][current_key] = current_value
+                result[current_name]['value'][current_key] = current_value  # type: ignore[index, assignment]
                 current_key = ''
                 current_value = None
 

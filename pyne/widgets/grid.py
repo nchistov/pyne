@@ -28,7 +28,7 @@ class Grid(Widget):
         # если да то она должна растягиваться вслед за окном.
         self.is_on_all_screen = True
 
-        self.widgets: dict[Widget, tuple[int, int, int, int]] = {}
+        self.widgets: dict[Widget, tuple[int, int, float, float]] = {}
         self.sorted_widgets: list[Widget] = []
 
     def set_rect(self, x: int, y: int, width: int, height: int):
@@ -38,7 +38,7 @@ class Grid(Widget):
 
         self.is_on_all_screen = False
 
-    def add_widget(self, widget: Widget, row: int, column: int, width: int = 1, height: int = 1,
+    def add_widget(self, widget: Widget, row: int, column: int, width: float = 1, height: float = 1,
                    priority: int | None = None):
         if row >= self.rows:
             raise NoSouchPositionError("Row must be less then max rows")

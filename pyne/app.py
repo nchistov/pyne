@@ -1,18 +1,26 @@
+from collections.abc import Callable
 import json
 import os
-from typing import Callable
+from typing import TypeAlias, NoReturn, Protocol
 
 import pygame as pg
 
 from .errors import NoSouchItemError
 from .widgets.base_widget import Widget
 
+NoParamFunc: TypeAlias = Callable[[], None]
+
+
+class SupportsGetitem(Protocol):
+    def __getitem__(self, item: int) -> bool:
+        ...
+
 
 class App:
     """Управляет окнами"""
 
-    def __init__(self, window_size=(500, 500), title="Pyne", bg_color=(255, 255, 255),
-                 icon: str | None = None):
+    def __init__(self, window_size: tuple[int, int] = (500, 500), title: str = "Pyne",
+                 bg_color: tuple[int, int, int] = (255, 255, 255), icon: str | None = None) -> None:
         """
         :param window_size: список или кортеж из двух чисел: первая ширина, а последняя высота окна.
         :param title: заголовок окна.
@@ -38,83 +46,83 @@ class App:
 
         self.clock = pg.time.Clock()
 
-        self.tasks: list[Callable] = []
+        self.tasks: list[NoParamFunc] = []
         self.widgets: list[Widget] = []
-        self.handlers: dict[str, Callable] = {}
-        self.used_handlers: dict[str, Callable] = {}
-        self.unused_handlers: dict[str, Callable] = {}
+        self.handlers: dict[str, NoParamFunc] = {}
+        self.used_handlers: dict[str, NoParamFunc] = {}
+        self.unused_handlers: dict[str, NoParamFunc] = {}
 
-        self.func_on_exit: Callable | None = None
+        self.func_on_exit: NoParamFunc | None = None
 
         with open(os.path.join(os.path.dirname(__file__), 'events.json')) as f:
-            self.events = json.load(f)
+            self.events: dict[str, int] = json.load(f)
 
         self.running = False
         self.bg = bg_color
         self.fps = 30
         print(f'[Pyne] fps -> {self.fps}')
 
-    def set_title(self, new_title: str):
+    def set_title(self, new_title: str) -> None:
         pg.display.set_caption(new_title)
 
-    def set_window_size(self, new_size: tuple[int, int]):
+    def set_window_size(self, new_size: tuple[int, int]) -> None:
         self.screen = pg.display.set_mode(new_size)
 
     def get_mouse_pos(self) -> tuple[int, int]:
         return pg.mouse.get_pos()
 
-    def clear_tasks(self):
+    def clear_tasks(self) -> None:
         self.tasks.clear()
 
-    def clear_widgets(self):
+    def clear_widgets(self) -> None:
         self.widgets.clear()
 
-    def clear_handlers(self):
+    def clear_handlers(self) -> None:
         self.handlers.clear()
         self.used_handlers.clear()
         self.unused_handlers.clear()
 
-    def add_func_on_exit(self, func: Callable):
+    def add_func_on_exit(self, func: NoParamFunc) -> None:
         self.func_on_exit = func
 
-    def add_task(self, func: Callable, priority: int | None = None):
+    def add_task(self, func: NoParamFunc, priority: int | None = None) -> None:
         if priority is None:
             self.tasks.append(func)
             return
 
         self.tasks.insert(priority, func)
 
-    def remove_task(self, func: Callable):
+    def remove_task(self, func: NoParamFunc) -> None | NoReturn:
         if func in self.tasks:
             self.tasks.remove(func)
         else:
             raise NoSouchItemError(f'can not find task {func}.')
 
-    def add_widget(self, widget: Widget, priority: int | None = None):
+    def add_widget(self, widget: Widget, priority: int | None = None) -> None:
         if priority is None:
             self.widgets.append(widget)
             return
 
         self.widgets.insert(priority, widget)
 
-    def remove_widget(self, widget: Widget):
+    def remove_widget(self, widget: Widget) -> None | NoReturn:
         if widget in self.widgets:
             self.widgets.remove(widget)
         else:
             raise NoSouchItemError(f'can not find widget {widget}.')
 
-    def add_handler(self, key: str, func: Callable):
+    def add_handler(self, key: str, func: NoParamFunc) -> None:
         self.handlers[key] = func
         self.used_handlers[key] = func
 
-    def remove_handler(self, key: str):
+    def remove_handler(self, key: str) -> None | NoReturn:
         if key in self.handlers.keys() and key in self.used_handlers.keys():
             del self.handlers[key]
             del self.used_handlers[key]
         else:
             raise NoSouchItemError(f'can not find handler {key}.')
 
-    def _is_press(self, keys, handler):
+    def _is_press(self, keys: SupportsGetitem, handler: str) -> bool:
         """Возвращает True, если handler нажат, иначе возвращает False"""
         for key in handler.split('-'):
             if key.startswith('Mouse'):  # Если зарегистрирован handler на мышь
@@ -132,7 +140,7 @@ class App:
                 return False
         return True
 
-    def _check_events(self):
+    def _check_events(self) -> None:
         """Проверяет событие выхода и все обработчики"""
         keys = pg.key.get_pressed()
 
@@ -154,7 +162,7 @@ class App:
             for widget in self.widgets:
                 widget.update(event)
 
-    def run(self):
+    def run(self) -> None:
         """Запускает главный цикл"""
         self.running = True
 
@@ -177,7 +185,7 @@ class App:
 
         pg.quit()
 
-    def quit(self):
+    def quit(self) -> None:
         """Завершает главный цикл"""
         self.running = False
         print('[Pyne] application quit')

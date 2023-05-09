@@ -9,7 +9,8 @@ Beatle = NewType('Beatle', Widget)
 
 
 class BeatleScreen(Widget):
-    def __init__(self,  color=(255, 255, 255), outline_color=(150, 150, 150), name: str = ''):
+    def __init__(self, color: tuple[int, int, int] = (255, 255, 255),
+                 outline_color: tuple[int, int, int] = (150, 150, 150), name: str = ''):
         super().__init__(name=name)
 
         self.color = color

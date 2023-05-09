@@ -6,10 +6,10 @@ from .base_widget import Widget
 
 
 class Label(Widget):
-    def __init__(self, text: str, bg_color: tuple[int] = (255, 255, 255),
-                 outline_color: tuple[int] = (255, 255, 255), text_color: tuple[int] = (0, 0, 0),
-                 font_size: int = 60, press: str = 'right', font: str | None = None,
-                 name: str = ''):
+    def __init__(self, text: str, bg_color: tuple[int, int, int] = (255, 255, 255),
+                 outline_color: tuple[int, int, int] = (255, 255, 255),
+                 text_color: tuple[int, int, int] = (0, 0, 0), font_size: int = 60,
+                 press: str = 'right', font: str | None = None, name: str = ''):
         super().__init__(name=name)
 
         self.text = text

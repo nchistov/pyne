@@ -4,8 +4,8 @@ from .base_widget import Widget
 
 
 class Slider(Widget):
-    def __init__(self, min_value: int, max_value: int, color: tuple[int] = (0, 0, 0),
-                 circle_color: tuple[int] = (150, 150, 150), name: str = ''):
+    def __init__(self, min_value: int, max_value: int, color: tuple[int, int, int] = (0, 0, 0),
+                 circle_color: tuple[int, int ,int] = (150, 150, 150), name: str = ''):
         super().__init__(name=name)
 
         self.slider_rect = pg.Rect(0, 0, 15, 15)
@@ -19,7 +19,7 @@ class Slider(Widget):
 
         self.value = min_value
 
-        self.value_per_pixel = 0
+        self.value_per_pixel = 0.0
 
     def set_rect(self, x: int, y: int, width: int, height: int):
         super().set_rect(x, y, width, height)

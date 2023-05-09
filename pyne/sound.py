@@ -10,16 +10,16 @@ class Sound:
         self.length: float = self.sound.get_length()
 
     @property
-    def volume(self):
+    def volume(self) -> float:
         return self._volume
 
     @volume.setter
-    def volume(self, value: float):
+    def volume(self, value: float) -> None:
         self._volume = value
         self.sound.set_volume(self._volume)
 
-    def stop(self):
+    def stop(self) -> None:
         self.sound.stop()
 
-    def play(self):
+    def play(self) -> None:
         self.sound.play()

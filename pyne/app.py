@@ -5,6 +5,7 @@ from typing import TypeAlias, NoReturn, Protocol
 
 import pygame as pg
 
+from ._base_controller import BaseController
 from .errors import NoSouchItemError
 from .widgets.base_widget import Widget
 
@@ -16,7 +17,7 @@ class SupportsGetitem(Protocol):
         ...
 
 
-class App:
+class App(BaseController):
     """Управляет окнами"""
 
     def __init__(self, window_size: tuple[int, int] = (500, 500), title: str = "Pyne",
@@ -27,6 +28,7 @@ class App:
         :param bg_color: цвет окна, в формате RGB.
         :param icon: если это None, приложение установит значок по умолчанию, иначе значок пользователя.
         """
+        super().__init__()
 
         pg.init()
         pg.font.init()
@@ -97,19 +99,6 @@ class App:
             self.tasks.remove(func)
         else:
             raise NoSouchItemError(f'can not find task {func}.')
-
-    def add_widget(self, widget: Widget, priority: int | None = None) -> None:
-        if priority is None:
-            self.widgets.append(widget)
-            return
-
-        self.widgets.insert(priority, widget)
-
-    def remove_widget(self, widget: Widget) -> None | NoReturn:
-        if widget in self.widgets:
-            self.widgets.remove(widget)
-        else:
-            raise NoSouchItemError(f'can not find widget {widget}.')
 
     def add_handler(self, key: str, func: NoParamFunc) -> None:
         self.handlers[key] = func

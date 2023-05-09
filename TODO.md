@@ -24,7 +24,7 @@
      }
      ```
 
- + [ ] Добавить класс `BaseController` и сделать его родителем классов `App` и `GameGUIController`
+ + [X] Добавить класс `BaseController` и сделать его родителем классов `App` и `GameGUIController`
  + [X] Добавить папки `images`.
  + [X] Сделать окно изменяемым по размеру.
 

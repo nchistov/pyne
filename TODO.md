@@ -2,28 +2,7 @@
 
 ## Общее
 
- + [ ] Добавить поддержку CSS.
-   + [X] Сделать транслятор CSS в JSON. Пример:
-     CSS:
-     ```css
-     Button {
-       color: (255, 0, 0);
-     }
-     ```
-
-     JSON:
-
-     ```json
-     {
-       "Button":
-         {"value":
-           {
-             "color": [255, 0, 0]
-           }
-         }
-     }
-     ```
-
+ + [ ] Разделить класс `CanvasObject` на классы `Point`, `Line`, `Rect`, `Circle`, `Image`, `Polygon` и `Text`
  + [X] Добавить класс `BaseController` и сделать его родителем классов `App` и `GameGUIController`
  + [X] Добавить папки `images`.
  + [X] Сделать окно изменяемым по размеру.

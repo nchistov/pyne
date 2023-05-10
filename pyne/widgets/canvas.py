@@ -2,7 +2,7 @@ import pygame as pg
 
 from .base_widget import Widget
 
-from ._canvas_object import CanvasObject
+from ._canvas_objects import BaseCanvasObject, Point, Line, Rect, Circle, Polygon, Image, Text
 
 
 class Canvas(Widget):
@@ -17,7 +17,7 @@ class Canvas(Widget):
         self.width = 0
         self.height = 0
 
-        self.objects: list[CanvasObject] = []
+        self.objects: list[BaseCanvasObject] = []
 
     def set_rect(self, x, y, width, height):
         super().set_rect(x, y, width, height)
@@ -27,43 +27,44 @@ class Canvas(Widget):
         self.surface = pg.Surface(self.rect.size)
 
     def draw_point(self, x: int, y: int, color=(0, 0, 0)) -> int:
-        new_obj = CanvasObject(('point', (x, y), color))
+        new_obj = Point((x, y), color)
         self.objects.append(new_obj)
 
         return len(self.objects) - 1
 
     def draw_line(self, x1: int, y1: int, x2: int, y2: int, color=(0, 0, 0), width=1) -> int:
-        new_obj = CanvasObject(('line', (x1, y1), (x2, y2), color, width))
+        new_obj = Line((x1, y1), (x2, y2), color, width)
         self.objects.append(new_obj)
 
         return len(self.objects) - 1
 
     def draw_rect(self, x: int, y: int, width: int, height: int, color=(0, 0, 0)) -> int:
-        new_obj = CanvasObject(('rect', (x, y), width, height, color))
+        new_obj = Rect((x, y), width, height, color)
         self.objects.append(new_obj)
 
         return len(self.objects) - 1
 
-    def draw_circle(self, x: int, y: int, R: int, color=(0, 0, 0)) -> int:
-        new_obj = CanvasObject(('circle', (x, y), R, color))
+    def draw_circle(self, x: int, y: int, radius: int, color=(0, 0, 0)) -> int:
+        new_obj = Circle((x, y), radius, color)
         self.objects.append(new_obj)
 
         return len(self.objects) - 1
 
     def draw_polygon(self, coordinates, color=(0, 0, 0)) -> int:
-        new_obj = CanvasObject(('polygon', coordinates, color))
+        new_obj = Polygon(coordinates, color)
         self.objects.append(new_obj)
 
         return len(self.objects) - 1
 
     def draw_image(self, file_name: str, x: int, y: int) -> int:
-        new_obj = CanvasObject(('image', file_name, (x, y)))
+        new_obj = Image(file_name, (x, y))
         self.objects.append(new_obj)
 
         return len(self.objects) - 1
 
-    def draw_text(self, text: str, x: int, y: int, font_size: int, color=(0, 0, 0), font: str | None = None) -> int:
-        new_obj = CanvasObject(('text', (x, y), text, font_size, color, font))
+    def draw_text(self, text: str, x: int, y: int, font_size: int,
+                  color=(0, 0, 0), font: str | None = None) -> int:
+        new_obj = Text((x, y), text, font_size, color, font)
         self.objects.append(new_obj)
 
         return len(self.objects) - 1
@@ -71,21 +72,21 @@ class Canvas(Widget):
     def move(self, obj: int, x, y):
         new_coordinates = []
 
-        if self.objects[obj].info[0] == 'polygon':  # Если надо двигать многоугольник, подвинем все углы
-            for pos in self.objects[obj].coordinates:
+        if isinstance(self.objects[obj], Polygon):  # Если надо двигать многоугольник, подвинем все углы
+            for pos in self.objects[obj].coordinates:  # type: ignore[attr-defined]
                 new_coordinates.append((pos[0] + x, pos[1] + y))
 
-                self.objects[obj].coordinates = new_coordinates
+                self.objects[obj].coordinates = new_coordinates  # type: ignore[attr-defined]
 
             return
 
-        self.objects[obj].x += x
-        self.objects[obj].y += y
+        self.objects[obj].x += x  # type: ignore[attr-defined]
+        self.objects[obj].y += y  # type: ignore[attr-defined]
 
-        if self.objects[obj].info[0] == 'line':  # Если надо двигать линию, изменяем не только start_pos
-            new_end_pos = self.objects[obj].end_pos[0] + x, self.objects[obj].end_pos[1] + y  # end_pos тоже
+        if isinstance(self.objects[obj], Line):
+            new_end_pos = self.objects[obj].end_pos[0] + x, self.objects[obj].end_pos[1] + y  # type: ignore[attr-defined]
 
-            self.objects[obj].end_pos = new_end_pos
+            self.objects[obj].end_pos = new_end_pos  # type: ignore[attr-defined]
 
     def delete(self, obj: int):
         try:

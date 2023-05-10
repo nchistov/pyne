@@ -12,7 +12,7 @@ class GameGUIController(BaseController):
 
         self.widgets: list[Widget] = []
 
-    def add_widget(self, widget: Widget, x: int, y: int, width: int, height: int, priority: int | None = None) -> None:
+    def add_widget(self, widget: Widget, x: int, y: int, width: int, height: int, priority: int | None = None) -> None:  # type: ignore[override]
         widget.set_rect(x, y, width, height)
 
         super().add_widget(widget, priority)

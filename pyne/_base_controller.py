@@ -5,7 +5,7 @@ from .widgets.base_widget import Widget
 
 
 class BaseController:
-    def __init__(self):
+    def __init__(self) -> None:
         self.widgets: list[Widget] = []
 
     def add_widget(self, widget: Widget, priority: int | None = None) -> None:

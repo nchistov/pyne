@@ -6,8 +6,6 @@ from time import sleep
 
 import pygame as pg
 
-from .widgets import BeatleScreen
-
 
 class Beatle:
     """
@@ -46,23 +44,21 @@ class Beatle:
     update: обновляет Beatle
     draw: рисует Beatle и линии
     """
-    def __init__(self,  beatle_screen: BeatleScreen):
-        """
-        :param beatle_screen: экземпляр класса pyne.widgets.BeatleScreen
-        """
-        self.screen = beatle_screen
-
+    def __init__(self):
         self.x = 0
         self.y = 0
 
-        self.is_down = True
+        self.base_x = 0
+        self.base_y = 0
+
+        self.is_down = False
 
         self.base_image = pg.image.load(os.path.join(os.path.dirname(__file__), 'images/beatle.png'))
         self.image = self.base_image
 
         self.rect = self.image.get_rect()
-        self.rect.x = self.screen.rect.centerx + self.x
-        self.rect.y = self.screen.rect.centery + self.y
+        self.rect.x = self.base_x + self.x
+        self.rect.y = self.base_y + self.y
 
         self.speed = 5
         self.angle = 0
@@ -124,8 +120,8 @@ class Beatle:
                             self.x += dx
                             self.y -= dy
 
-                            self.rect.x = self.screen.rect.centerx + self.x
-                            self.rect.y = self.screen.rect.centery + self.y
+                            self.rect.x = self.base_x + self.x
+                            self.rect.y = self.base_y + self.y
 
                             sleep(0.05 / self.speed)
 
@@ -147,8 +143,8 @@ class Beatle:
                         self.x = 0
                         self.y = 0
 
-                        self.rect.x = self.screen.rect.centerx + self.x
-                        self.rect.y = self.screen.rect.centery + self.y
+                        self.rect.x = self.base_x + self.x
+                        self.rect.y = self.base_y + self.y
 
             sleep(0.02)
 

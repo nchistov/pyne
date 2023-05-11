@@ -1,11 +1,7 @@
-from typing import NewType
-
 import pygame as pg
 
 from .base_widget import Widget
-
-# Класс pyne.widgets.Beatle не получается импортировать из-за циклического импорта.
-Beatle = NewType('Beatle', Widget)
+from ..beatle import Beatle
 
 
 class BeatleScreen(Widget):
@@ -28,6 +24,13 @@ class BeatleScreen(Widget):
         self.surface = pg.Surface(self.rect.size)
 
     def add_beatle(self, beatle: Beatle):
+        beatle.base_x, beatle.base_y = self.rect.center
+
+        beatle.rect.x = beatle.base_x + beatle.x
+        beatle.rect.y = beatle.base_y + beatle.y
+
+        beatle.is_down = True
+
         self.beatles.append(beatle)
 
     def remove_beatle(self, beatle: Beatle):

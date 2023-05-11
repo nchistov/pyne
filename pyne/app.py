@@ -161,7 +161,7 @@ class App(BaseController):
             self.screen.fill(self.bg)
 
             for widget in self.widgets:
-                widget.draw(self.screen)
+                widget.draw(self.screen)  # type: ignore[arg-type]
 
             for task in self.tasks:
                 task()

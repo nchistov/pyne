@@ -8,7 +8,7 @@ app.add_widget(grid)
 beatle_screen = pyne.widgets.BeatleScreen()  # Создаем экран для Beatle
 grid.add_widget(beatle_screen, 0, 0, 1)
 
-t = pyne.beatle.Beatle(beatle_screen)  # Создаем Beatle
+t = pyne.beatle.Beatle()  # Создаем Beatle
 beatle_screen.add_beatle(t)
 
 # Рисуем круг

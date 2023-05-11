@@ -5,6 +5,7 @@ from enum import Enum
 import pygame as pg
 
 from . import Button, Entry, Canvas
+from ._canvas_objects import Text
 from .base_widget import Widget
 
 
@@ -132,7 +133,7 @@ class FileDialog(Widget):
             self._max_y = y
             self._bottom_y = y
 
-    def update(self, event):
+    def update(self, event: pg.event.Event):
         if self.state != State.waiting:
             if event.type == pg.MOUSEBUTTONDOWN:
                 mouse_x, mouse_y = event.pos
@@ -150,12 +151,12 @@ class FileDialog(Widget):
                             self._top_y += self._speed
                             self._bottom_y += self._speed
                     elif event.button == 1:
-                        for obj in self.canvas.objects:
-                            if obj.info[0] == 'text':
+                        for c_obj in self.canvas.objects:
+                            if isinstance(c_obj, Text):
                                 if self.canvas.hit(mouse_x, mouse_y):
-                                    if obj.text_image_rect.collidepoint(mouse_x - self.canvas.rect.x, mouse_y - self.canvas.rect.y):
-                                        if os.path.isdir(os.path.join(self.path, obj.text)):
-                                            self.path = os.path.join(self.path, obj.text)
+                                    if c_obj.text_image_rect.collidepoint(mouse_x - self.canvas.rect.x, mouse_y - self.canvas.rect.y):
+                                        if os.path.isdir(os.path.join(self.path, c_obj.text)):
+                                            self.path = os.path.join(self.path, c_obj.text)
 
                                             for item in self.canvas_objects[::-1]:
                                                 self.canvas.delete(item)
@@ -163,10 +164,10 @@ class FileDialog(Widget):
 
                                             self.draw_items()
                                         else:
-                                            self.filename_entry.set_text(obj.text)
+                                            self.filename_entry.set_text(c_obj.text)
 
-            for obj in self.widgets:
-                obj.update(event)
+            for widget in self.widgets:
+                widget.update(event)
 
     def draw(self, screen: pg.Surface):
         if self.state != State.waiting:

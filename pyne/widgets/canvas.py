@@ -1,7 +1,8 @@
+from typing import cast
+
 import pygame as pg
 
 from .base_widget import Widget
-
 from ._canvas_objects import BaseCanvasObject, Point, Line, Rect, Circle, Polygon, Image, Text
 
 
@@ -69,24 +70,28 @@ class Canvas(Widget):
 
         return len(self.objects) - 1
 
-    def move(self, obj: int, x, y):
+    def move(self, obj: int, x: int, y: int):
         new_coordinates = []
 
-        if isinstance(self.objects[obj], Polygon):  # Если надо двигать многоугольник, подвинем все углы
-            for pos in self.objects[obj].coordinates:  # type: ignore[attr-defined]
+        c_obj = self.objects[obj]
+
+        if isinstance(c_obj, Polygon):  # Если надо двигать многоугольник, подвинем все углы
+            c_obj = cast(Polygon, c_obj)
+            for pos in c_obj.coordinates:
                 new_coordinates.append((pos[0] + x, pos[1] + y))
 
-                self.objects[obj].coordinates = new_coordinates  # type: ignore[attr-defined]
+                c_obj.coordinates = new_coordinates
 
             return
 
-        self.objects[obj].x += x  # type: ignore[attr-defined]
-        self.objects[obj].y += y  # type: ignore[attr-defined]
+        c_obj.x += x  # type: ignore[attr-defined]
+        c_obj.y += y  # type: ignore[attr-defined]
 
-        if isinstance(self.objects[obj], Line):
-            new_end_pos = self.objects[obj].end_pos[0] + x, self.objects[obj].end_pos[1] + y  # type: ignore[attr-defined]
+        if isinstance(c_obj, Line):
+            c_obj = cast(Line, c_obj)
+            new_end_pos = c_obj.end[0] + x, c_obj.end[1] + y
 
-            self.objects[obj].end_pos = new_end_pos  # type: ignore[attr-defined]
+            c_obj.end = new_end_pos
 
     def delete(self, obj: int):
         try:

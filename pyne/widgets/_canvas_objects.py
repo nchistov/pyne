@@ -1,4 +1,5 @@
 import os
+from typing import Sequence
 
 import pygame as pg
 
@@ -70,7 +71,7 @@ class Circle(BaseCanvasObject):
 
 
 class Polygon(BaseCanvasObject):
-    def __init__(self, coordinates: tuple[tuple[int, int]], color: tuple[int, int, int]) -> None:
+    def __init__(self, coordinates: Sequence[tuple[int, int]], color: tuple[int, int, int]) -> None:
         super().__init__()
 
         self.coordinates = coordinates

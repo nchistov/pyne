@@ -94,7 +94,7 @@ class App(BaseController):
 
         self.tasks.insert(priority, func)
 
-    def remove_task(self, func: NoParamFunc) -> None | NoReturn:
+    def remove_task(self, func: NoParamFunc) -> None | NoReturn:  # type: ignore[return]
         if func in self.tasks:
             self.tasks.remove(func)
         else:
@@ -104,7 +104,7 @@ class App(BaseController):
         self.handlers[key] = func
         self.used_handlers[key] = func
 
-    def remove_handler(self, key: str) -> None | NoReturn:
+    def remove_handler(self, key: str) -> None | NoReturn:  # type: ignore[return]
         if key in self.handlers.keys() and key in self.used_handlers.keys():
             del self.handlers[key]
             del self.used_handlers[key]

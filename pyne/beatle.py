@@ -44,7 +44,7 @@ class Beatle:
     update: обновляет Beatle
     draw: рисует Beatle и линии
     """
-    def __init__(self):
+    def __init__(self) -> None:
         self.x = 0
         self.y = 0
 

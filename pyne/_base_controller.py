@@ -15,7 +15,7 @@ class BaseController:
 
         self.widgets.insert(priority, widget)
 
-    def remove_widget(self, widget: Widget) -> None | NoReturn:
+    def remove_widget(self, widget: Widget) -> None | NoReturn:  # type: ignore[return]
         if widget in self.widgets:
             self.widgets.remove(widget)
         else:

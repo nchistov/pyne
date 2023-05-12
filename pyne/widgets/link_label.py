@@ -35,5 +35,6 @@ class LinkLabel(Label):
     def draw(self, screen: pg.Surface):
         super().draw(screen)
         if self.active:
-            pg.draw.line(screen, (0, 0, 255), (self.text_image_rect.left, self.text_image_rect.bottom),
+            pg.draw.line(screen, (0, 0, 255),
+                         (self.text_image_rect.left, self.text_image_rect.bottom),
                          (self.text_image_rect.right, self.text_image_rect.bottom))

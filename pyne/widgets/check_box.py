@@ -27,7 +27,8 @@ class CheckBox(Widget):
 
         self.bg_rect = pg.Rect(self.rect.x + 9, self.rect.y + 9, 12, 12)
 
-        self.font = pg.font.Font(font or os.path.join(os.path.dirname(__file__), '../fonts/font.ttf'), font_size)
+        self.font = pg.font.Font(font or os.path.join(os.path.dirname(__file__),
+                                                      '../fonts/font.ttf'), font_size)
 
         self.is_choose = False
 

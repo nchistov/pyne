@@ -26,7 +26,8 @@ class Slider(Widget):
         self.slider_rect.centery = y + 7
         self.slider_rect.x = self.rect.x
 
-        self.value_per_pixel = (self.max_value - self.min_value) / (self.rect.right - self.rect.left)
+        self.value_per_pixel = (self.max_value - self.min_value) /\
+                               (self.rect.right - self.rect.left)
 
     def update(self, event: pg.event.Event):
         if self.is_mouse_pressed:
@@ -36,7 +37,9 @@ class Slider(Widget):
             elif self.slider_rect.x < self.rect.x:
                 self.slider_rect.x = self.rect.x
 
-            self.value = self.min_value + round((self.slider_rect.x - self.rect.left) * self.value_per_pixel)
+            self.value = self.min_value + round(
+                (self.slider_rect.x - self.rect.left) * self.value_per_pixel
+            )
 
         if event.type == pg.MOUSEBUTTONDOWN:
             if event.button == 1:
@@ -47,8 +50,12 @@ class Slider(Widget):
             self.is_mouse_pressed = False
 
     def draw(self, screen: pg.Surface):
-        pg.draw.line(screen, self.color, (self.rect.left, self.rect.y), (self.rect.left, self.rect.y + 15))
-        pg.draw.line(screen, self.color, (self.rect.right, self.rect.y), (self.rect.right, self.rect.y + 15))
-        pg.draw.line(screen, self.color, (self.rect.left, self.rect.y + 7), (self.rect.right, self.rect.y + 7))
+        pg.draw.line(screen, self.color, (self.rect.left, self.rect.y),
+                     (self.rect.left, self.rect.y + 15))
+        pg.draw.line(screen, self.color, (self.rect.right, self.rect.y),
+                     (self.rect.right, self.rect.y + 15))
+        pg.draw.line(screen, self.color, (self.rect.left, self.rect.y + 7),
+                     (self.rect.right, self.rect.y + 7))
 
-        pg.draw.circle(screen, self.circle_color, self.slider_rect.center, self.slider_rect.height / 2)
+        pg.draw.circle(screen, self.circle_color, self.slider_rect.center,
+                       self.slider_rect.height / 2)

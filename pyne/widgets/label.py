@@ -20,7 +20,8 @@ class Label(Widget):
 
         self.press = press
 
-        self.font = pg.font.Font(font or os.path.join(os.path.dirname(__file__), '../fonts/font.ttf'), font_size)
+        self.font = pg.font.Font(font or os.path.join(os.path.dirname(__file__),
+                                                      '../fonts/font.ttf'), font_size)
 
         self.set_text(text)
 
@@ -57,8 +58,11 @@ class Label(Widget):
         screen.blit(self.text_image, self.text_image_rect)
 
         # Рисуем рамку
-        pg.draw.line(screen, self.outline_color, (self.rect.right, self.rect.bottom), (self.rect.right, self.rect.top))
-        pg.draw.line(screen, self.outline_color, (self.rect.right, self.rect.top), (self.rect.left, self.rect.top))
-        pg.draw.line(screen, self.outline_color, (self.rect.left, self.rect.top), (self.rect.left, self.rect.bottom))
+        pg.draw.line(screen, self.outline_color, (self.rect.right, self.rect.bottom),
+                     (self.rect.right, self.rect.top))
+        pg.draw.line(screen, self.outline_color, (self.rect.right, self.rect.top),
+                     (self.rect.left, self.rect.top))
+        pg.draw.line(screen, self.outline_color, (self.rect.left, self.rect.top),
+                     (self.rect.left, self.rect.bottom))
         pg.draw.line(screen, self.outline_color, (self.rect.left, self.rect.bottom),
                      (self.rect.right, self.rect.bottom))

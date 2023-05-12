@@ -15,8 +15,11 @@ class Panel(Widget):
         pg.draw.rect(screen, self.color, self.rect)
 
         # Рисуем рамку
-        pg.draw.line(screen, self.outline_color, (self.rect.right, self.rect.bottom), (self.rect.right, self.rect.top))
-        pg.draw.line(screen, self.outline_color, (self.rect.right, self.rect.top), (self.rect.left, self.rect.top))
-        pg.draw.line(screen, self.outline_color, (self.rect.left, self.rect.top), (self.rect.left, self.rect.bottom))
+        pg.draw.line(screen, self.outline_color, (self.rect.right, self.rect.bottom),
+                     (self.rect.right, self.rect.top))
+        pg.draw.line(screen, self.outline_color, (self.rect.right, self.rect.top),
+                     (self.rect.left, self.rect.top))
+        pg.draw.line(screen, self.outline_color, (self.rect.left, self.rect.top),
+                     (self.rect.left, self.rect.bottom))
         pg.draw.line(screen, self.outline_color, (self.rect.left, self.rect.bottom),
                      (self.rect.right, self.rect.bottom))

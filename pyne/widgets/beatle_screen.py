@@ -46,8 +46,11 @@ class BeatleScreen(Widget):
         screen.blit(self.surface, self.rect)
 
         # Рисуем рамку
-        pg.draw.line(screen, self.outline_color, (self.rect.x, self.rect.y), (self.rect.right, self.rect.y))
-        pg.draw.line(screen, self.outline_color, (self.rect.right, self.rect.y), (self.rect.right, self.rect.bottom))
+        pg.draw.line(screen, self.outline_color, (self.rect.x, self.rect.y),
+                     (self.rect.right, self.rect.y))
+        pg.draw.line(screen, self.outline_color, (self.rect.right, self.rect.y),
+                     (self.rect.right, self.rect.bottom))
         pg.draw.line(screen, self.outline_color, (self.rect.right, self.rect.bottom),
                      (self.rect.left, self.rect.bottom))
-        pg.draw.line(screen, self.outline_color, (self.rect.left, self.rect.bottom), (self.rect.x, self.rect.y))
+        pg.draw.line(screen, self.outline_color, (self.rect.left, self.rect.bottom),
+                     (self.rect.x, self.rect.y))

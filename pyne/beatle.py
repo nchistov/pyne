@@ -54,7 +54,8 @@ class Beatle:
 
         self.is_down = False
 
-        self.base_image = pg.image.load(os.path.join(os.path.dirname(__file__), 'images/beatle.png'))
+        self.base_image = pg.image.load(os.path.join(os.path.dirname(__file__),
+                                                     'images/beatle.png'))
         self.image = self.base_image
 
         self.rect = self.image.get_rect()
@@ -68,10 +69,9 @@ class Beatle:
 
         self.lines: list[tuple[tuple[float, float], tuple[float, float]]] = []
 
-        t = Thread(target=self.update)
+        self.thread = Thread(target=self.update)
         self._running = True
-        t.start()
-        self.thread = t
+        self.thread.start()
 
     def forward(self, steps: int):
         self.tasks.put(('fd', steps))
@@ -113,7 +113,7 @@ class Beatle:
                         if self.is_down:
                             self.lines.append(((self.rect.centerx, self.rect.centery),
                                                (self.rect.centerx + dx, self.rect.centery - dy)))
-                        for i in range(cast(int, task[1])):
+                        for _ in range(cast(int, task[1])):
                             if self.is_down:
                                 (start_x, start_y), _ = self.lines[-1]
                                 self.lines[-1] = ((start_x, start_y),

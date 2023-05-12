@@ -32,7 +32,8 @@ class Entry(Widget):
 
         self.surface = pg.Surface(self.rect.size)
 
-        self.font = pg.font.Font(font or os.path.join(os.path.dirname(__file__), '../fonts/font.ttf'), font_size)
+        self.font = pg.font.Font(font or os.path.join(os.path.dirname(__file__),
+                                                      '../fonts/font.ttf'), font_size)
         self.text_image = self.font.render(self.text, True, self.text_color)
         self.text_image_rect = self.text_image.get_rect()
         self.text_image_rect.left = 5
@@ -76,7 +77,8 @@ class Entry(Widget):
         self.text_image_rect.centery = self.rect.height // 2
 
     def render_cursor(self):
-        before_cursor = self.font.render(self.text[:self.insertion_pos], True, self.text_color).get_rect()
+        before_cursor = self.font.render(self.text[:self.insertion_pos],
+                                         True, self.text_color).get_rect()
         before_cursor.left = self.text_image_rect.left
         self.cursor_rect.left = before_cursor.right
         d = self.cursor_rect.right - self.rect.width
@@ -157,7 +159,8 @@ class Entry(Widget):
         # Рисуем рамку
         pg.draw.line(screen, self.current_outline_color, (self.rect.right, self.rect.bottom),
                      (self.rect.right, self.rect.top))
-        pg.draw.line(screen, self.current_outline_color, (self.rect.right, self.rect.top), (self.rect.left, self.rect.top))
+        pg.draw.line(screen, self.current_outline_color, (self.rect.right, self.rect.top),
+                     (self.rect.left, self.rect.top))
         pg.draw.line(screen, self.current_outline_color, (self.rect.left, self.rect.top),
                      (self.rect.left, self.rect.bottom))
         pg.draw.line(screen, self.current_outline_color, (self.rect.left, self.rect.bottom),

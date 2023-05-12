@@ -1,2 +1,3 @@
 [FORMAT]
-good-names=x,y
+good-names=x,y,f,up,dx,dy,x1,y1,x2,y2,d
+ignore-paths=pyne/_css_parser

@@ -10,9 +10,9 @@ from .base_widget import Widget
 
 
 class State(Enum):
-    waiting = 0
-    opening = 1
-    saving = 2
+    WAITING = 0
+    OPENING = 1
+    SAVING = 2
 
 
 class FileDialog(Widget):
@@ -21,7 +21,7 @@ class FileDialog(Widget):
 
         self.files = files or []
 
-        self.state = State.waiting
+        self.state = State.WAITING
 
         self.result = ''
 
@@ -42,24 +42,25 @@ class FileDialog(Widget):
 
         self.canvas = Canvas(outline_color=(100, 100, 100))
 
-        self.widgets = (self.save_or_open_btn, self.cancel_btn, self.filename_entry, self.canvas, self.back_btn)
+        self.widgets = (self.save_or_open_btn, self.cancel_btn,
+                        self.filename_entry, self.canvas, self.back_btn)
 
         self.canvas_objects: list[int] = []  # Идентификаторы объектов на холсте.
 
     def askopenfile(self):
-        self.state = State.opening
+        self.state = State.OPENING
         self.save_or_open_btn.set_text('Open')
 
     def asksavefile(self):
-        self.state = State.saving
+        self.state = State.SAVING
         self.save_or_open_btn.set_text('Save')
 
     def save_or_open(self):
         self.result = os.path.join(self.path, self.filename_entry.text)
-        self.state = State.waiting
+        self.state = State.WAITING
 
     def cancel(self):
-        self.state = State.waiting
+        self.state = State.WAITING
 
     def back(self):
         """Возвращается назад по дереву каталогов."""
@@ -117,24 +118,24 @@ class FileDialog(Widget):
 
         for folder in result[0]:
             self.canvas_objects.append(self.canvas.draw_text(folder, 25, y, 25))
-            self.canvas_objects.append(self.canvas.draw_image(os.path.join(os.path.dirname(__file__),
-                                                                           'images/folder.gif'),
-                                                              5, y + 10))
+            self.canvas_objects.append(self.canvas.draw_image(
+                os.path.join(os.path.dirname(__file__), 'images/folder.gif'), 5, y + 10)
+            )
             y += 40
             self._max_y = y
             self._bottom_y = y
 
         for file in result[1]:
             self.canvas_objects.append(self.canvas.draw_text(file, 25, y, 25))
-            self.canvas_objects.append(self.canvas.draw_image(os.path.join(os.path.dirname(__file__),
-                                                                           'images/file.gif'),
-                                                              5, y + 10))
+            self.canvas_objects.append(self.canvas.draw_image(
+                os.path.join(os.path.dirname(__file__),'images/file.gif'), 5, y + 10)
+            )
             y += 40
             self._max_y = y
             self._bottom_y = y
 
     def update(self, event: pg.event.Event):
-        if self.state != State.waiting:
+        if self.state != State.WAITING:
             if event.type == pg.MOUSEBUTTONDOWN:
                 mouse_x, mouse_y = event.pos
                 if self.canvas.hit(mouse_x, mouse_y):
@@ -154,7 +155,9 @@ class FileDialog(Widget):
                         for c_obj in self.canvas.objects:
                             if isinstance(c_obj, Text):
                                 if self.canvas.hit(mouse_x, mouse_y):
-                                    if c_obj.text_image_rect.collidepoint(mouse_x - self.canvas.rect.x, mouse_y - self.canvas.rect.y):
+                                    if c_obj.text_image_rect.collidepoint(
+                                            mouse_x - self.canvas.rect.x,
+                                            mouse_y - self.canvas.rect.y):
                                         if os.path.isdir(os.path.join(self.path, c_obj.text)):
                                             self.path = os.path.join(self.path, c_obj.text)
 
@@ -170,6 +173,6 @@ class FileDialog(Widget):
                 widget.update(event)
 
     def draw(self, screen: pg.Surface):
-        if self.state != State.waiting:
+        if self.state != State.WAITING:
             for obj in self.widgets:
                 obj.draw(screen)

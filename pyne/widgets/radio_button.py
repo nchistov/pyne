@@ -19,8 +19,10 @@ class RadioButton(CheckBox):
     def draw(self, screen: pg.Surface):
         screen.blit(self.text_image, self.text_image_rect)
 
-        pg.draw.circle(screen, (0, 0, 0), self.choosing_rect.center, self.choosing_rect.height // 2)
-        pg.draw.circle(screen, (255, 255, 255), self.choosing_rect.center, (self.choosing_rect.height // 2) - 1)
+        pg.draw.circle(screen, (0, 0, 0), self.choosing_rect.center,
+                       self.choosing_rect.height // 2)
+        pg.draw.circle(screen, (255, 255, 255), self.choosing_rect.center,
+                       (self.choosing_rect.height // 2) - 1)
 
         if self.is_choose:
             pg.draw.circle(screen, (0, 0, 255), self.choosing_rect.center, (self.choosing_rect.height // 2) - 3)

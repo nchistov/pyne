@@ -41,7 +41,8 @@ class Button(Widget):
 
         self.rect = pg.Rect(0, 0, len(text) * 17, 35)
 
-        self.font = pg.font.Font(font or os.path.join(os.path.dirname(__file__), '../fonts/font.ttf'), font_size)
+        self.font = pg.font.Font(font or os.path.join(os.path.dirname(__file__),
+                                                      '../fonts/font.ttf'), font_size)
 
         self.set_text(text)
 
@@ -96,7 +97,7 @@ class Button(Widget):
                     self.current_color = self.active_color    # изменяем цвет
                     self.is_pressed = True                    # и флаг is_pressed
                     if self.command is not None:
-                        self.command()                        # Если команда зарегистрирована, вызываем ее
+                        self.command()                 # Если команда зарегистрирована, вызываем ее
                     if self.sound is not None:
                         self.sound.play()
 

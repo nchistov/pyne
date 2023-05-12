@@ -1,7 +1,7 @@
 import pygame as pg
 
-from ._base_controller import BaseController
 from pyne.widgets.base_widget import Widget
+from ._base_controller import BaseController
 
 
 class GameGUIController(BaseController):
@@ -12,7 +12,8 @@ class GameGUIController(BaseController):
 
         self.widgets: list[Widget] = []
 
-    def add_widget(self, widget: Widget, x: int, y: int, width: int, height: int, priority: int | None = None) -> None:  # type: ignore[override]
+    def add_widget(self, widget: Widget, x: int, y: int,
+                   width: int, height: int, priority: int | None = None) -> None:  # type: ignore[override]
         widget.set_rect(x, y, width, height)
 
         super().add_widget(widget, priority)

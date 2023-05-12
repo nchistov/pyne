@@ -54,8 +54,8 @@ class Grid(Widget):
 
             widget.set_rect(x, y, int(sell_width * width), int(sell_height * height))
 
-        except AttributeError:
-            raise AttributeError("Widget must has method 'set_rect'")
+        except AttributeError as exc:
+            raise AttributeError("Widget must has method 'set_rect'") from exc
         except ZeroDivisionError:
             pass
 

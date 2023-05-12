@@ -76,7 +76,7 @@ class Grid(Widget):
             raise NoSouchItemError(f'can not find widget {widget} in widgets.')
 
     def change_pos_of_widget(self, widget: Widget, new_row: int, new_column: int,
-                             new_width=1, new_height=1, priority=None):
+                             new_width: int = 1, new_height: int = 1, priority: int | None = None):
         if widget in self.widgets:
             self.widgets.pop(widget)
         else:

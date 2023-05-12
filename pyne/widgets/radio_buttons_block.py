@@ -5,8 +5,9 @@ from .base_widget import Widget
 
 
 class SpecialRadioButton(RadioButton):
-    def __init__(self, text: str, radio_buttons: list['SpecialRadioButton'], text_color=(0, 0, 0),
-                 font_size=25, font: str | None = None, name: str = ''):
+    def __init__(self, text: str, radio_buttons: list['SpecialRadioButton'],
+                 text_color: tuple[int, int, int] = (0, 0, 0), font_size: int = 25,
+                 font: str | None = None, name: str = ''):
         super().__init__(text, text_color=text_color, font_size=font_size, font=font, name=name)
 
         self.radio_buttons = radio_buttons
@@ -29,7 +30,7 @@ class SpecialRadioButton(RadioButton):
 
 
 class RadioButtonsBlock(Widget):
-    def __init__(self, texts: list[str], y_step=15):
+    def __init__(self, texts: list[str], y_step: int = 15):
         super().__init__()
 
         self.texts = texts

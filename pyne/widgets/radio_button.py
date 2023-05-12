@@ -1,13 +1,16 @@
-from typing import Callable
+from collections.abc import Callable
+from typing import TypeAlias, Any
 
 import pygame as pg
 
 from .check_box import CheckBox
 
+NoParamFunc: TypeAlias = Callable[[], Any]
+
 
 class RadioButton(CheckBox):
-    def __init__(self, text: str, command: Callable | None = None,
-                 unset_command: Callable | None = None, text_color=(0, 0, 0),
+    def __init__(self, text: str, command: NoParamFunc | None = None,
+                 unset_command: NoParamFunc | None = None, text_color=(0, 0, 0),
                  font_size=25, font: str | None = None, name: str = ''):
         super().__init__(text, command, unset_command, text_color, font_size, font, name=name)
 

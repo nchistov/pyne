@@ -3,6 +3,7 @@ from math import sin, cos, radians
 from queue import Queue
 from threading import Thread
 from time import sleep
+from typing import cast
 
 import pygame as pg
 
@@ -63,7 +64,7 @@ class Beatle:
         self.speed = 5
         self.angle = 0
 
-        self.tasks: Queue = Queue(maxsize=10000)
+        self.tasks: Queue[tuple[str, int] | tuple[str]] = Queue(maxsize=10000)
 
         self.lines: list[tuple[tuple[float, float], tuple[float, float]]] = []
 
@@ -107,12 +108,12 @@ class Beatle:
 
                 match task[0]:
                     case 'fd':
-                        dx = cos(radians(self.angle))
-                        dy = sin(radians(self.angle))
+                        dx = cos(radians(cast(int, self.angle)))
+                        dy = sin(radians(cast(int, self.angle)))
                         if self.is_down:
                             self.lines.append(((self.rect.centerx, self.rect.centery),
                                                (self.rect.centerx + dx, self.rect.centery - dy)))
-                        for i in range(task[1]):
+                        for i in range(cast(int, task[1])):
                             if self.is_down:
                                 (start_x, start_y), _ = self.lines[-1]
                                 self.lines[-1] = ((start_x, start_y),
@@ -130,7 +131,7 @@ class Beatle:
 
                         self.angle %= 360
 
-                        self.image = pg.transform.rotate(self.base_image, self.angle)
+                        self.image = pg.transform.rotate(self.base_image, cast(int, self.angle))
                     case 'up':
                         self.is_down = False
                     case 'down':

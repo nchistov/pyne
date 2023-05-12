@@ -1,4 +1,4 @@
-from typing import cast
+from typing import cast, Sequence
 
 import pygame as pg
 
@@ -7,7 +7,8 @@ from ._canvas_objects import BaseCanvasObject, Point, Line, Rect, Circle, Polygo
 
 
 class Canvas(Widget):
-    def __init__(self, bg_color=(255, 255, 255), outline_color=(255, 255, 255), name: str = ''):
+    def __init__(self, bg_color: tuple[int ,int, int] = (255, 255, 255),
+                 outline_color: tuple[int, int, int] = (255, 255, 255), name: str = ''):
         super().__init__(name=name)
 
         self.bg_color = bg_color
@@ -20,38 +21,42 @@ class Canvas(Widget):
 
         self.objects: list[BaseCanvasObject] = []
 
-    def set_rect(self, x, y, width, height):
+    def set_rect(self, x: int, y: int, width: int, height: int):
         super().set_rect(x, y, width, height)
 
         self.width, self.height = width, height
 
         self.surface = pg.Surface(self.rect.size)
 
-    def draw_point(self, x: int, y: int, color=(0, 0, 0)) -> int:
+    def draw_point(self, x: int, y: int, color: tuple[int, int, int] = (0, 0, 0)) -> int:
         new_obj = Point((x, y), color)
         self.objects.append(new_obj)
 
         return len(self.objects) - 1
 
-    def draw_line(self, x1: int, y1: int, x2: int, y2: int, color=(0, 0, 0), width=1) -> int:
+    def draw_line(self, x1: int, y1: int, x2: int, y2: int,
+                  color: tuple[int, int, int] = (0, 0, 0), width: int = 1) -> int:
         new_obj = Line((x1, y1), (x2, y2), color, width)
         self.objects.append(new_obj)
 
         return len(self.objects) - 1
 
-    def draw_rect(self, x: int, y: int, width: int, height: int, color=(0, 0, 0)) -> int:
+    def draw_rect(self, x: int, y: int, width: int, height: int,
+                  color: tuple[int, int, int] = (0, 0, 0)) -> int:
         new_obj = Rect((x, y), width, height, color)
         self.objects.append(new_obj)
 
         return len(self.objects) - 1
 
-    def draw_circle(self, x: int, y: int, radius: int, color=(0, 0, 0)) -> int:
+    def draw_circle(self, x: int, y: int, radius: int,
+                    color: tuple[int, int, int] = (0, 0, 0)) -> int:
         new_obj = Circle((x, y), radius, color)
         self.objects.append(new_obj)
 
         return len(self.objects) - 1
 
-    def draw_polygon(self, coordinates, color=(0, 0, 0)) -> int:
+    def draw_polygon(self, coordinates: Sequence[tuple[int, int]],
+                     color: tuple[int, int, int] = (0, 0, 0)) -> int:
         new_obj = Polygon(coordinates, color)
         self.objects.append(new_obj)
 
@@ -64,7 +69,7 @@ class Canvas(Widget):
         return len(self.objects) - 1
 
     def draw_text(self, text: str, x: int, y: int, font_size: int,
-                  color=(0, 0, 0), font: str | None = None) -> int:
+                  color: tuple[int, int, int] = (0, 0, 0), font: str | None = None) -> int:
         new_obj = Text((x, y), text, font_size, color, font)
         self.objects.append(new_obj)
 

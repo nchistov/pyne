@@ -1,7 +1,7 @@
 from collections.abc import Callable
 import json
 import os
-from typing import TypeAlias, NoReturn, Protocol
+from typing import TypeAlias, NoReturn, Protocol, Any
 
 import pygame as pg
 
@@ -9,7 +9,7 @@ from ._base_controller import BaseController
 from .errors import NoSouchItemError
 from .widgets.base_widget import Widget
 
-NoParamFunc: TypeAlias = Callable[[], None]
+NoParamFunc: TypeAlias = Callable[[], Any]
 
 
 class SupportsGetitem(Protocol):
@@ -161,7 +161,7 @@ class App(BaseController):
             self.screen.fill(self.bg)
 
             for widget in self.widgets:
-                widget.draw(self.screen)  # type: ignore[arg-type]
+                widget.draw(self.screen)
 
             for task in self.tasks:
                 task()

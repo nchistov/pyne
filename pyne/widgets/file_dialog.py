@@ -98,7 +98,7 @@ class FileDialog(Widget):
 
         return sorted(directories), sorted(files)
 
-    def set_rect(self, x, y, width, height):
+    def set_rect(self, x: int, y: int, width: int, height: int):
         super().set_rect(x, y, width, height)
         self.save_or_open_btn.set_rect(x + (width - 80),  y + (height - 90), 80, 40)
         self.cancel_btn.set_rect(x + (width - 80),  y + (height - 40), 80, 40)

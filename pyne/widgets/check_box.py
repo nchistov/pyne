@@ -1,14 +1,18 @@
+from collections.abc import Callable
 import os
-from typing import Callable
+from typing import TypeAlias, Any
 
 import pygame as pg
 
 from .base_widget import Widget
 
+NoParamFunc: TypeAlias = Callable[[], Any]
+
 
 class CheckBox(Widget):
-    def __init__(self, text: str, command: Callable | None = None,
-                 unset_command: Callable | None = None, text_color=(0, 0, 0), font_size=25,
+    def __init__(self, text: str, command: NoParamFunc | None = None,
+                 unset_command: NoParamFunc | None = None,
+                 text_color: tuple[int, int, int] = (0, 0, 0), font_size: int = 25,
                  font: str | None = None, name: str = ''):
         super().__init__(name=name)
 

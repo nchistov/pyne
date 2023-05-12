@@ -6,8 +6,11 @@ from .base_widget import Widget
 
 
 class Entry(Widget):
-    def __init__(self, prompt='', text='', text_color=(0, 0, 0), bg_color=(255, 255, 255),
-                 outline_color=(0, 0, 0), font_size=25, font: str | None = None, name: str = ''):
+    def __init__(self, prompt: str = '', text: str = '',
+                 text_color: tuple[int, int, int] = (0, 0, 0),
+                 bg_color: tuple[int, int, int] = (255, 255, 255),
+                 outline_color: tuple[int, int, int] = (0, 0, 0), font_size: int = 25,
+                 font: str | None = None, name: str = ''):
         super().__init__(name=name)
 
         self._prompt = prompt
@@ -36,28 +39,28 @@ class Entry(Widget):
         self.text_image_rect.centery = self.rect.height // 2
         self.render_text()
 
-    def set_text(self, text):
+    def set_text(self, text: str):
         self.text = text
 
     @property
-    def text(self):
+    def text(self) -> str:
         return self._text
 
     @text.setter
-    def text(self, value):
+    def text(self, value: str):
         self._text = value
         self.render_text()
 
     @property
-    def prompt(self):
+    def prompt(self) -> str:
         return self._prompt
 
     @prompt.setter
-    def prompt(self, value):
+    def prompt(self, value: str):
         self._prompt = value
         self.render_text()
 
-    def set_rect(self, x, y, width, height):
+    def set_rect(self, x: int, y: int, width: int, height: int):
         super().set_rect(x, y, width, height)
         self.render_text()
 
@@ -84,7 +87,7 @@ class Entry(Widget):
             self.text_image_rect.right -= self.cursor_rect.left
             self.cursor_rect.left = 0
 
-    def check_mouse_click(self, mouse_x, mouse_y):
+    def check_mouse_click(self, mouse_x: float, mouse_y: float):
         if self.rect.collidepoint(mouse_x, mouse_y):
             self.active = True
 
@@ -103,7 +106,7 @@ class Entry(Widget):
 
             self.text = new_text
 
-    def add_letter(self, letter):
+    def add_letter(self, letter: str):
         new_text = self.text[:self.insertion_pos]
         new_text += letter
         new_text += self.text[self.insertion_pos:]
@@ -112,7 +115,7 @@ class Entry(Widget):
 
         self.text = new_text
 
-    def update(self, event):
+    def update(self, event: pg.event.Event):
         self.cursor_rect.centery = self.rect.height // 2
 
         if event.type == pg.MOUSEBUTTONDOWN:

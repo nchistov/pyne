@@ -1,3 +1,7 @@
+"""
+Класс GameGUIController в основном предназначен для игр на pygame (чтобы встраивать Pyne UI)
+"""
+
 import pygame as pg
 
 from pyne.widgets.base_widget import Widget

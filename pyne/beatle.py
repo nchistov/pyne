@@ -1,3 +1,7 @@
+"""
+Графика Beatle, является упрошенной версией стандартного `turtle`.
+"""
+
 import os.path
 from math import sin, cos, radians
 from queue import Queue

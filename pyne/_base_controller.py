@@ -1,3 +1,7 @@
+"""
+Содержит класс `BaseController`
+"""
+
 from typing import NoReturn
 
 from .errors import NoSouchItemError
@@ -5,6 +9,8 @@ from .widgets.base_widget import Widget
 
 
 class BaseController:
+    """Базовый класс для классов `App` и `GameGUIController`"""
+
     def __init__(self) -> None:
         self.widgets: list[Widget] = []
 

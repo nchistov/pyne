@@ -1,3 +1,7 @@
+"""
+Содержит класс `App`
+"""
+
 from collections.abc import Callable
 import json
 import os

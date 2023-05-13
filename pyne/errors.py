@@ -1,3 +1,8 @@
+"""
+Содержит ошибки вызываемые в разных случаях в этом пакете
+"""
+
+
 class NoSouchItemError(Exception):
     pass
 

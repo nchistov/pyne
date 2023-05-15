@@ -167,7 +167,7 @@ class FileDialog(Widget):
 
                                             self.draw_items()
                                         else:
-                                            self.filename_entry.set_text(c_obj.text)
+                                            self.filename_entry.text = c_obj.text
 
             for widget in self.widgets:
                 widget.update(event)

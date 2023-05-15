@@ -11,11 +11,13 @@ NoParamFunc: TypeAlias = Callable[[], Any]
 
 
 class Button(Widget):
-    def __init__(self, text: str, color=(150, 150, 150), active_color=(70, 200, 215),
-                 text_color=(0, 0, 0), outline_color=(200, 200, 200), font_size=30,
-                 command: NoParamFunc | None = None, image: str | None = None,
-                 press='left', sound: Sound | None = None, font: str | None = None,
-                 name: str = ''):
+    def __init__(self, text: str, color: tuple[int, int, int] = (150, 150, 150),
+                 active_color: tuple[int, int, int] = (70, 200, 215),
+                 text_color: tuple[int, int, int] = (0, 0, 0),
+                 outline_color: tuple[int, int, int] = (200, 200, 200),
+                 font_size: int = 30, command: NoParamFunc | None = None,
+                 image: str | None = None, press: str = 'left',
+                 sound: Sound | None = None, font: str | None = None, name: str = ''):
         super().__init__(name=name)
         self.text = text
         self.color = color

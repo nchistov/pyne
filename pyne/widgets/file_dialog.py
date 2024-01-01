@@ -21,7 +21,7 @@ class FileDialog(Widget):
 
         self.files = files or []
 
-        self.state = State.WAITING
+        self._state = State.WAITING
 
         self.result = ''
 
@@ -31,7 +31,7 @@ class FileDialog(Widget):
         self._top_y = 5
         self._bottom_y = 5
 
-        self.path = os.getcwd()
+        self._path = os.getcwd()
 
         self.save_or_open_btn = Button(text='Open', font_size=25, command=self.save_or_open)
         self.cancel_btn = Button(text='Cancel', font_size=25, command=self.cancel)
@@ -48,30 +48,30 @@ class FileDialog(Widget):
         self.canvas_objects: list[int] = []  # Идентификаторы объектов на холсте.
 
     def askopenfile(self):
-        self.state = State.OPENING
+        self._state = State.OPENING
         self.save_or_open_btn.set_text('Open')
 
     def asksavefile(self):
-        self.state = State.SAVING
+        self._state = State.SAVING
         self.save_or_open_btn.set_text('Save')
 
     def save_or_open(self):
-        self.result = os.path.join(self.path, self.filename_entry.text)
-        self.state = State.WAITING
+        self.result = os.path.join(self._path, self.filename_entry.text)
+        self._state = State.WAITING
 
     def cancel(self):
-        self.state = State.WAITING
+        self._state = State.WAITING
 
     def back(self):
         """Возвращается назад по дереву каталогов."""
         if sys.platform == 'win32':
-            if self.path.count('\\') > 1:
-                new_end = self.path.rfind('\\')
-                self.path = self.path[:new_end]
+            if self._path.count('\\') > 1:
+                new_end = self._path.rfind('\\')
+                self._path = self._path[:new_end]
         else:
-            if self.path.count('/') > 1:
-                new_end = self.path.rfind('/')
-                self.path = self.path[:new_end]
+            if self._path.count('/') > 1:
+                new_end = self._path.rfind('/')
+                self._path = self._path[:new_end]
 
         for item in self.canvas_objects[::-1]:
             self.canvas.delete(item)
@@ -113,7 +113,7 @@ class FileDialog(Widget):
         self.draw_items()
 
     def draw_items(self):
-        result = self._read_ls(self.path)
+        result = self._read_ls(self._path)
         y = 5
 
         for folder in result[0]:
@@ -135,7 +135,7 @@ class FileDialog(Widget):
             self._bottom_y = y
 
     def update(self, event: pg.event.Event):
-        if self.state != State.WAITING:
+        if self._state != State.WAITING:
             if event.type == pg.MOUSEBUTTONDOWN:
                 mouse_x, mouse_y = event.pos
                 if self.canvas.hit(mouse_x, mouse_y):
@@ -158,8 +158,8 @@ class FileDialog(Widget):
                                     if c_obj.text_image_rect.collidepoint(
                                             mouse_x - self.canvas.rect.x,
                                             mouse_y - self.canvas.rect.y):
-                                        if os.path.isdir(os.path.join(self.path, c_obj.text)):
-                                            self.path = os.path.join(self.path, c_obj.text)
+                                        if os.path.isdir(os.path.join(self._path, c_obj.text)):
+                                            self._path = os.path.join(self._path, c_obj.text)
 
                                             for item in self.canvas_objects[::-1]:
                                                 self.canvas.delete(item)
@@ -173,6 +173,6 @@ class FileDialog(Widget):
                 widget.update(event)
 
     def draw(self, screen: pg.Surface):
-        if self.state != State.WAITING:
+        if self._state != State.WAITING:
             for obj in self.widgets:
                 obj.draw(screen)

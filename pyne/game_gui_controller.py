@@ -9,8 +9,8 @@ from ._base_controller import BaseController
 
 
 class GameGUIController(BaseController):
-    def __init__(self, screen: pg.Surface):
-        super().__init__()
+    def __init__(self, screen: pg.Surface, css: str = ''):
+        super().__init__(css)
 
         self.screen = screen
 
@@ -23,6 +23,8 @@ class GameGUIController(BaseController):
         super().add_widget(widget, priority)
 
     def update(self, event: pg.event.Event) -> None:
+        self._update_widgets_style()
+
         for widget in self.widgets:
             widget.update(event)
 

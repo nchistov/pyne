@@ -6,19 +6,23 @@ from .base_widget import Widget
 
 
 class Entry(Widget):
+    default_values = {'text_color': (0, 0, 0), 'bg_color': (255, 255, 255),
+                      'outline_color': (0, 0, 0), 'font_size': 25}
+    css_name = 'entry'
+
     def __init__(self, prompt: str = '', text: str = '',
-                 text_color: tuple[int, int, int] = (0, 0, 0),
-                 bg_color: tuple[int, int, int] = (255, 255, 255),
-                 outline_color: tuple[int, int, int] = (0, 0, 0), font_size: int = 25,
+                 text_color: tuple[int, int, int] | None = None,
+                 bg_color: tuple[int, int, int] | None = None,
+                 outline_color: tuple[int, int, int] | None = None, font_size: int | None = None,
                  font: str | None = None, name: str = ''):
         super().__init__(name=name)
 
+        self.css_customizable_fields = {'text_color', 'bg_color', 'outline_color', 'font_size'}
+
         self._prompt = prompt
         self.prompt_color = (150, 150, 150)
-        self.text_color = text_color
 
-        self.bg_color = bg_color
-        self.outline_color = outline_color
+        self._update_fields(locals())
 
         self.current_outline_color = (200, 200, 200)
 
@@ -33,7 +37,7 @@ class Entry(Widget):
         self.surface = pg.Surface(self.rect.size)
 
         self.font = pg.font.Font(font or os.path.join(os.path.dirname(__file__),
-                                                      '../fonts/font.ttf'), font_size)
+                                                      '../fonts/font.ttf'), self.font_size)
         self.text_image = self.font.render(self._text, True, self.text_color)
         self.text_image_rect = self.text_image.get_rect()
         self.text_image_rect.left = 5
@@ -56,6 +60,10 @@ class Entry(Widget):
     @prompt.setter
     def prompt(self, value: str):
         self._prompt = value
+        self._render_text()
+
+    def set_text(self, text: str):
+        self._text = text
         self._render_text()
 
     def set_rect(self, x: int, y: int, width: int, height: int):

@@ -10,16 +10,22 @@ NoParamFunc: TypeAlias = Callable[[], Any]
 
 
 class CheckBox(Widget):
+    default_values = {'text_color': (0, 0, 0), 'font_size': 25}
+    css_name = 'check-box'
+
     def __init__(self, text: str, command: NoParamFunc | None = None,
                  unset_command: NoParamFunc | None = None,
-                 text_color: tuple[int, int, int] = (0, 0, 0), font_size: int = 25,
+                 text_color: tuple[int, int, int] | None = None, font_size: int | None = None,
                  font: str | None = None, name: str = ''):
         super().__init__(name=name)
+
+        self.css_customizable_fields = {'text_color', 'font_size'}
 
         self.text = text
         self.command = command
         self.unset_command = unset_command
-        self.text_color = text_color
+
+        self._update_fields(locals())
 
         self.color = (255, 255, 255)
 
@@ -28,7 +34,7 @@ class CheckBox(Widget):
         self.bg_rect = pg.Rect(self.rect.x + 9, self.rect.y + 9, 12, 12)
 
         self.font = pg.font.Font(font or os.path.join(os.path.dirname(__file__),
-                                                      '../fonts/font.ttf'), font_size)
+                                                      '../fonts/font.ttf'), self.font_size)
 
         self.is_choose = False
 
@@ -47,6 +53,7 @@ class CheckBox(Widget):
         self.bg_rect.y = self.text_image_rect.centery - 1
 
     def set_text(self, text: str):
+        self.text = text
         self.text_image = self.font.render(text, True, self.text_color)
 
         self.text_image_rect = self.text_image.get_rect()

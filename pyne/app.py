@@ -21,9 +21,9 @@ class SupportsGetitem(Protocol):
 
 class App(BaseController):
     """Управляет окнами"""
-
     def __init__(self, window_size: tuple[int, int] = (500, 500), title: str = "Pyne",
-                 bg_color: tuple[int, int, int] = (255, 255, 255), icon: str | None = None) -> None:
+                 bg_color: tuple[int, int, int] = (255, 255, 255), icon: str | None = None,
+                 css: str = '') -> None:
         """
         :param window_size: список или кортеж из двух чисел: первая ширина, а последняя высота окна.
         :param title: заголовок окна.
@@ -31,7 +31,7 @@ class App(BaseController):
         :param icon: если это None, приложение установит значок по умолчанию,
                      иначе значок пользователя.
         """
-        super().__init__()
+        super().__init__(css)
 
         pg.init()
         pg.font.init()
@@ -166,6 +166,8 @@ class App(BaseController):
         self.running = True
 
         print('[Pyne] application start')
+
+        self._update_widgets_style()
 
         while self.running:
             self.screen.fill(self.bg)

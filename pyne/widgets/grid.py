@@ -1,6 +1,7 @@
 import pygame as pg
 
 from .base_widget import Widget
+from .._css_parser import parse
 from ..errors import NoSouchItemError, NoSouchPositionError
 
 
@@ -31,6 +32,8 @@ class Grid(Widget):
         self.widgets: dict[Widget, tuple[int, int, float, float]] = {}
         self.sorted_widgets: list[Widget] = []
 
+        self.css = ''
+
     def set_rect(self, x: int, y: int, width: int, height: int):
         super().set_rect(x, y, width, height)
 
@@ -39,7 +42,7 @@ class Grid(Widget):
         self.is_on_all_screen = False
 
     def add_widget(self, widget: Widget, row: int, column: int, width: float = 1, height: float = 1,
-                   priority: int | None = None):
+                   priority: int | None = None) -> None:
         if row >= self.rows:
             raise NoSouchPositionError("Row must be less then max rows")
         if column >= self.columns:
@@ -84,7 +87,21 @@ class Grid(Widget):
 
         self.add_widget(widget, new_row, new_column, new_width, new_height, priority)
 
+    def _update_widgets_style(self) -> None:
+        parsed_css = parse(self.css)
+        for widget_name, values in parsed_css.items():
+            for widget in self.widgets:
+                if widget.css_name == widget_name:
+                    for k, v in values['value'].items():
+                        if k.replace('-', '_') in widget.css_customizable_fields:
+                            setattr(widget, k.replace('-', '_'), v)
+                            if 'text' in k:
+                                widget.set_text(widget.text)
+                elif isinstance(widget, self.__class__):
+                    widget.css = self.css
+
     def update(self, event: pg.event.Event):
+        self._update_widgets_style()
         if event.type == pg.MOUSEBUTTONDOWN:
             mouse_x, mouse_y = event.pos
             if self.rect.collidepoint(mouse_x, mouse_y):

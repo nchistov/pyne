@@ -5,12 +5,16 @@ from ..beatle import Beatle
 
 
 class BeatleScreen(Widget):
-    def __init__(self, color: tuple[int, int, int] = (255, 255, 255),
-                 outline_color: tuple[int, int, int] = (150, 150, 150), name: str = ''):
+    default_values = {'color': (255, 255, 255), 'outline_color': (150, 150, 150)}
+    css_name = 'beatle-screen'
+
+    def __init__(self, color: tuple[int, int, int] | None = None,
+                 outline_color: tuple[int, int, int] | None = None, name: str = ''):
         super().__init__(name=name)
 
-        self.color = color
-        self.outline_color = outline_color
+        self.css_customizable_fields = {'color', 'outline_color'}
+
+        self._update_fields(locals())
 
         self.beatles: list[Beatle] = []
 

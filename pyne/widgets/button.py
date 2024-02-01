@@ -106,15 +106,8 @@ class Button(Widget):
             self.is_pressed = False
 
     def draw(self, screen: pg.Surface):
-        pg.draw.rect(screen, self.current_color, self.rect)
+        pg.draw.rect(screen, self.current_color, self.rect, border_radius=5)
         screen.blit(self.text_image, self.text_image_rect)
 
-        if not self.is_pressed:  # Если кнопка не нажата, рисуем рамку
-            pg.draw.line(screen, self.outline_color, (self.rect.right - 1,
-                                                      self.rect.bottom),
-                         (self.rect.right - 1, self.rect.top))
-
-            pg.draw.line(screen, self.outline_color, (self.rect.right, self.rect.top),
-                         (self.rect.left, self.rect.top))
         if self.has_image:
             screen.blit(self.image, self.image_rect)

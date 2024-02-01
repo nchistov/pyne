@@ -5,7 +5,7 @@ from ..errors import NoSouchItemError, NoSouchPositionError
 
 
 class Grid(Widget):
-    def __init__(self, rows: int, columns: int, scrolling: bool = False, speed: int = 5,
+    def __init__(self, rows: int, columns: int, padding: int = 0, scrolling: bool = False, speed: int = 5,
                  name: str = ''):
         """
         :param rows: количество рядов
@@ -16,6 +16,7 @@ class Grid(Widget):
         super().__init__(name=name)
         self.rows = rows
         self.columns = columns
+        self.padding = padding
 
         self.scrolling = scrolling
         self.speed = speed
@@ -49,10 +50,10 @@ class Grid(Widget):
             sell_height = self.rect.height / self.rows
             sell_width = self.rect.width / self.columns
 
-            x = int(self.rect.x + (column * sell_width))
+            x = int(self.rect.x + (column * sell_width)) + self.padding // 2
             y = int(self.rect.x + (row * sell_height))
 
-            widget.set_rect(x, y, int(sell_width * width), int(sell_height * height))
+            widget.set_rect(x, y, int(sell_width * width)-self.padding, int(sell_height * height) - self.padding)
 
         except AttributeError as exc:
             raise AttributeError("Widget must has method 'set_rect'") from exc

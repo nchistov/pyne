@@ -21,6 +21,9 @@ def parse(css_style_sheet: str):
     for rule in rules:
         current_hash = ''
         current_name = ''
+
+        if rule.type == 'whitespace':
+            continue
         # Обработать заголовок.
         for token in rule.prelude:
             if isinstance(token, ast.IdentToken):
@@ -64,6 +67,7 @@ def parse(css_style_sheet: str):
                 result[current_name]['value'][current_key] = current_value  # type: ignore[index, assignment]
                 current_key = ''
                 current_value = None
+                state = StateWaiting.KEY
 
     return result
 

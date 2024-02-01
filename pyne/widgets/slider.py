@@ -4,16 +4,21 @@ from .base_widget import Widget
 
 
 class Slider(Widget):
-    def __init__(self, min_value: int, max_value: int, color: tuple[int, int, int] = (0, 0, 0),
-                 circle_color: tuple[int, int ,int] = (150, 150, 150), name: str = ''):
+    default_values = {'color': (0, 0, 0), 'circle_color': (150, 150, 150)}
+    css_name = 'slider'
+
+    def __init__(self, min_value: int, max_value: int, color: tuple[int, int, int] | None = None,
+                 circle_color: tuple[int, int, int] | None = None, name: str = ''):
         super().__init__(name=name)
+
+        self.css_customizable_fields = {'color', 'circle_color'}
 
         self.slider_rect = pg.Rect(0, 0, 15, 15)
 
         self.min_value = min_value
         self.max_value = max_value
-        self.color = color
-        self.circle_color = circle_color
+
+        self._update_fields(locals())
 
         self.is_mouse_pressed = False
 

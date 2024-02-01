@@ -11,22 +11,29 @@ NoParamFunc: TypeAlias = Callable[[], Any]
 
 
 class Button(Widget):
-    def __init__(self, text: str, color=(150, 150, 150), active_color=(70, 200, 215),
-                 text_color=(0, 0, 0), outline_color=(200, 200, 200), font_size=30,
-                 command: NoParamFunc | None = None, image: str | None = None,
-                 press='left', sound: Sound | None = None, font: str | None = None,
-                 name: str = ''):
+    default_values = {'color': (150, 150, 150), 'active_color': (70, 200, 215),
+                      'text_color': (0, 0, 0), 'outline_color': (200, 200, 200),
+                      'font_size': 30, 'press': 'left'}
+    css_name = 'button'
+
+    def __init__(self, text: str, color: tuple[int, int, int] | None = None,
+                 active_color: tuple[int, int, int] | None = None,
+                 text_color: tuple[int, int, int] | None = None,
+                 outline_color: tuple[int, int, int] | None = None,
+                 font_size: int | None = None, command: NoParamFunc | None = None,
+                 image: str | None = None, press: str | None = None,
+                 sound: Sound | None = None, font: str | None = None, name: str = ''):
         super().__init__(name=name)
+
+        self.css_customizable_fields = {'color', 'active_color', 'text_color',
+                                        'outline_color', 'font_size', 'press'}
         self.text = text
-        self.color = color
-        self.active_color = active_color
-        self.text_color = text_color
-        self.outline_color = outline_color
+
         self.command = command
 
-        self.press = press
+        self._update_fields(locals())
 
-        self.current_color = color
+        self.current_color = self.color
         self.sound = sound
 
         self.is_pressed = False
@@ -42,11 +49,12 @@ class Button(Widget):
         self.rect = pg.Rect(0, 0, len(text) * 17, 35)
 
         self.font = pg.font.Font(font or os.path.join(os.path.dirname(__file__),
-                                                      '../fonts/font.ttf'), font_size)
+                                                      '../fonts/font.ttf'), self.font_size)
 
         self.set_text(text)
 
     def set_text(self, text: str):
+        self.text = text
         self.text_image = self.font.render(text, True, self.text_color)
 
         self.text_image_rect = self.text_image.get_rect()
@@ -90,6 +98,7 @@ class Button(Widget):
                     raise ValueError('incorrect word to pressing image')
 
     def update(self, event: pg.event.Event):
+        self.current_color = self.color
         if event.type == pg.MOUSEBUTTONDOWN:
             if event.button == 1:
                 mouse_x, mouse_y = event.pos  # Получаем координаты мыши

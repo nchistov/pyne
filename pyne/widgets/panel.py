@@ -4,12 +4,16 @@ from .base_widget import Widget
 
 
 class Panel(Widget):
-    def __init__(self, color: tuple[int, int, int] = (255, 255, 255),
-                 outline_color: tuple[int, int, int] = (255, 255, 255), name: str = ''):
+    default_values = {'color': (255, 255, 255), 'outline_color': (255, 255, 255)}
+    css_name = 'panel'
+
+    def __init__(self, color: tuple[int, int, int] | None = None,
+                 outline_color: tuple[int, int, int] | None = None, name: str = ''):
         super().__init__(name=name)
 
-        self.color = color
-        self.outline_color = outline_color
+        self.css_customizable_fields = {'color', 'outline_color'}
+
+        self._update_fields(locals())
 
     def draw(self, screen: pg.Surface):
         pg.draw.rect(screen, self.color, self.rect)

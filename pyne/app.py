@@ -1,7 +1,6 @@
 """
 Содержит класс `App`
 """
-
 from collections.abc import Callable
 import json
 import os
@@ -17,15 +16,14 @@ NoParamFunc: TypeAlias = Callable[[], Any]
 
 
 class SupportsGetitem(Protocol):
-    def __getitem__(self, item: int) -> bool:
-        ...
+    def __getitem__(self, item: int) -> bool: ...
 
 
 class App(BaseController):
     """Управляет окнами"""
-
     def __init__(self, window_size: tuple[int, int] = (500, 500), title: str = "Pyne",
-                 bg_color: tuple[int, int, int] = (255, 255, 255), icon: str | None = None) -> None:
+                 bg_color: tuple[int, int, int] = (255, 255, 255), icon: str | None = None,
+                 css: str = '') -> None:
         """
         :param window_size: список или кортеж из двух чисел: первая ширина, а последняя высота окна.
         :param title: заголовок окна.
@@ -33,7 +31,7 @@ class App(BaseController):
         :param icon: если это None, приложение установит значок по умолчанию,
                      иначе значок пользователя.
         """
-        super().__init__()
+        super().__init__(css)
 
         pg.init()
         pg.font.init()
@@ -48,10 +46,11 @@ class App(BaseController):
             self.icon = pg.image.load(icon)
         pg.display.set_icon(self.icon)
 
-        pg.display.set_caption(title)
-        print(f'[Pyne] window title -> "{title}"')
+        self._title = title
+        pg.display.set_caption(self._title)
+        print(f'[Pyne] window title -> "{self._title}"')
 
-        self.clock = pg.time.Clock()
+        self._clock = pg.time.Clock()
 
         self.tasks: list[NoParamFunc] = []
         self.widgets: list[Widget] = []
@@ -69,8 +68,14 @@ class App(BaseController):
         self.fps = 30
         print(f'[Pyne] fps -> {self.fps}')
 
-    def set_title(self, new_title: str) -> None:
-        pg.display.set_caption(new_title)
+    @property
+    def title(self) -> str:
+        return self._title
+
+    @title.setter
+    def title(self, new_title: str) -> None:
+        self._title = new_title
+        pg.display.set_caption(self._title)
 
     def set_window_size(self, new_size: tuple[int, int]) -> None:
         self.screen = pg.display.set_mode(new_size)
@@ -162,6 +167,8 @@ class App(BaseController):
 
         print('[Pyne] application start')
 
+        self._update_widgets_style()
+
         while self.running:
             self.screen.fill(self.bg)
 
@@ -175,7 +182,7 @@ class App(BaseController):
 
             pg.display.flip()
 
-            self.clock.tick()
+            self._clock.tick()
 
         pg.quit()
 

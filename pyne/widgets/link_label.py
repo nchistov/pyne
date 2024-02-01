@@ -6,12 +6,19 @@ from .label import Label
 
 
 class LinkLabel(Label):
-    def __init__(self, text: str, url: str, bg_color: tuple[int, int, int] = (255, 255, 255),
-                 outline_color: tuple[int, int, int] = (255, 255, 255),
-                 text_color: tuple[int, int, int] = (0, 0, 255), font_size: int = 60,
-                 press: str = 'right', font: str | None = None, name: str = ''):
+    default_values = {'bg_color': (255, 255, 255), 'outline_color': (255, 255, 255),
+                      'text_color': (0, 0, 255), 'font_size': 60, 'press': 'right'}
+    css_name = 'link-label'
+
+    def __init__(self, text: str, url: str, bg_color: tuple[int, int, int] | None = None,
+                 outline_color: tuple[int, int, int] | None = None,
+                 text_color: tuple[int, int, int] | None = None, font_size: int | None = None,
+                 press: str | None = None, font: str | None = None, name: str = ''):
         super().__init__(text, bg_color, outline_color, text_color,
                          font_size, press, font, name=name)
+
+        self.css_customizable_fields = {'bg_color', 'outline_color', 'text_color',
+                                        'font_size', 'press'}
 
         self.url = url
         if not text:

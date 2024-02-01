@@ -6,26 +6,30 @@ from .base_widget import Widget
 
 
 class Label(Widget):
-    def __init__(self, text: str, bg_color: tuple[int, int, int] = (255, 255, 255),
-                 outline_color: tuple[int, int, int] = (255, 255, 255),
-                 text_color: tuple[int, int, int] = (0, 0, 0), font_size: int = 60,
-                 press: str = 'right', font: str | None = None, name: str = ''):
+    default_values = {'bg_color': (255, 255, 255), 'outline_color': (255, 255, 255),
+                      'text_color': (0, 0, 0), 'font_size': 60, 'press': 'right'}
+    css_name = 'label'
+
+    def __init__(self, text: str, bg_color: tuple[int, int, int] | None = None,
+                 outline_color: tuple[int, int, int] | None = None,
+                 text_color: tuple[int, int, int] | None = None, font_size: int | None = None,
+                 press: str | None = None, font: str | None = None, name: str = ''):
         super().__init__(name=name)
+
+        self.css_customizable_fields = {'bg_color', 'outline_color', 'text_color',
+                                        'font_size', 'press'}
+
+        self._update_fields(locals())
 
         self.text = text
 
-        self.bg_color = bg_color
-        self.outline_color = outline_color
-        self.text_color = text_color
-
-        self.press = press
-
         self.font = pg.font.Font(font or os.path.join(os.path.dirname(__file__),
-                                                      '../fonts/font.ttf'), font_size)
+                                                      '../fonts/font.ttf'), self.font_size)
 
         self.set_text(text)
 
     def set_text(self, text: str):
+        self.text = text
         self.text_image = self.font.render(text, True, self.text_color)
 
         self.text_image_rect = self.text_image.get_rect()
